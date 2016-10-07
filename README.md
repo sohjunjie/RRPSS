@@ -17,13 +17,15 @@ Follow the following instructions to clone the project files into your Eclipse I
 
 ## Making changes to the project
 
-**Notice to collaborators performing edits on the project.**
+**Create a new branch**
 
 All local development and changes should be done in appropriately named branches
 (e.g. create a new branch before doing any new major changes)
 
   `Team > Switch To > New Branch`
   
+
+
 **Pushing your changes to github**
 
 Add all the files that you want all changes to be reflected by
@@ -34,6 +36,7 @@ Commit all your changes, thereby creating a "savepoint"
 
 Push your changes to github
   `Team > Push Branch <branch name>`
+
 
 
 **Do not** merge your changes directly into your local master branch and push to Git
