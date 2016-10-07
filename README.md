@@ -29,12 +29,15 @@ Follow the following instructions to clone the project files into your Eclipse I
 ####**Pushing your changes to github**
 
    Add all the files that you want all changes to be reflected by
+   
      `Team > Add to index`
 
    Commit all your changes, thereby creating a "savepoint"
+   
      `Team > Commit...`  
 
    Push your changes to github
+   
      `Team > Push Branch <branch name>`
 
 
