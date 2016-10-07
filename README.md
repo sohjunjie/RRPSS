@@ -17,39 +17,39 @@ Follow the following instructions to clone the project files into your Eclipse I
 
 ## Making changes to the project
 
-**Create a new branch**
+####**Create a new branch**
 
-All local development and changes should be done in appropriately named branches
-(e.g. create a new branch before doing any new major changes)
+   All local development and changes should be done in appropriately named branches
+   (e.g. create a new branch before doing any new major changes)
 
   `Team > Switch To > New Branch`
   
 
 
-**Pushing your changes to github**
+####**Pushing your changes to github**
 
-Add all the files that you want all changes to be reflected by
-  `Team > Add to index`
+   Add all the files that you want all changes to be reflected by
+     `Team > Add to index`
 
-Commit all your changes, thereby creating a "savepoint"
-  `Team > Commit...`  
+   Commit all your changes, thereby creating a "savepoint"
+     `Team > Commit...`  
 
-Push your changes to github
-  `Team > Push Branch <branch name>`
+   Push your changes to github
+     `Team > Push Branch <branch name>`
 
 
 
-**Do not** merge your changes directly into your local master branch and push to Git
+####**Do not merge your changes directly into your local master branch and push to Git**
 
-If you are done developing the component you are working on, push your
-branch to GitHub.
+   If you are done developing the component you are working on, push your
+   branch to GitHub.
 
-After that, visit the
+   After that, visit the
 
-[Git repository page](//github.com/sohjunjie/RRPSS/) and open a
+   [Git repository page](//github.com/sohjunjie/RRPSS/) and open a
 
-pull request to the `master` branch.
+   pull request to the `master` branch.
 
-Give your pull request a title and describe what you are trying to do
-and self-review your code. Merge to master only if you are sure of 
-your changes. If not, get someone to review your code.
+   Give your pull request a title and describe what you are trying to do
+   and self-review your code. Merge to master only if you are sure of 
+   your changes. If not, get someone to review your code.
