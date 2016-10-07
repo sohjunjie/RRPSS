@@ -1,0 +1,7 @@
+machine:
+  java:
+    version: openjdk7
+
+test:
+  override:
+    - javac -d bin -cp lib/*.jar src/*.java
