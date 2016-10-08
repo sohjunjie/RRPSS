@@ -15,6 +15,19 @@ Follow the following instructions to clone the project files into your Eclipse I
 
 
 
+## Pulling changes to the project
+
+####**Switch to master branch**
+
+   The master branch is the most definitive branch containing the latest working 
+   copy of the project in github. Pull the latest changes by right clicking the project
+   folder then
+
+  `Team > Switch To... > Master  # if not in master branch`  
+  `Team > Pull                   # get latest changes`  
+
+
+
 ## Making changes to the project
 
 ####**Create a new branch**
@@ -24,7 +37,6 @@ Follow the following instructions to clone the project files into your Eclipse I
 
   `Team > Switch To > New Branch`
   
-
 
 ####**Pushing your changes to github**
 
