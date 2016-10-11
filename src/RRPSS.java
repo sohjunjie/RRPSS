@@ -2,7 +2,7 @@
 public class RRPSS {
 
 	public static void main(String[] args) {
-		Staff s = new Staff("John", 1, true, "Chef");
+		/*Staff s = new Staff("John", 1, true, "Chef");
 		System.out.println(s.getName());
 		System.out.println(s.getEmpId());
 		System.out.println(s.getGender());
@@ -13,7 +13,7 @@ public class RRPSS {
 		System.out.println(t.getCapacity());
 		System.out.println(t.getStatus());
 		t.setStatus(Table.KindofStatus.reserved);
-		System.out.println(t.getStatus());
+		System.out.println(t.getStatus());*/
 	}
 
 }
