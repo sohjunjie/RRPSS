@@ -11,6 +11,7 @@ Follow the following instructions to clone the project files into your Eclipse I
 2. Select Checkout projects from GIT
 3. You should see a "Import Projects from Git" window.
    In the URI enter: git@github.com:sohjunjie/RRPSS.git
+   If it fails use: https://github.com/sohjunjie/RRPSS.git instead
 4. Continue clicking next and the project will be in your eclipse
 
 
