@@ -1,14 +1,14 @@
 // TODO: implements comparable, search vacated, capacity
 public class Table {
-	public enum KindofStatus {vacated, occupied, reserved};
+	public enum TableStatus {VACATED, OCCUPIED, RESERVED};
 	private int table_id;
 	private int capacity;
-	private KindofStatus status;
+	private TableStatus status;
 	
 	public Table (int table_id, int capacity) {
 		this.table_id=table_id;
 		this.capacity=capacity;
-		status=KindofStatus.vacated;
+		status=TableStatus.vacated;
 	}
 	
 	public int getTableId() {
@@ -19,7 +19,7 @@ public class Table {
 		return capacity;
 	}
 	
-	public KindofStatus getStatus() {
+	public TableStatus getStatus() {
 		return status;
 	}
 	
@@ -31,7 +31,7 @@ public class Table {
 		this.capacity=capacity;
 	}
 	
-	public void setStatus(KindofStatus status) {
+	public void setStatus(TableStatus status) {
 		this.status=status;
 	}
 }
