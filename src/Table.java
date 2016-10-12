@@ -1,4 +1,4 @@
-
+// TODO: implements comparable, search vacated, capacity
 public class Table {
 	public enum KindofStatus {vacated, occupied, reserved};
 	private int table_id;
