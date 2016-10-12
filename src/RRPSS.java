@@ -1,19 +1,23 @@
+import java.io.IOException;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RRPSS {
+public class RRPSS implements Serializable{
 
-	private ArrayList<Table> 				tables;
-	private ArrayList<Staff> 				staffs;
-	private ArrayList<Invoice> 				invoices;
-	private ArrayList<MenuItem> 			menuItems;
-	private ArrayList<SetPromotion> 		setPromotions;
-	private ArrayList<Order> 				orders;
-	private ArrayList<ReservationBooking>	bookings;
+	private static final long serialVersionUID = 7526471155622776147L;
+	
+	public ArrayList<Table> 				tables;
+	public ArrayList<Staff> 				staffs;
+	public ArrayList<Invoice> 				invoices;
+	public ArrayList<MenuItem> 				menuItems;
+	public ArrayList<SetPromotion> 			setPromotions;
+	public ArrayList<Order> 				orders;
+	public ArrayList<ReservationBooking>	bookings;
 
 	public RRPSS(){
 		// Initialize restaurant
         this.tables 	= initTables();
-        this.menuItems 	= initMenu();
         this.staffs 	= initStaff();
 	}
 	
@@ -60,5 +64,15 @@ public class RRPSS {
 	public class SetPromotion{ }
 	public class Order{ }
 	public class ReservationBooking{ }
+
+	
+	private void writeObject(java.io.ObjectOutputStream out) throws IOException{
+	
+	}
+	 
+	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException{
+	
+	}
+	
 
 }
