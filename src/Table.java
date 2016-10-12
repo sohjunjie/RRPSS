@@ -8,7 +8,7 @@ public class Table {
 	public Table (int table_id, int capacity) {
 		this.table_id=table_id;
 		this.capacity=capacity;
-		status=TableStatus.vacated;
+		status=TableStatus.VACATED;
 	}
 	
 	public int getTableId() {
