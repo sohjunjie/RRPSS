@@ -1,11 +1,11 @@
 package classes;
 
-public class MenuItem {
+public abstract class MenuItem {
 	
 	private String 		menuName;
 	private String 		desc;
 	
-	public MenuItem(String menuName, MenuType type, String desc){
+	public MenuItem(String menuName, String desc){
 		this.menuName = menuName;
 		this.desc = desc;
 	}
