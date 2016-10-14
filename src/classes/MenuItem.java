@@ -21,5 +21,5 @@ public class MenuItem {
 	public String getMenuName(){ return this.menuName; }
 	public MenuType getMenuType(){ return this.type; }
 	public String getDesc(){ return this.desc; }
-	
+
 }
