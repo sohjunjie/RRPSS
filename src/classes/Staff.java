@@ -1,4 +1,4 @@
-package entity;
+package classes;
 
 public class Staff {
 	private String name;
