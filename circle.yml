@@ -4,4 +4,4 @@ machine:
 
 test:
   override:
-    - javac -d bin src/*.java
+    - javac -d bin -cp src/classes/*.java src/*.java
