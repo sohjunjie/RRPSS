@@ -1,3 +1,4 @@
+package entity;
 // TODO: implements comparable, search vacated, capacity
 public class Table {
 	public enum TableStatus {VACATED, OCCUPIED, RESERVED};

@@ -12,7 +12,7 @@ public class application {
 	public static final String 	saveDataFileName	= "RRPSS.dat";
 	
 	public static void main(String[] args) {
-		RRPSS orrpss = new RRPSS();
+		RRPSS orrpss = loadRestuarant();
 		saveRestuarant(orrpss);
 	}
 
