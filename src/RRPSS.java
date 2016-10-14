@@ -2,8 +2,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import entity.Staff;
-import entity.Table;
+import classes.Staff;
+import classes.Table;
 
 public class RRPSS implements Serializable{
 
