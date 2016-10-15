@@ -13,38 +13,18 @@ public class Staff {
 		this.job_title=job_title;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	public int getEmpId () {
-		return emp_id;
-	}
-	
+	public String getName(){ return name; }
+	public int getEmpId(){ return emp_id; }
+	public String getJobTitle(){ return job_title; }
 	public String getGender() {
-		if (genderIsMale==true)
+		if (genderIsMale)
 			return "Male";
 		else
 			return "Female";
 	}
 	
-	public String getJobTitle() {
-		return job_title;
-	}
-	
-	public void setName(String name) {
-		this.name=name;
-	}
-	
-	public void setEmpId(int emp_id) {
-		this.emp_id=emp_id;
-	}
-	
-	public void setGender(boolean genderIsMale) {
-		this.genderIsMale=genderIsMale;
-	}
-	
-	public void setJobTitle(String job_title) {
-		this.job_title=job_title;
-	}
+	public void setName(String name){ this.name=name; }
+	public void setEmpId(int emp_id){ this.emp_id=emp_id; }
+	public void setGender(boolean genderIsMale){ this.genderIsMale=genderIsMale; }
+	public void setJobTitle(String job_title){ this.job_title=job_title; }
 }
