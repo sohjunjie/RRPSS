@@ -8,25 +8,18 @@ class Reservation {
 	private String customerName;				//only customerName, customerContact, acceptStatus and valid Status can be changed
 	private int customerContact;
 	private boolean acceptedStatus;				//true = accepted, false = not yet accepted
-	private boolean validStatus;				//true = still valid, false = reservation is removed
-	private GregorianCalendar reservationTime;	//reservationTime and numPax cannot be changed, create new reservation is necessary
+	private GregorianCalendar arrivalTime;		//reservationTime and numPax cannot be changed, create new reservation is necessary
 	
-	public Reservation(String customerName,int customerContact,int numPax,int reservationID, GregorianCalendar reservationTime)
+	public Reservation(String customerName,int customerContact,int numPax,int reservationID, GregorianCalendar arrivalTime)
 	{
 		this.customerName = customerName;
 		this.customerContact = customerContact;
 		this.numPax = numPax;
 		this.acceptedStatus = false;
-		this.validStatus = true;
 		this.reservationID = reservationID;
-		this.reservationTime = reservationTime;
+		this.arrivalTime = arrivalTime;
 	}
-	
-	public void removeReservation()
-	{
-		this.validStatus = false;
-	}
-	
+		
 	public void acceptReservation()
 	{
 		this.acceptedStatus = true;
@@ -66,9 +59,9 @@ class Reservation {
 		return this.reservationID;
 	}
 	
-	public GregorianCalendar getReservationTime()
+	public GregorianCalendar getArrivalTime()
 	{
-		return this.reservationTime;
+		return this.arrivalTime;
 	}
 
 }
