@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import classes.*;
 
@@ -13,13 +14,15 @@ public class application {
 
 	public static final Path 	dataPath 			= Paths.get(System.getProperty("user.dir"), "data");
 	public static final String 	saveDataFileName	= "RRPSS.dat";
-	public Staff thisStaff = null;
-
+	public static Staff thisStaff = null;
+	public static Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
+		
 		RRPSS orrpss = loadRestuarant();
 		
-		for(MenuItem m : orrpss.menuItems)
-			System.out.println(m.getMenuName());
+		while(thisStaff == null)
+			thisStaff = menuGetStaffIdentity(orrpss.staffs);		
 		
 		saveRestuarant(orrpss);
 	}
@@ -67,10 +70,52 @@ public class application {
 		return retRRPSS;
 	}
 	
-	public void menuGetStaffIdentity(){
-		//get this staff --> thisStaff
+	public static Staff menuGetStaffIdentity(ArrayList<Staff> staffs){
+		
+		int index = 0;
+		System.out.println("Who are you ?");
+		for(Staff s : staffs){
+			System.out.println("(" + index++ + ") " + s);
+		}
+		System.out.print("    Enter index: ");
+		int choice = sc.nextInt();
+		
+		try {
+			return staffs.get(choice);
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Invalid index entered!");
+			return null;
+		}
+
 	}
 	
-	public void menuOption(){}
+	public void menuOption(){
+		
+		int choice;
+		
+        do {
+            System.out.println("\nSelect a choice: ");
+            System.out.println("(1) Make a reservation");
+            System.out.println("(2) Take order");
+            System.out.println("(3) Calculate volume of my shape");
+            System.out.println("(4) Exit");
+        	System.out.println();
+        	System.out.print("    Enter the number of your choice: ");
+            choice = sc.nextInt();
+            
+            switch (choice) {
+                case 1: // Define a list of shapes
+	                    System.out.print("    Enter total number of shapes: ");
+                        break;
+                case 2: // Calculate area of all the shapes
+                        break;
+                case 3: // Show the list of customers with their seat numbers sorted by seat numbers
+                    break;
+                case 4:
+            }
+
+        } while (choice < 4);
+		
+	}
 	
 }
