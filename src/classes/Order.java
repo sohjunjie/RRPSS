@@ -10,15 +10,13 @@ public class Order implements Serializable{
 
 	private static final long serialVersionUID = -9135686500512288865L;
 	private Date dateTime;
-	private String orderNumber;
-	public ArrayList<OrderLineItem> orderLineItems;
+	private ArrayList<OrderLineItem> orderLineItems;
 	private Staff staffCreated;
 	private Invoice invoice;
 	private Table OrderTable;
 	
-	public Order(String orderNumber, Staff staffCreated, Table OrderTable){
+	public Order(Staff staffCreated, Table OrderTable){
 		this.orderLineItems = new ArrayList<OrderLineItem>();
-		this.orderNumber = orderNumber;
 		this.staffCreated = staffCreated;
 		Calendar cal = Calendar.getInstance();
 		this.dateTime = cal.getTime();
@@ -27,21 +25,16 @@ public class Order implements Serializable{
 	
 	public Order(ArrayList<OrderLineItem> orderLineItems, String orderNumber, Staff staffCreated){
 		this.orderLineItems = orderLineItems;
-		this.orderNumber = orderNumber;
 		this.staffCreated = staffCreated;
 		Calendar cal = Calendar.getInstance();
 		this.dateTime = cal.getTime(); 
 	}
 	
 	public ArrayList<OrderLineItem> getorderLineItems(){return orderLineItems;}
-	public void setOrderNo(ArrayList<OrderLineItem> orderLineItems){this.orderLineItems = orderLineItems;}
-	
 	public Date getDateTime(){return dateTime;}
-	
-	public String getOrderNo(){return orderNumber;}
-	public void setOrderNo(String orderNumber){this.orderNumber = orderNumber;}
-	
 	public Staff getStaffCreated(){return staffCreated;}
+	
+	public void setOrderNo(ArrayList<OrderLineItem> orderLineItems){this.orderLineItems = orderLineItems;}
 	public void setStaffCreated(Staff staffCreated){this.staffCreated = staffCreated;}
 	
 	//add to end of orderLineItems array
@@ -59,6 +52,7 @@ public class Order implements Serializable{
 			index++;
 		}
 		choice = sc.nextInt();
+		sc.close();
 		
 		try {
 			String orderItemAdded = orderLineItems.get(choice).toString();
@@ -92,6 +86,18 @@ public class Order implements Serializable{
 		}
 	}
 	
-	public void generateInvoice(){invoice.printInvoice();}
+	public void generateInvoice(ArrayList<Invoice> invoices){
+		this.invoice = new Invoice(this, invoices.size());
+		invoices.add(this.invoice);
+		
+	}
+	
+	public String toString(){
+		String printOrderString = "";
+		for(OrderLineItem o : orderLineItems){
+			printOrderString += o.getMenuItem().getMenuName() + "    " + o.getChargedPrice() + "\n";
+		}
+		return printOrderString;
+	}
 	
 }
