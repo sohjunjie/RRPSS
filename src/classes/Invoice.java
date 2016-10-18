@@ -7,28 +7,29 @@ public class Invoice implements Serializable{
 
 	private static final long serialVersionUID = 103202593696268715L;
 	private Order order;
-	private String invoiceNumber;
+	private long invoiceNumber;
 	private double gst;
 	private double price;
 	private double totalPrice;
 	public static final double GSTPERCENTAGE = 0.07;
 	
-	public Invoice(Order order, String invoiceNumber){
+	public Invoice(Order order, long invoiceNumber){
 		this.order = order;
 		this.invoiceNumber = invoiceNumber;
-		// Price before GST calculated by summing out prices of all menuItems in orderList[].
-		for (int i = 0; i < order.orderLineItems.size(); i++){
-			this.price += order.orderLineItems.get(i).getMenuItem().getPrice();
-			}
-		this.gst = GSTPERCENTAGE * price;
-		this.totalPrice = price + gst;	
+		
+		ArrayList<OrderLineItem> orderLineItems = order.getorderLineItems();
+		for(OrderLineItem o : orderLineItems)
+			this.price += o.getMenuItem().getPrice();
+
+		this.gst = GSTPERCENTAGE * this.price;
+		this.totalPrice = price + gst;
 		}
 	
 	public void printInvoice(){
-		System.out.println("Date & Time: " + order.getDateTime());
-		System.out.println("Invoice Number: " + invoiceNumber);
+		System.out.println("Date & Time: " + this.order.getDateTime());
+		System.out.println("Invoice Number: " + this.invoiceNumber);
 		// Converts the orderList array to a string and then prints it out
-		System.out.println("Items ordered: " + order.orderLineItems.toString());
+		System.out.println("Items ordered: " + this.order);
 		System.out.println("Subotal: " + price);
 		System.out.println("GST: " + gst);
 		System.out.println("Total: " + totalPrice);

@@ -42,11 +42,9 @@ public class application {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	public static RRPSS loadRestuarant(){
 
 		Path saveData 			= Paths.get(dataPath.toString(), saveDataFileName);
-		ArrayList<MenuItem> o 			= null;
 		FileInputStream fis 	= null;
 		ObjectInputStream ois 	= null;
 		RRPSS retRRPSS = null;

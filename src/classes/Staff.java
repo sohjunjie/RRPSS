@@ -1,9 +1,7 @@
 package classes;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class Staff implements Serializable{
 	private static final long serialVersionUID = -3686894603777756471L;
@@ -44,7 +42,7 @@ public class Staff implements Serializable{
 	}
 	
 	public void createNewOrder(ArrayList<Order> Orders, Table orderTable){
-		Order order = new Order("", this, orderTable);
+		Order order = new Order(this, orderTable);
 		Orders.add(order);
 	}
 	
