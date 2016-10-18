@@ -92,34 +92,34 @@ public class RRPSS implements Serializable{
 	}
 
 	
-	private void writeObject(java.io.ObjectOutputStream out) throws IOException{
-		
-		out.defaultWriteObject();
-		
-		Object[] o = new Object[6];
-		o[0] = (Object) this.tables;
-		o[1] = (Object) this.staffs;
-		o[2] = (Object) this.menuItems;
-		o[3] = (Object) this.invoices;
-		o[4] = (Object) this.orders;
-		o[5] = (Object) this.bookings;
-		
-		out.writeObject(o);
-	}
-
-	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException{
-
-        in.defaultReadObject();
-		Object[] o = (Object[]) in.readObject();
-		
-		this.tables 	= (ArrayList<Table>) o[0];
-		this.staffs 	= (ArrayList<Staff>) o[1];
-		this.menuItems 	= (ArrayList<MenuItem>) o[2];
-		this.invoices 	= (ArrayList<Invoice>) o[3];
-		this.orders 	= (ArrayList<Order>) o[4];
-		this.bookings 	= (ArrayList<Reservation>) o[5];
-
-	}
+//	private void writeObject(java.io.ObjectOutputStream out) throws IOException{
+//		
+//		out.defaultWriteObject();
+//		
+//		Object[] o = new Object[6];
+//		o[0] = (Object) this.tables;
+//		o[1] = (Object) this.staffs;
+//		o[2] = (Object) this.menuItems;
+//		o[3] = (Object) this.invoices;
+//		o[4] = (Object) this.orders;
+//		o[5] = (Object) this.bookings;
+//		
+//		out.writeObject(o);
+//	}
+//
+//	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException{
+//
+//        in.defaultReadObject();
+//		Object[] o = (Object[]) in.readObject();
+//		
+//		this.tables 	= (ArrayList<Table>) o[0];
+//		this.staffs 	= (ArrayList<Staff>) o[1];
+//		this.menuItems 	= (ArrayList<MenuItem>) o[2];
+//		this.invoices 	= (ArrayList<Invoice>) o[3];
+//		this.orders 	= (ArrayList<Order>) o[4];
+//		this.bookings 	= (ArrayList<Reservation>) o[5];
+//
+//	}
 	
 
 }

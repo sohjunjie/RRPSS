@@ -7,7 +7,6 @@ public class Invoice implements Serializable{
 
 	private static final long serialVersionUID = 103202593696268715L;
 	private Order order;
-	public ArrayList<OrderLineItem> invoiceLineItems;
 	private String invoiceNumber;
 	private double gst;
 	private double price;

@@ -13,6 +13,7 @@ public class application {
 
 	public static final Path 	dataPath 			= Paths.get(System.getProperty("user.dir"), "data");
 	public static final String 	saveDataFileName	= "RRPSS.dat";
+	public Staff thisStaff = null;
 
 	public static void main(String[] args) {
 		RRPSS orrpss = loadRestuarant();
@@ -67,5 +68,11 @@ public class application {
 		
 		return retRRPSS;
 	}
+	
+	public void menuGetStaffIdentity(){
+		//get this staff --> thisStaff
+	}
+	
+	public void menuOption(){}
 	
 }
