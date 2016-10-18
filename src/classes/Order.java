@@ -12,15 +12,17 @@ public class Order implements Serializable{
 	private Date dateTime;
 	private String orderNumber;
 	public ArrayList<OrderLineItem> orderLineItems;
-	public Staff staffCreated;
-	public Invoice invoice;
+	private Staff staffCreated;
+	private Invoice invoice;
+	private Table OrderTable;
 	
-	public Order(String orderNumber, Staff staffCreated){
+	public Order(String orderNumber, Staff staffCreated, Table OrderTable){
 		this.orderLineItems = new ArrayList<OrderLineItem>();
 		this.orderNumber = orderNumber;
 		this.staffCreated = staffCreated;
 		Calendar cal = Calendar.getInstance();
-		this.dateTime = cal.getTime(); 
+		this.dateTime = cal.getTime();
+		this.OrderTable = OrderTable;
 	}
 	
 	public Order(ArrayList<OrderLineItem> orderLineItems, String orderNumber, Staff staffCreated){

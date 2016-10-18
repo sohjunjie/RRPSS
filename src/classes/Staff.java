@@ -43,8 +43,8 @@ public class Staff implements Serializable{
 
 	}
 	
-	public void createNewOrder(ArrayList<Order> Orders){
-		Order order = new Order("", this);
+	public void createNewOrder(ArrayList<Order> Orders, Table orderTable){
+		Order order = new Order("", this, orderTable);
 		Orders.add(order);
 	}
 	
