@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Order implements Serializable{
-
+	
 	private static final long serialVersionUID = -9135686500512288865L;
 	private Date dateTime;
 	private ArrayList<OrderLineItem> orderLineItems;
@@ -39,7 +39,7 @@ public class Order implements Serializable{
 	
 	//add to end of orderLineItems array
 	public void addOrderItem(OrderLineItem orderItem){orderLineItems.add(orderItem);}
-		
+	
 	public void addOrderItem(ArrayList<MenuItem> FoodMenu){
 		int choice;
 		int index = 0;
@@ -89,7 +89,6 @@ public class Order implements Serializable{
 	public void generateInvoice(ArrayList<Invoice> invoices){
 		this.invoice = new Invoice(this, invoices.size());
 		invoices.add(this.invoice);
-		
 	}
 	
 	public String toString(){

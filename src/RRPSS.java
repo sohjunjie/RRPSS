@@ -1,3 +1,5 @@
+
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -14,7 +16,6 @@ public class RRPSS implements Serializable{
 	public ArrayList<Invoice> 				invoices;
 	public ArrayList<Order> 				orders;
 	public ArrayList<Reservation>			bookings;
-
 
 	public RRPSS(){
 		// Initialize restaurant
