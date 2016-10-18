@@ -1,6 +1,12 @@
 package classes;
 
-public class Staff {
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
+public class Staff implements Serializable{
+	private static final long serialVersionUID = -3686894603777756471L;
 	private String name;
 	private int emp_id;
 	private boolean genderIsMale;
@@ -27,4 +33,24 @@ public class Staff {
 	public void setEmpId(int emp_id){ this.emp_id=emp_id; }
 	public void setGender(boolean genderIsMale){ this.genderIsMale=genderIsMale; }
 	public void setJobTitle(String job_title){ this.job_title=job_title; }
+	
+	public void makeReservationBooking(ArrayList<Reservation> reservations){
+
+		String custName;
+		int custContact;
+		int numPax;
+		int reservationID;
+
+	}
+	
+	public void createNewOrder(ArrayList<Order> Orders){
+		Order order = new Order("", this);
+		Orders.add(order);
+	}
+	
+	public void takeOrder(Order order, ArrayList<MenuItem> FoodMenu){
+		order.addOrderItem(FoodMenu);
+	}
+	
+	
 }

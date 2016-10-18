@@ -3,7 +3,7 @@ package classes;
 import java.util.GregorianCalendar;
 
 
-class Reservation {
+public class Reservation {
 	
 	private int reservationID;					
 	private int numPax;
