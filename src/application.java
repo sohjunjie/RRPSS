@@ -5,10 +5,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
-import classes.MenuItem;
-import classes.Staff;
-import classes.Table;
+import classes.*;
 
 public class application {
 
@@ -31,6 +30,7 @@ public class application {
 		ObjectOutputStream 	oos 			= null;
 		
 		try {
+			
 			fos = new FileOutputStream(saveFileName.toString());
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(saveRPSS);
@@ -41,29 +41,29 @@ public class application {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public static RRPSS loadRestuarant(){
 
 		Path saveData 			= Paths.get(dataPath.toString(), saveDataFileName);
-		RRPSS retRRPSS 			= null;
+		ArrayList<MenuItem> o 			= null;
 		FileInputStream fis 	= null;
 		ObjectInputStream ois 	= null;
-
+		RRPSS retRRPSS = null;
+		
 		try {
-			fis = new FileInputStream(saveDataFileName.toString());
-			ois = new ObjectInputStream(fis);
+			fis = new FileInputStream(saveData.toString());
+			ois = new ObjectInputStream(fis);			
 			retRRPSS = (RRPSS) ois.readObject();
 			ois.close();
+
 		} catch (IOException ex) {
 //			ex.printStackTrace();
 		} catch (ClassNotFoundException ex) {
 //			ex.printStackTrace();
 		}
 
-		if(retRRPSS == null){
-			System.out.println("test");
+		if(retRRPSS == null)
 			retRRPSS = new RRPSS();
-		}
-
 		
 		return retRRPSS;
 	}

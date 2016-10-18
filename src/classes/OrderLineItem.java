@@ -1,10 +1,16 @@
 package classes;
 
-public class OrderLineItem {
+import java.io.Serializable;
 
+public class OrderLineItem implements Serializable{
+
+	private static final long serialVersionUID = -1249371886974645374L;
 	private MenuItem orderItem;
-	
-	public OrderLineItem(MenuItem orderItem) { this.orderItem = orderItem; }
+	private double chargedPrice;
+	public OrderLineItem(MenuItem orderItem, double chargedPrice){ 
+		this.orderItem = orderItem;
+		this.chargedPrice = chargedPrice;
+	}
 	public MenuItem getMenuItem(){ return this.orderItem; }
 	
 }

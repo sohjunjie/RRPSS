@@ -106,7 +106,7 @@ public class RRPSS implements Serializable{
 		
 		out.writeObject(o);
 	}
-	 
+
 	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException{
 
         in.defaultReadObject();
@@ -118,7 +118,7 @@ public class RRPSS implements Serializable{
 		this.invoices 	= (ArrayList<Invoice>) o[3];
 		this.orders 	= (ArrayList<Order>) o[4];
 		this.bookings 	= (ArrayList<Reservation>) o[5];
-		
+
 	}
 	
 

@@ -1,7 +1,10 @@
 package classes;
 
-public abstract class MenuItem {
+import java.io.Serializable;
+
+public abstract class MenuItem implements Serializable{
 	
+	private static final long serialVersionUID = 1991173970229115074L;
 	private String 		menuName;
 	private String 		desc;
 	private double		price;
