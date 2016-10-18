@@ -12,5 +12,6 @@ public class OrderLineItem implements Serializable{
 		this.chargedPrice = chargedPrice;
 	}
 	public MenuItem getMenuItem(){ return this.orderItem; }
+	public double getChargedPrice(){ return this.chargedPrice; }
 	
 }
