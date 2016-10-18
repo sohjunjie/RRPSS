@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import classes.*;
 
@@ -13,13 +14,17 @@ public class application {
 
 	public static final Path 	dataPath 			= Paths.get(System.getProperty("user.dir"), "data");
 	public static final String 	saveDataFileName	= "RRPSS.dat";
-	public Staff thisStaff = null;
-
+	public static Staff thisStaff = null;
+	public static Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
+		
 		RRPSS orrpss = loadRestuarant();
 		
-		for(MenuItem m : orrpss.menuItems)
-			System.out.println(m.getMenuName());
+		while(thisStaff == null)
+			thisStaff = menuGetStaffIdentity(orrpss.staffs);
+
+		// close shop - settle all pending orders before closing application
 		
 		saveRestuarant(orrpss);
 	}
@@ -67,10 +72,54 @@ public class application {
 		return retRRPSS;
 	}
 	
-	public void menuGetStaffIdentity(){
-		//get this staff --> thisStaff
+	public static Staff menuGetStaffIdentity(ArrayList<Staff> staffs){
+		
+		int index = 0;
+		System.out.println("Who are you ?");
+		for(Staff s : staffs){
+			System.out.println("(" + index++ + ") " + s);
+		}
+    	System.out.print("    Enter the number of your choice: ");
+		int choice = sc.nextInt();
+		
+		try {
+			return staffs.get(choice);
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Invalid index entered!");
+			return null;
+		}
+
 	}
 	
-	public void menuOption(){}
+	public void menuOption(){
+		
+		int choice;
+		
+        do {
+            System.out.println("\nSelect a choice: ");
+            System.out.println("(1) Make reservation");
+            System.out.println("(2) Accept reservation");
+            System.out.println("(3) Show availability");
+            System.out.println("(4) Print sales revenue report");
+            System.out.println("(5) Exit");
+        	System.out.println();
+        	System.out.print("    Enter the number of your choice: ");
+            choice = sc.nextInt();
+            
+            switch (choice) {
+                case 1: 
+                        break;
+                case 2: // Calculate area of all the shapes
+                        break;
+                case 3: // Show the list of customers with their seat numbers sorted by seat numbers
+                    break;
+                case 4:
+                	break;
+                case 5:
+            }
+
+        } while (choice < 5);
+		
+	}
 	
 }

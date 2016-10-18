@@ -35,6 +35,7 @@ public class PromotionPackage extends MenuItem implements Serializable{
 			index++;
 		}
 
+    	System.out.print("    Enter the number of your choice: ");
 		int choice = sc.nextInt();
 		sc.close();
 
@@ -63,6 +64,7 @@ public class PromotionPackage extends MenuItem implements Serializable{
 		for (Food fd : foodSet)
 			System.out.println(foodSet.indexOf(fd) + ": " + fd.getMenuName());
 
+    	System.out.print("    Enter the number of your choice: ");
 		index = sc.nextInt();
 		sc.close();
 		

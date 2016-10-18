@@ -3,23 +3,28 @@ package classes;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 public class Staff implements Serializable{
 	private static final long serialVersionUID = -3686894603777756471L;
 	private String name;
-	private int emp_id;
+	private int empId;
 	private boolean genderIsMale;
-	private String job_title;
+	private String jobTitle;
 	
-	public Staff(String name, int emp_id, boolean genderIsMale, String job_title) {
+	public String toString(){
+		return "EmpId: " + this.empId + "     Name: " + this.name + "    title: " + this.jobTitle;
+	}
+	
+	public Staff(String name, int empId, boolean genderIsMale, String jobTitle) {
 		this.name=name;
-		this.emp_id=emp_id;
+		this.empId=empId;
 		this.genderIsMale=genderIsMale;
-		this.job_title=job_title;
+		this.jobTitle=jobTitle;
 	}
 	
 	public String getName(){ return name; }
-	public int getEmpId(){ return emp_id; }
-	public String getJobTitle(){ return job_title; }
+	public int getEmpId(){ return empId; }
+	public String getJobTitle(){ return jobTitle; }
 	public String getGender() {
 		if (genderIsMale)
 			return "Male";
@@ -28,9 +33,9 @@ public class Staff implements Serializable{
 	}
 	
 	public void setName(String name){ this.name=name; }
-	public void setEmpId(int emp_id){ this.emp_id=emp_id; }
+	public void setEmpId(int empId){ this.empId=empId; }
 	public void setGender(boolean genderIsMale){ this.genderIsMale=genderIsMale; }
-	public void setJobTitle(String job_title){ this.job_title=job_title; }
+	public void setJobTitle(String jobTitle){ this.jobTitle=jobTitle; }
 	
 	public void makeReservationBooking(ArrayList<Reservation> reservations){
 
@@ -40,7 +45,7 @@ public class Staff implements Serializable{
 		int reservationID;
 
 	}
-	
+
 	public void createNewOrder(ArrayList<Order> Orders, Table orderTable){
 		Order order = new Order(this, orderTable);
 		Orders.add(order);
