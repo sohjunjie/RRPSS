@@ -6,13 +6,21 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import classes.MenuItem;
+import classes.Staff;
+import classes.Table;
+
 public class application {
 
 	public static final Path 	dataPath 			= Paths.get(System.getProperty("user.dir"), "data");
 	public static final String 	saveDataFileName	= "RRPSS.dat";
-	
+
 	public static void main(String[] args) {
 		RRPSS orrpss = loadRestuarant();
+		
+		for(MenuItem m : orrpss.menuItems)
+			System.out.println(m.getMenuName());
+		
 		saveRestuarant(orrpss);
 	}
 
@@ -32,7 +40,7 @@ public class application {
 		}
 
 	}
-	
+
 	public static RRPSS loadRestuarant(){
 
 		Path saveData 			= Paths.get(dataPath.toString(), saveDataFileName);
@@ -51,8 +59,11 @@ public class application {
 //			ex.printStackTrace();
 		}
 
-		if(retRRPSS == null)
+		if(retRRPSS == null){
+			System.out.println("test");
 			retRRPSS = new RRPSS();
+		}
+
 		
 		return retRRPSS;
 	}

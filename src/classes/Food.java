@@ -1,15 +1,19 @@
 package classes;
 
-public class Food extends MenuItem {
-	public enum Type {MAIN_COURSE, DESSERT, DRINKS};
-	private Type type;
+import java.io.Serializable;
 
-	public Food(String menuName, String desc, double price, Type type) {
+public class Food extends MenuItem implements Serializable{
+
+	private static final long serialVersionUID = 4883217370046073402L;
+	public enum CourseType {MAIN_COURSE, DESSERT, DRINKS};
+	private CourseType type;
+
+	public Food(String menuName, String desc, double price, CourseType type) {
 		super(menuName, desc, price);
 		this.type = type;		
 	}
 
-	public Type getType() { return this.type; }
-	public void setType(Type type) { this.type = type; }
+	public CourseType getType() { return this.type; }
+	public void setType(CourseType type) { this.type = type; }
 
 }
