@@ -1,8 +1,7 @@
 package classes;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
-
+import java.util.Calendar;
 
 public class Reservation implements Serializable{
 	
@@ -12,9 +11,9 @@ public class Reservation implements Serializable{
 	private String customerName;				//only customerName, customerContact and  acceptStatus can be changed
 	private int customerContact;
 	private boolean acceptedStatus;				//true = accepted, false = not yet accepted
-	private GregorianCalendar arrivalTime;		//reservationTime and numPax cannot be changed, create new reservation is necessary
+	private Calendar arrivalTime;		//reservationTime and numPax cannot be changed, create new reservation is necessary
 	
-	public Reservation(String customerName, int customerContact, int numPax, int reservationID, GregorianCalendar arrivalTime){
+	public Reservation(String customerName, int customerContact, int numPax, int reservationID, Calendar arrivalTime){
 		this.customerName = customerName;
 		this.customerContact = customerContact;
 		this.numPax = numPax;
@@ -30,7 +29,7 @@ public class Reservation implements Serializable{
 	public int getCustomerContact(){ return this.customerContact; }
 	public int getNumPax(){ return this.numPax; }
 	public int getReservationID(){ return this.reservationID; }	
-	public GregorianCalendar getArrivalTime(){ return this.arrivalTime; }
+	public Calendar getArrivalTime(){ return this.arrivalTime; }
 	
 	public void setCustomerName(String newName){ this.customerName = newName; }	
 	public void setCustomerContact(int newContact) { this.customerContact = newContact; }
