@@ -2,10 +2,13 @@ package classes;
 
 import java.util.Date;
 import java.util.Scanner;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Order {
+public class Order implements Serializable{
+
+	private static final long serialVersionUID = -9135686500512288865L;
 	private Date dateTime;
 	private String orderNumber;
 	public ArrayList<OrderLineItem> orderLineItems;
@@ -57,7 +60,7 @@ public class Order {
 		
 		try {
 			String orderItemAdded = orderLineItems.get(choice).toString();
-			orderItem = new OrderLineItem(FoodMenu.get(choice));
+			orderItem = new OrderLineItem(FoodMenu.get(choice), FoodMenu.get(choice).getPrice());
 			this.orderLineItems.add(orderItem);
 			System.out.println(orderItemAdded + " added to order."); 
 		}catch(IndexOutOfBoundsException e){

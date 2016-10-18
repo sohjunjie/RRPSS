@@ -1,11 +1,13 @@
 package classes;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 
-public class Reservation {
+public class Reservation implements Serializable{
 	
-	private int reservationID;					
+	private static final long serialVersionUID = 3558136592677236481L;
+	private int reservationID;
 	private int numPax;
 	private String customerName;				//only customerName, customerContact and  acceptStatus can be changed
 	private int customerContact;

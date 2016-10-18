@@ -1,6 +1,11 @@
 package classes;
 
-public class Invoice {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Invoice implements Serializable{
+
+	private static final long serialVersionUID = 103202593696268715L;
 	private Order order;
 	private String invoiceNumber;
 	private double gst;
