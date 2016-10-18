@@ -22,7 +22,9 @@ public class application {
 		RRPSS orrpss = loadRestuarant();
 		
 		while(thisStaff == null)
-			thisStaff = menuGetStaffIdentity(orrpss.staffs);		
+			thisStaff = menuGetStaffIdentity(orrpss.staffs);
+
+		// close shop - settle all pending orders before closing application
 		
 		saveRestuarant(orrpss);
 	}
@@ -77,7 +79,7 @@ public class application {
 		for(Staff s : staffs){
 			System.out.println("(" + index++ + ") " + s);
 		}
-		System.out.print("    Enter index: ");
+    	System.out.print("    Enter the number of your choice: ");
 		int choice = sc.nextInt();
 		
 		try {
@@ -95,26 +97,28 @@ public class application {
 		
         do {
             System.out.println("\nSelect a choice: ");
-            System.out.println("(1) Make a reservation");
-            System.out.println("(2) Take order");
-            System.out.println("(3) Calculate volume of my shape");
-            System.out.println("(4) Exit");
+            System.out.println("(1) Make reservation");
+            System.out.println("(2) Accept reservation");
+            System.out.println("(3) Show availability");
+            System.out.println("(4) Print sales revenue report");
+            System.out.println("(5) Exit");
         	System.out.println();
         	System.out.print("    Enter the number of your choice: ");
             choice = sc.nextInt();
             
             switch (choice) {
-                case 1: // Define a list of shapes
-	                    System.out.print("    Enter total number of shapes: ");
+                case 1: 
                         break;
                 case 2: // Calculate area of all the shapes
                         break;
                 case 3: // Show the list of customers with their seat numbers sorted by seat numbers
                     break;
                 case 4:
+                	break;
+                case 5:
             }
 
-        } while (choice < 4);
+        } while (choice < 5);
 		
 	}
 	
