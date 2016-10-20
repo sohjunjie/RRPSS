@@ -108,7 +108,7 @@ public class Staff implements Serializable{
 		Calendar arrivalTime = new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute);
 		bookings.add(new Reservation(customerName, customerContact, numPax, reservationID, arrivalTime));
 	}
-
+//System.out.println(bookings.get(rec_id - 1).getArrivalTime().getTime()); to print ArrivalTime.
 	public void acceptReservation(ArrayList<Reservation> bookings) {
 		System.out.print("Enter reservation ID of reservation to accept: ");
 		int res_id = sc.nextInt() - 1;
