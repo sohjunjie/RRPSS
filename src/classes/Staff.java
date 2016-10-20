@@ -60,6 +60,8 @@ public class Staff implements Serializable{
 	}
 	
 	public void createReservation(ArrayList<Reservation> bookings) {
+		int year, month, dayOfMonth, hourOfDay, minute;
+		boolean invalidDay, invalidHour;
 		System.out.print("Enter customer name: ");
 		String customerName = sc.next();
 		System.out.print("Enter customer contact number: ");
@@ -68,22 +70,48 @@ public class Staff implements Serializable{
 		int numPax = sc.nextInt();
 		int reservationID = bookings.size() + 1; 
 		System.out.print("Enter year: ");
-		int year = sc.nextInt();
-		System.out.print("Enter month (1 is Jan, 12 is Dec) :");
-		int month =sc.nextInt()-1;
+		do {
+			year = sc.nextInt();
+			if (year < 2010)
+				System.out.print("Invalid year, please enter year again: ");
+		} while (year < 2010);
+		System.out.print("Enter month (1 is Jan, 12 is Dec): ");
+		do {
+			month = sc.nextInt() - 1 ;
+			if (month > 12 || month < 0)
+				System.out.print("Invalid month, please enter month again: ");
+		} while (month> 12 || month < 0);
 		System.out.print("Enter day of month: ");
-		int dayOfMonth = sc.nextInt();
-		System.out.print("Enter hour of day: ");
-		int hourOfDay = sc.nextInt();
+		do {
+			dayOfMonth = sc.nextInt();
+			//account for leap year every 4 years, and number of days in each month)
+			invalidDay = (month == 2 && year % 4 == 0 && dayOfMonth > 29 ||
+					month == 2 && year % 4 !=0 && dayOfMonth > 28 ||
+					(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month ==  10 || month == 12) && dayOfMonth > 31 ||
+					(month == 4 || month == 6 || month == 9 || month == 11) && dayOfMonth > 30);
+			if (invalidDay)
+				System.out.print("Invalid day of month, please enter day of month again: ");
+		} while (invalidDay);
+		System.out.print("Enter hour of day (in 24 hr format): ");
+		do {
+			hourOfDay = sc.nextInt();
+			invalidHour = (hourOfDay < 11 || hourOfDay > 15 && hourOfDay < 18 || hourOfDay > 22);
+			if (invalidHour)
+				System.out.print("Invalid reservation time, please enter hour again: ");
+		} while (invalidHour);
 		System.out.print("Enter minute: ");
-		int minute = sc.nextInt();
+		do {
+			minute = sc.nextInt();
+			if (minute < 0 || minute > 59)
+				System.out.print("Invalid reservation time, please enter minute again: ");
+		} while (minute < 0 || minute > 59);
 		Calendar arrivalTime = new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute);
 		bookings.add(new Reservation(customerName, customerContact, numPax, reservationID, arrivalTime));
 	}
 
 	public void acceptReservation(ArrayList<Reservation> bookings) {
 		System.out.print("Enter reservation ID of reservation to accept: ");
-		int res_id = sc.nextInt();
+		int res_id = sc.nextInt() - 1;
 		bookings.get(res_id).acceptReservation();
 	}
 }
