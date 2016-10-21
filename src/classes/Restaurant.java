@@ -103,7 +103,28 @@ public class Restaurant implements Serializable{
 		return retTables;
 	}
 
-	public void takeOrder(){}
+	public void viewPendingOrder(){
+		// 1. show list of pending orders
+		// 2. select a pending order and show order interface
+	}
+
+	public void makeReservation(){
+		// show make reservation menu
+	}
+	
+	public void acceptReservation(){
+		// 0. pre-processing -- move expired reservations to settledReservations
+		// 1. show list of pending reservations
+		// 2. select a reservation and show reservation interface
+	}
+	
+	public ArrayList<Table> findTableAvailability(){
+		return null;
+	}
+	
+	public void printSalesReport(){
+		// print sales report
+	}
 	
 	
 }
