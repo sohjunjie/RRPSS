@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 import classes.*;
 import db.Restaurant;
+import mgr.InvoiceMgr;
+import mgr.OrderMgr;
+import ui.FoodMenuUI;
+import ui.ReservationUI;
 
 public class application {
 	
@@ -14,7 +18,7 @@ public class application {
 	public static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		
+
 		Restaurant.loadRestaurant();
 		
 		while(thisStaff == null)
@@ -65,13 +69,17 @@ public class application {
             choice = sc.nextInt();
             
             switch (choice) {
-                case 1: 
+                case 1: // reservation
+                		ReservationUI.menuShowReservationOptions(thisStaff);
                         break;
-                case 2:
+                case 2:	// edit a pending order
+                		OrderMgr.editPendingOrder();
                         break;
                 case 3:
+                		FoodMenuUI.menuShowFoodMenuOptions();
                     	break;
                 case 4:
+                		InvoiceMgr.printSalesRevenueReport();
                 		break;
                 case 5:
             }
@@ -79,5 +87,6 @@ public class application {
         } while (choice < 5);
 
 	}
+
 	
 }

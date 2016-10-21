@@ -21,6 +21,12 @@ import classes.Table;
 
 public class Restaurant {
 
+	public static final int		bookingMthInAdvance			= 1;
+	public static final	int		AMStartTime					= 11;
+	public static final	int		AMEndTime					= 15;
+	public static final	int		PMStartTime					= 18;
+	public static final	int		PMEndTime					= 22;
+	
 	public static final Path 	dataPath 					= Paths.get(System.getProperty("user.dir"), "data");
 	public static final String 	tableFileName				= "table.dat";
 	public static final String 	staffFileName				= "staff.dat";
@@ -119,10 +125,10 @@ public class Restaurant {
 	
 	public static void initStaff(){
 		ArrayList<Staff> staffs = new ArrayList<Staff>();
-		staffs.add(new Staff("John", 1, true, "Chef"));
-		staffs.add(new Staff("May", 2, false, "Cashier"));
-		staffs.add(new Staff("Nitro", 3, true, "Waiter"));
-		staffs.add(new Staff("Miki", 4, false, "Cashier"));
+		staffs.add(new Staff("John", 1, 'M', "Chef"));
+		staffs.add(new Staff("May", 2, 'F', "Cashier"));
+		staffs.add(new Staff("Nitro", 3, 'M', "Waiter"));
+		staffs.add(new Staff("Miki", 4, 'F', "Cashier"));
 		Restaurant.staffs = staffs;
 	}
 	public static void saveStaff(){
