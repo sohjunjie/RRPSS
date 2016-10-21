@@ -2,9 +2,12 @@ package ui;
 
 import java.util.Scanner;
 
+import classes.Staff;
+import mgr.ReservationMgr;
+
 public class ReservationUI {
 
-	public static void menuShowReservationOptions(){
+	public static void menuShowReservationOptions(Staff staff){
 
 		int choice;
 		Scanner sc = new Scanner(System.in);
@@ -21,10 +24,13 @@ public class ReservationUI {
             
             switch (choice) {
                 case 1: 
+                		showTableAvailability();
                         break;
                 case 2:
+                		makeReservation();
                         break;
                 case 3:
+                		acceptReservation(staff);
                     	break;
                 case 4:
             }
@@ -35,18 +41,16 @@ public class ReservationUI {
         
 	}
 
-	public static void showAvailability(){
+	public static void showTableAvailability(){
 		
 	}
 	
 	public static void makeReservation(){
-		// show make reservation menu
+		ReservationMgr.makeReservation();
 	}
 	
-	public static void acceptReservation(){
-		// 0. pre-processing -- move expired reservations to settledReservations
-		// 1. show list of pending reservations
-		// 2. select a reservation and show reservation interface
+	public static void acceptReservation(Staff staff){
+		ReservationMgr.acceptReservation(staff);
 	}
 	
 	
