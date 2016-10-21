@@ -14,14 +14,19 @@ public class Restaurant implements Serializable{
 	public static ArrayList<MenuItem> 			foodMenu;
 	
 	public static ArrayList<Invoice> 			invoices;
+	
 	public static ArrayList<Order> 				orders;
-	public static ArrayList<Reservation>		reservations;
-
+	public static ArrayList<Order> 				settledOrders;
+	
+	public static ArrayList<Reservation>		settledReservations;
+	public static ArrayList<Reservation>		unsettledReservations;
+	
 	public Restaurant(){
 		// Initialize restaurant
         this.tables 	= initTables();
         this.staffs 	= initStaff();
         this.foodMenu	= initMenu();
+        
 	}
 
 	public ArrayList<MenuItem> initMenu(){
