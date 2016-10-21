@@ -12,6 +12,7 @@ import java.util.Calendar;
 public class Order implements Serializable{
 	
 	private static final long serialVersionUID = -9135686500512288865L;
+	private int							orderID;
 	private ArrayList<OrderLineItem> 	orderLineItems;
 	private Staff 						createdByStaff;
 	private Reservation					fromReservation;
@@ -19,6 +20,7 @@ public class Order implements Serializable{
 	private Invoice 					invoice;
 
 	public Order(Staff createdByStaff, Reservation fromReservation){
+		this.orderID			= Calendar.getInstance().hashCode();
 		this.orderLineItems		= new ArrayList<OrderLineItem>();
 		this.createdByStaff 	= createdByStaff;
 		this.fromReservation 	= fromReservation;
@@ -26,9 +28,11 @@ public class Order implements Serializable{
 		this.invoice			= null;
 	}
 	
-	public ArrayList<OrderLineItem> getorderLineItems(){return orderLineItems;}
-	public Date getDateTime(){return dateTime;}
-	public Staff getStaffCreated(){return createdByStaff;}
+	public int getOrderID(){ return this.orderID; }
+	public ArrayList<OrderLineItem> getorderLineItems(){return this.orderLineItems;}
+	public Date getDateTime(){return this.dateTime;}
+	public Staff getStaffCreated(){return this.createdByStaff;}
+	public Invoice getInvoice(){ return this.invoice; }
 	
 	public void setOrderLineItems(ArrayList<OrderLineItem> orderLineItems){this.orderLineItems = orderLineItems;}
 	
@@ -93,12 +97,11 @@ public class Order implements Serializable{
 		}
 	}
 	
-	public void generateInvoice(ArrayList<Invoice> invoices){
+	public void generateInvoice(){
 		
 		if(this.invoice != null) return;	//lock order for editing when invoice already generated
-		
 		this.invoice = new Invoice(this);
-		Restaurant.invoices.add(this.invoice);
+
 	}
 	
 	public double calculateTotalOrderPrice(){
