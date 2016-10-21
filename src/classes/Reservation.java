@@ -24,7 +24,7 @@ public class Reservation implements Serializable{
 	
 	public void acceptReservation(){ 
 		this.acceptedStatus = true;
-		Restaurant.unsettledReservations.remove(this);
+		Restaurant.reservations.remove(this);
 		Restaurant.settledReservations.add(this);
 	}
 	

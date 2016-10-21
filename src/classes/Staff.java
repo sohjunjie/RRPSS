@@ -108,7 +108,7 @@ public class Staff implements Serializable{
 
 		//check expired reservation ?? reservation.getArrivalTime().getTime()
 		
-		ArrayList<Reservation> reservations = Restaurant.unsettledReservations;
+		ArrayList<Reservation> reservations = Restaurant.reservations;
 		System.out.print("Enter reservation ID of reservation to accept: ");
 		int res_id = sc.nextInt() - 1;
 		Reservation reservation = reservations.get(res_id);
