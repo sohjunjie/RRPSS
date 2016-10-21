@@ -18,15 +18,22 @@ public class Restaurant implements Serializable{
 	public static ArrayList<Order> 				orders;
 	public static ArrayList<Order> 				settledOrders;
 	
+	public static ArrayList<Reservation>		reservations;
 	public static ArrayList<Reservation>		settledReservations;
-	public static ArrayList<Reservation>		unsettledReservations;
 	
 	public Restaurant(){
 		// Initialize restaurant
-        this.tables 	= initTables();
-        this.staffs 	= initStaff();
-        this.foodMenu	= initMenu();
+		Restaurant.tables 				= initTables();
+        Restaurant.staffs 				= initStaff();
+        Restaurant.foodMenu				= initMenu();
         
+        Restaurant.invoices				= new ArrayList<Invoice>();
+        
+        Restaurant.orders				= new ArrayList<Order>();
+        Restaurant.settledOrders		= new ArrayList<Order>();
+        
+        Restaurant.reservations			= new ArrayList<Reservation>();
+        Restaurant.settledReservations	= new ArrayList<Reservation>();
 	}
 
 	public ArrayList<MenuItem> initMenu(){
@@ -96,5 +103,28 @@ public class Restaurant implements Serializable{
 		return retTables;
 	}
 
+	public void viewPendingOrder(){
+		// 1. show list of pending orders
+		// 2. select a pending order and show order interface
+	}
 
+	public void makeReservation(){
+		// show make reservation menu
+	}
+	
+	public void acceptReservation(){
+		// 0. pre-processing -- move expired reservations to settledReservations
+		// 1. show list of pending reservations
+		// 2. select a reservation and show reservation interface
+	}
+	
+	public ArrayList<Table> findTableAvailability(){
+		return null;
+	}
+	
+	public void printSalesReport(){
+		// print sales report
+	}
+	
+	
 }

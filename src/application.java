@@ -102,7 +102,7 @@ public class application {
             System.out.println("(1) Show availability");
             System.out.println("(2) Make reservation");
             System.out.println("(3) Accept reservation");
-            System.out.println("(4) Take order");
+            System.out.println("(4) View pending order");
             System.out.println("(5) Print sales revenue report");
             System.out.println("(6) Exit");
         	System.out.println();

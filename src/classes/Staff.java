@@ -13,8 +13,6 @@ public class Staff implements Serializable{
 	private boolean genderIsMale;
 	private String jobTitle;
 	
-	Scanner sc = new Scanner (System.in);
-	
 	public String toString(){
 		return "EmpId: " + this.empId + "     Name: " + this.name + "    title: " + this.jobTitle;
 	}
@@ -52,17 +50,22 @@ public class Staff implements Serializable{
 	
 	public void createReservation() {
 		
+		Scanner sc = new Scanner (System.in);
 		ArrayList<Reservation> reservations = Restaurant.settledReservations;
 		int year, month, dayOfMonth, hourOfDay, minute;
 		boolean invalidDay, invalidHour;
+
+		int reservationID = Calendar.getInstance().hashCode();
 		
 		System.out.print("Enter customer name: ");
 		String customerName = sc.next();
+		
 		System.out.print("Enter customer contact number: ");
 		int customerContact = sc.nextInt();
+		
 		System.out.print("Enter number of people: ");
 		int numPax = sc.nextInt();
-		int reservationID = reservations.size() + 1; 
+
 		System.out.print("Enter year: ");
 		do {
 			year = sc.nextInt();
@@ -99,6 +102,9 @@ public class Staff implements Serializable{
 			if (minute < 0 || minute > 59)
 				System.out.print("Invalid reservation time, please enter minute again: ");
 		} while (minute < 0 || minute > 59);
+		
+		sc.close();
+		
 		Calendar arrivalTime = new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute);
 		reservations.add(new Reservation(customerName, customerContact, numPax, reservationID, arrivalTime));
 	}
@@ -107,13 +113,29 @@ public class Staff implements Serializable{
 	public void acceptReservation(){
 
 		//check expired reservation ?? reservation.getArrivalTime().getTime()
+		int index = 0;
+		Scanner sc = new Scanner (System.in);
+
+		ArrayList<Reservation> reservations = Restaurant.reservations;
 		
-		ArrayList<Reservation> reservations = Restaurant.unsettledReservations;
-		System.out.print("Enter reservation ID of reservation to accept: ");
-		int res_id = sc.nextInt() - 1;
-		Reservation reservation = reservations.get(res_id);
-		reservation.acceptReservation();
-		this.createNewOrder(reservation);
+		System.out.print("Select which reservation to accept: ");
+		for(Reservation r : reservations){
+			System.out.println("(" + index++ + ") Customer Name:" + r.getCustomerName() + 
+												"    Contact: " + r.getCustomerContact() +
+												"    Arrival time: " + r.getArrivalTime().getTime());
+		}
+		int choice = sc.nextInt();
+		sc.close();
+		
+		try {
+			Reservation reservation = reservations.get(choice);
+			reservation.acceptReservation();
+			this.createNewOrder(reservation);
+			System.out.println("Reservation accepted."); 
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Fail to accept reservation! (Invalid index provided");
+		}		
+
 
 	}
 

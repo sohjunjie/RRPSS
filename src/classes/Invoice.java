@@ -1,21 +1,21 @@
 package classes;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Invoice implements Serializable{
 
 	private static final long serialVersionUID = 103202593696268715L;
 	private Order order;
-	private long invoiceNumber;
+	private int invoiceNumber;
 	private double gst;
 	private double price;
 	private double totalPrice;
 	public static final double GSTPERCENTAGE = 0.07;
 	
-	public Invoice(Order order, long invoiceNumber){
+	public Invoice(Order order){
 		this.order = order;
-		this.invoiceNumber = invoiceNumber;
+		this.invoiceNumber = Calendar.getInstance().hashCode();
 		this.price = order.calculateTotalOrderPrice();
 		this.gst = GSTPERCENTAGE * this.price;
 		this.totalPrice = this.price + this.gst;
@@ -30,4 +30,5 @@ public class Invoice implements Serializable{
 		System.out.println("GST: " + gst);
 		System.out.println("Total: " + totalPrice);
 	}
+
 }

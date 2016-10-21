@@ -9,29 +9,25 @@ import java.util.Calendar;
 public class Order implements Serializable{
 	
 	private static final long serialVersionUID = -9135686500512288865L;
-	private Date dateTime;
-	private ArrayList<OrderLineItem> orderLineItems;
-	private Staff staffCreated;
-	private Invoice invoice;
-	private Reservation fromReservation;
-//	private static ArrayList<MenuItem> referenceFoodMenu;
+	private ArrayList<OrderLineItem> 	orderLineItems;
+	private Staff 						createdByStaff;
+	private Reservation					fromReservation;
+	private Date 						dateTime;
+	private Invoice 					invoice;
 
-	public Order(Staff staffCreated, Reservation fromReservation){
-		this.orderLineItems = new ArrayList<OrderLineItem>();
-		this.staffCreated = staffCreated;
-		Calendar cal = Calendar.getInstance();
-		this.dateTime = cal.getTime();
-		this.fromReservation = fromReservation;
+	public Order(Staff createdByStaff, Reservation fromReservation){
+		this.orderLineItems		= new ArrayList<OrderLineItem>();
+		this.createdByStaff 	= createdByStaff;
+		this.fromReservation 	= fromReservation;
+		this.dateTime 			= Calendar.getInstance().getTime();
 	}
 	
 	public ArrayList<OrderLineItem> getorderLineItems(){return orderLineItems;}
 	public Date getDateTime(){return dateTime;}
-	public Staff getStaffCreated(){return staffCreated;}
+	public Staff getStaffCreated(){return createdByStaff;}
 	
-	public void setOrderNo(ArrayList<OrderLineItem> orderLineItems){this.orderLineItems = orderLineItems;}
-	public void setStaffCreated(Staff staffCreated){this.staffCreated = staffCreated;}
+	public void setOrderLineItems(ArrayList<OrderLineItem> orderLineItems){this.orderLineItems = orderLineItems;}
 	
-	//add to end of orderLineItems array
 	public void addOrderItem(OrderLineItem orderItem){orderLineItems.add(orderItem);}
 	
 	public void addOrderItem(){
@@ -87,8 +83,8 @@ public class Order implements Serializable{
 	}
 	
 	public void generateInvoice(ArrayList<Invoice> invoices){
-		this.invoice = new Invoice(this, invoices.size());
-		invoices.add(this.invoice);
+		this.invoice = new Invoice(this);
+		Restaurant.invoices.add(this.invoice);
 	}
 	
 	public double calculateTotalOrderPrice(){
