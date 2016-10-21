@@ -9,7 +9,7 @@ public class InvoiceMgr {
 
 	public static ArrayList<Invoice> invoices = Restaurant.invoices;
 	
-	public void printSalesRevenueReport(){
+	public static void printSalesRevenueReport(){
 		// TODO: Print sales revenue report by looping through invoices ArrayList
 	}
 	
