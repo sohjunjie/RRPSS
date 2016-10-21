@@ -55,20 +55,23 @@ public class Staff implements Serializable{
 		Orders.add(order);
 	}
 	
-	public void takeOrder(Order order, ArrayList<MenuItem> FoodMenu){
-		order.addOrderItem(FoodMenu);
+	public void takeOrder(Order order){
+		order.addOrderItem();
 	}
 	
-	public void createReservation(ArrayList<Reservation> bookings) {
+	public void createReservation() {
+		
+		ArrayList<Reservation> reservations = Restaurant.reservations;
 		int year, month, dayOfMonth, hourOfDay, minute;
 		boolean invalidDay, invalidHour;
+		
 		System.out.print("Enter customer name: ");
 		String customerName = sc.next();
 		System.out.print("Enter customer contact number: ");
 		int customerContact = sc.nextInt();
 		System.out.print("Enter number of people: ");
 		int numPax = sc.nextInt();
-		int reservationID = bookings.size() + 1; 
+		int reservationID = reservations.size() + 1; 
 		System.out.print("Enter year: ");
 		do {
 			year = sc.nextInt();
@@ -106,12 +109,16 @@ public class Staff implements Serializable{
 				System.out.print("Invalid reservation time, please enter minute again: ");
 		} while (minute < 0 || minute > 59);
 		Calendar arrivalTime = new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute);
-		bookings.add(new Reservation(customerName, customerContact, numPax, reservationID, arrivalTime));
+		reservations.add(new Reservation(customerName, customerContact, numPax, reservationID, arrivalTime));
 	}
+
 //System.out.println(bookings.get(rec_id - 1).getArrivalTime().getTime()); to print ArrivalTime.
-	public void acceptReservation(ArrayList<Reservation> bookings) {
+	public void acceptReservation() {
+		
+		ArrayList<Reservation> reservations = Restaurant.reservations;
 		System.out.print("Enter reservation ID of reservation to accept: ");
 		int res_id = sc.nextInt() - 1;
-		bookings.get(res_id).acceptReservation();
+		reservations.get(res_id).acceptReservation();
+		
 	}
 }

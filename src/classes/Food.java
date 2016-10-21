@@ -10,7 +10,7 @@ public class Food extends MenuItem implements Serializable{
 
 	public Food(String menuName, String desc, double price, CourseType type) {
 		super(menuName, desc, price);
-		this.type = type;		
+		this.type = type;
 	}
 
 	public CourseType getType() { return this.type; }

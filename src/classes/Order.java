@@ -14,20 +14,14 @@ public class Order implements Serializable{
 	private Staff staffCreated;
 	private Invoice invoice;
 	private Table OrderTable;
-	
+//	private static ArrayList<MenuItem> referenceFoodMenu;
+
 	public Order(Staff staffCreated, Table OrderTable){
 		this.orderLineItems = new ArrayList<OrderLineItem>();
 		this.staffCreated = staffCreated;
 		Calendar cal = Calendar.getInstance();
 		this.dateTime = cal.getTime();
 		this.OrderTable = OrderTable;
-	}
-	
-	public Order(ArrayList<OrderLineItem> orderLineItems, String orderNumber, Staff staffCreated){
-		this.orderLineItems = orderLineItems;
-		this.staffCreated = staffCreated;
-		Calendar cal = Calendar.getInstance();
-		this.dateTime = cal.getTime(); 
 	}
 	
 	public ArrayList<OrderLineItem> getorderLineItems(){return orderLineItems;}
@@ -40,14 +34,16 @@ public class Order implements Serializable{
 	//add to end of orderLineItems array
 	public void addOrderItem(OrderLineItem orderItem){orderLineItems.add(orderItem);}
 	
-	public void addOrderItem(ArrayList<MenuItem> FoodMenu){
+	public void addOrderItem(){
+		
 		int choice;
 		int index = 0;
 		Scanner sc = new Scanner(System.in);
 		OrderLineItem orderItem;
+		ArrayList<MenuItem> foodMenu = Restaurant.foodMenu;
 		
 		System.out.println("Select the food item to add to the order:");
-		for(MenuItem menuItem : FoodMenu)
+		for(MenuItem menuItem : foodMenu)
 			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
 
     	System.out.print("    Enter the number of your choice: ");
@@ -56,7 +52,7 @@ public class Order implements Serializable{
 		
 		try {
 			String orderItemAdded = orderLineItems.get(choice).toString();
-			orderItem = new OrderLineItem(FoodMenu.get(choice), FoodMenu.get(choice).getPrice());
+			orderItem = new OrderLineItem(foodMenu.get(choice));
 			this.orderLineItems.add(orderItem);
 			System.out.println(orderItemAdded + " added to order."); 
 		}catch(IndexOutOfBoundsException e){
@@ -94,6 +90,13 @@ public class Order implements Serializable{
 		this.invoice = new Invoice(this, invoices.size());
 		invoices.add(this.invoice);
 	}
+	
+	public double calculateTotalOrderPrice(){
+		double retPrice = 0;
+		for(OrderLineItem o : this.orderLineItems)
+			retPrice += o.getMenuItem().getPrice();
+		return retPrice;
+	}	
 	
 	public String toString(){
 		String printOrderString = "";
