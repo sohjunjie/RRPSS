@@ -3,6 +3,8 @@ package classes;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import db.Restaurant;
+
 public class Reservation implements Serializable{
 	
 	private static final long serialVersionUID = 3558136592677236481L;
