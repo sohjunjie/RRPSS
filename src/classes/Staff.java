@@ -40,19 +40,10 @@ public class Staff implements Serializable{
 	public void setEmpId(int empId){ this.empId=empId; }
 	public void setGender(boolean genderIsMale){ this.genderIsMale=genderIsMale; }
 	public void setJobTitle(String jobTitle){ this.jobTitle=jobTitle; }
-	
-	public void makeReservationBooking(ArrayList<Reservation> reservations){
 
-		String custName;
-		int custContact;
-		int numPax;
-		int reservationID;
-
-	}
-
-	public void createNewOrder(ArrayList<Order> Orders, Table orderTable){
-		Order order = new Order(this, orderTable);
-		Orders.add(order);
+	public void createNewOrder(Reservation fromReservation){
+		Order order = new Order(this, fromReservation);
+		Restaurant.orders.add(order);
 	}
 	
 	public void takeOrder(Order order){
@@ -61,7 +52,7 @@ public class Staff implements Serializable{
 	
 	public void createReservation() {
 		
-		ArrayList<Reservation> reservations = Restaurant.reservations;
+		ArrayList<Reservation> reservations = Restaurant.settledReservations;
 		int year, month, dayOfMonth, hourOfDay, minute;
 		boolean invalidDay, invalidHour;
 		
@@ -112,13 +103,18 @@ public class Staff implements Serializable{
 		reservations.add(new Reservation(customerName, customerContact, numPax, reservationID, arrivalTime));
 	}
 
-//System.out.println(bookings.get(rec_id - 1).getArrivalTime().getTime()); to print ArrivalTime.
-	public void acceptReservation() {
+	
+	public void acceptReservation(){
+
+		//check expired reservation ?? reservation.getArrivalTime().getTime()
 		
-		ArrayList<Reservation> reservations = Restaurant.reservations;
+		ArrayList<Reservation> reservations = Restaurant.unsettledReservations;
 		System.out.print("Enter reservation ID of reservation to accept: ");
 		int res_id = sc.nextInt() - 1;
-		reservations.get(res_id).acceptReservation();
-		
+		Reservation reservation = reservations.get(res_id);
+		reservation.acceptReservation();
+		this.createNewOrder(reservation);
+
 	}
+
 }
