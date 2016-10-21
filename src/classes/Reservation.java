@@ -22,7 +22,11 @@ public class Reservation implements Serializable{
 		this.arrivalTime = arrivalTime;
 	}
 	
-	public void acceptReservation(){ this.acceptedStatus = true; }
+	public void acceptReservation(){ 
+		this.acceptedStatus = true;
+		Restaurant.unsettledReservations.remove(this);
+		Restaurant.settledReservations.add(this);
+	}
 	
 	public boolean getAcceptedStatus(){ return this.acceptedStatus; }
 	public String getCustomerName(){ return this.customerName; }
