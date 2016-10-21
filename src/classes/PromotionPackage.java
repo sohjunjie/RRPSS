@@ -26,9 +26,9 @@ public class PromotionPackage extends MenuItem implements Serializable{
 	public void addFood(ArrayList<MenuItem> foodMenu){
 
 		Scanner sc = new Scanner(System.in);
+		int index = 0;
 		
 		System.out.println("What food would you like to add to the Promotion Package?");
-		int index = 0;
 		for (MenuItem menuItem : foodMenu){
 			if(menuItem instanceof Food)
 				System.out.println("(" + index + ") " + menuItem.getMenuName());
@@ -50,7 +50,7 @@ public class PromotionPackage extends MenuItem implements Serializable{
 		}catch(IndexOutOfBoundsException e){
 			System.out.println("Add food item failed! (Invalid index provided");
 		}
-		
+
 	}
 
 	
