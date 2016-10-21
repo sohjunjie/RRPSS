@@ -3,6 +3,8 @@ package classes;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import db.Restaurant;
+
 public class Reservation implements Serializable{
 	
 	private static final long serialVersionUID = 3558136592677236481L;
@@ -22,7 +24,7 @@ public class Reservation implements Serializable{
 		this.arrivalTime = arrivalTime;
 	}
 
-	public void acceptReservation(){
+	public void setAccepted(){
 		this.accepted = true;
 		Restaurant.reservations.remove(this);
 		Restaurant.settledReservations.add(this);

@@ -2,6 +2,9 @@ package classes;
 
 import java.util.Date;
 import java.util.Scanner;
+
+import db.Restaurant;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +12,7 @@ import java.util.Calendar;
 public class Order implements Serializable{
 	
 	private static final long serialVersionUID = -9135686500512288865L;
+	private int							orderID;
 	private ArrayList<OrderLineItem> 	orderLineItems;
 	private Staff 						createdByStaff;
 	private Reservation					fromReservation;
@@ -16,21 +20,30 @@ public class Order implements Serializable{
 	private Invoice 					invoice;
 
 	public Order(Staff createdByStaff, Reservation fromReservation){
+		this.orderID			= Calendar.getInstance().hashCode();
 		this.orderLineItems		= new ArrayList<OrderLineItem>();
 		this.createdByStaff 	= createdByStaff;
 		this.fromReservation 	= fromReservation;
 		this.dateTime 			= Calendar.getInstance().getTime();
+		this.invoice			= null;
 	}
 	
-	public ArrayList<OrderLineItem> getorderLineItems(){return orderLineItems;}
-	public Date getDateTime(){return dateTime;}
-	public Staff getStaffCreated(){return createdByStaff;}
+	public int getOrderID(){ return this.orderID; }
+	public ArrayList<OrderLineItem> getorderLineItems(){return this.orderLineItems;}
+	public Date getDateTime(){return this.dateTime;}
+	public Staff getStaffCreated(){return this.createdByStaff;}
+	public Invoice getInvoice(){ return this.invoice; }
 	
 	public void setOrderLineItems(ArrayList<OrderLineItem> orderLineItems){this.orderLineItems = orderLineItems;}
 	
-	public void addOrderItem(OrderLineItem orderItem){orderLineItems.add(orderItem);}
+	public void addOrderItem(OrderLineItem orderItem){
+		if(this.invoice != null) return;	//lock order for editing when invoice already generated
+		orderLineItems.add(orderItem);
+	}
 	
 	public void addOrderItem(){
+		
+		if(this.invoice != null) return;	//lock order for editing when invoice already generated
 		
 		int choice;
 		int index = 0;
@@ -60,6 +73,8 @@ public class Order implements Serializable{
 	
 	public void removeOrderItem(){
 		
+		if(this.invoice != null) return;	//lock order for editing when invoice already generated
+		
 		int choice, index;
 		Scanner sc = new Scanner(System.in);
 		
@@ -82,9 +97,11 @@ public class Order implements Serializable{
 		}
 	}
 	
-	public void generateInvoice(ArrayList<Invoice> invoices){
+	public void generateInvoice(){
+		
+		if(this.invoice != null) return;	//lock order for editing when invoice already generated
 		this.invoice = new Invoice(this);
-		Restaurant.invoices.add(this.invoice);
+
 	}
 	
 	public double calculateTotalOrderPrice(){
