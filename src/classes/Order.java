@@ -13,15 +13,15 @@ public class Order implements Serializable{
 	private ArrayList<OrderLineItem> orderLineItems;
 	private Staff staffCreated;
 	private Invoice invoice;
-	private Table OrderTable;
+	private Reservation fromReservation;
 //	private static ArrayList<MenuItem> referenceFoodMenu;
 
-	public Order(Staff staffCreated, Table OrderTable){
+	public Order(Staff staffCreated, Reservation fromReservation){
 		this.orderLineItems = new ArrayList<OrderLineItem>();
 		this.staffCreated = staffCreated;
 		Calendar cal = Calendar.getInstance();
 		this.dateTime = cal.getTime();
-		this.OrderTable = OrderTable;
+		this.fromReservation = fromReservation;
 	}
 	
 	public ArrayList<OrderLineItem> getorderLineItems(){return orderLineItems;}
