@@ -19,7 +19,7 @@ public class application {
 	
 	public static void main(String[] args) {
 		
-		RRPSS orrpss = loadRestuarant();
+		Restaurant orrpss = loadRestuarant();
 		
 		while(thisStaff == null)
 			thisStaff = menuGetStaffIdentity(orrpss.staffs);
@@ -27,9 +27,11 @@ public class application {
 		// close shop - settle all pending orders before closing application
 		
 		saveRestuarant(orrpss);
+		
+		System.exit(0);
 	}
 
-	public static void saveRestuarant(RRPSS saveRPSS){
+	public static void saveRestuarant(Restaurant saveRPSS){
 
 		Path 				saveFileName 	= Paths.get(dataPath.toString(), saveDataFileName);
 		FileOutputStream   	fos 			= null;
@@ -47,17 +49,17 @@ public class application {
 
 	}
 
-	public static RRPSS loadRestuarant(){
+	public static Restaurant loadRestuarant(){
 
 		Path saveData 			= Paths.get(dataPath.toString(), saveDataFileName);
 		FileInputStream fis 	= null;
 		ObjectInputStream ois 	= null;
-		RRPSS retRRPSS = null;
+		Restaurant retRRPSS = null;
 		
 		try {
 			fis = new FileInputStream(saveData.toString());
 			ois = new ObjectInputStream(fis);			
-			retRRPSS = (RRPSS) ois.readObject();
+			retRRPSS = (Restaurant) ois.readObject();
 			ois.close();
 
 		} catch (IOException ex) {
@@ -67,7 +69,7 @@ public class application {
 		}
 
 		if(retRRPSS == null)
-			retRRPSS = new RRPSS();
+			retRRPSS = new Restaurant();
 		
 		return retRRPSS;
 	}
@@ -97,11 +99,12 @@ public class application {
 		
         do {
             System.out.println("\nSelect a choice: ");
-            System.out.println("(1) Make reservation");
-            System.out.println("(2) Accept reservation");
-            System.out.println("(3) Show availability");
-            System.out.println("(4) Print sales revenue report");
-            System.out.println("(5) Exit");
+            System.out.println("(1) Show availability");
+            System.out.println("(2) Make reservation");
+            System.out.println("(3) Accept reservation");
+            System.out.println("(4) Take order");
+            System.out.println("(5) Print sales revenue report");
+            System.out.println("(6) Exit");
         	System.out.println();
         	System.out.print("    Enter the number of your choice: ");
             choice = sc.nextInt();
@@ -116,9 +119,11 @@ public class application {
                 case 4:
                 	break;
                 case 5:
+                	break;
+                case 6:
             }
 
-        } while (choice < 5);
+        } while (choice < 6);
 		
 	}
 	

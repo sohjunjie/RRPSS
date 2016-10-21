@@ -32,6 +32,7 @@ public class Table implements Serializable{
 		this.reservedBy = reservedBy;
 		this.setStatus(TableStatus.OCCUPIED);
 	}
+	
 	public void removeReservation(){
 		this.reservedBy = null;
 		this.setStatus(TableStatus.VACATED);

@@ -1,27 +1,27 @@
+package classes;
 
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import classes.*;
 import classes.Food.CourseType;
 
-public class RRPSS implements Serializable{
+public class Restaurant implements Serializable{
 
 	private static final long serialVersionUID = 5980715250927144785L;
-	public ArrayList<Table> 				tables;
-	public ArrayList<Staff> 				staffs;
-	public ArrayList<MenuItem> 				menuItems;
+	public static ArrayList<Table> 				tables;
+	public static ArrayList<Staff> 				staffs;
+	public static ArrayList<MenuItem> 			foodMenu;
 	
-	public ArrayList<Invoice> 				invoices;
-	public ArrayList<Order> 				orders;
-	public ArrayList<Reservation>			bookings;
+	public static ArrayList<Invoice> 			invoices;
+	public static ArrayList<Order> 				orders;
+	public static ArrayList<Reservation>		reservations;
 
-	public RRPSS(){
+	public Restaurant(){
 		// Initialize restaurant
         this.tables 	= initTables();
         this.staffs 	= initStaff();
-        this.menuItems	= initMenu();
+        this.foodMenu	= initMenu();
 	}
 
 	public ArrayList<MenuItem> initMenu(){

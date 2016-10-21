@@ -16,14 +16,10 @@ public class Invoice implements Serializable{
 	public Invoice(Order order, long invoiceNumber){
 		this.order = order;
 		this.invoiceNumber = invoiceNumber;
-		
-		ArrayList<OrderLineItem> orderLineItems = order.getorderLineItems();
-		for(OrderLineItem o : orderLineItems)
-			this.price += o.getMenuItem().getPrice();
-
+		this.price = order.calculateTotalOrderPrice();
 		this.gst = GSTPERCENTAGE * this.price;
-		this.totalPrice = price + gst;
-		}
+		this.totalPrice = this.price + this.gst;
+	}
 	
 	public void printInvoice(){
 		System.out.println("Date & Time: " + this.order.getDateTime());

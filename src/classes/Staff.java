@@ -51,8 +51,8 @@ public class Staff implements Serializable{
 		Orders.add(order);
 	}
 	
-	public void takeOrder(Order order, ArrayList<MenuItem> FoodMenu){
-		order.addOrderItem(FoodMenu);
+	public void takeOrder(Order order){
+		order.addOrderItem();
 	}
 	
 	
