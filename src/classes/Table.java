@@ -3,7 +3,6 @@ package classes;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-// TODO: implements comparable, search vacated, capacity
 public class Table implements Serializable{
 
 	private static final long serialVersionUID = -696513068399675213L;

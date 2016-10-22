@@ -21,10 +21,5 @@ public class TableMgr {
 		
 	}
 	
-	// TODO: print list of table available within date range, and numPax
-	public static void showTableAvailability(Calendar startDateTime, Calendar endDateTime, int numPax){
-		
-	}
-	
 	
 }
