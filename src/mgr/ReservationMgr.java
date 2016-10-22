@@ -9,14 +9,17 @@ import java.util.Scanner;
 
 import classes.Reservation;
 import classes.Staff;
+import classes.Table;
 import db.Restaurant;
 
 public class ReservationMgr {
 
-	public static ArrayList<Reservation> reservations = Restaurant.reservations;
-	public static ArrayList<Reservation> settledReservations = Restaurant.settledReservations;
+	public static ArrayList<Reservation> 	reservations = Restaurant.reservations;
+	public static ArrayList<Reservation> 	settledReservations = Restaurant.settledReservations;
 	
 	public static void acceptReservation(Staff staff){
+
+		removeExpiredReservation();
 		
 		int index = 0;
 		Scanner sc = new Scanner (System.in);
@@ -43,20 +46,42 @@ public class ReservationMgr {
 	public static void makeReservation() {
 		
 		Scanner sc = new Scanner (System.in);
-
-		int reservationID = Calendar.getInstance().hashCode();
 		
 		System.out.print("Enter customer name: "); 				String customerName = sc.nextLine();
 		System.out.print("Enter customer contact number: "); 	int customerContact = sc.nextInt();
 		System.out.print("Enter number of people: ");			int numPax = sc.nextInt();
+		Calendar arrivalTime = getValidReservationDateTime();
+
+		Table reserveTable = TableMgr.findReservationTable(arrivalTime);
+		
+		if(reserveTable != null)
+			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));
+		else
+			System.out.println("No tables available for reservation on datetime " + arrivalTime.getTime());
+		
+		sc.close();
+		
+	}
+
+	public static void removeExpiredReservation(){
+		
+		// TODO: move reservations more than 30mins late from arrivaltime to settledReservations
+		
+	}
+	
+	public static Calendar getValidReservationDateTime(){
+
+		Scanner sc = new Scanner (System.in);
 		
 		String date = "";
 	    Date parsedDate = null;
-		boolean validDate = false;
+	    SimpleDateFormat dateFormat = null;
+		boolean validDate = false;		
 		Calendar arrivalTime = Calendar.getInstance();
+		
 		do{
-		    System.out.println("Enter reservation datetime (dd/MM/yyyy hh:mm)");	date  = sc.nextLine();
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		    System.out.print("Enter reservation datetime (dd/MM/yyyy hh:mm)");	date  = sc.nextLine();
+		    dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		    try {
 		    	parsedDate = dateFormat.parse(date);
 		    } catch (ParseException e) {
@@ -68,14 +93,11 @@ public class ReservationMgr {
 		    validDate = checkValidReservationDate(arrivalTime);
 
 		} while(!validDate);
-
-		// TODO: check table availability
-		reservations.add(new Reservation(customerName, customerContact, numPax, reservationID, arrivalTime));
 		
 		sc.close();
 		
+		return arrivalTime;
 	}
-
 	public static boolean checkValidReservationDate(Calendar date){
 		
 		boolean validDate = false;
@@ -121,6 +143,6 @@ public class ReservationMgr {
 	    		
 		return validDate;
 	}
-
+	
 
 }

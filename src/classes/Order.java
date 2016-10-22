@@ -3,6 +3,7 @@ package classes;
 import java.util.Date;
 import java.util.Scanner;
 
+import classes.Table.TableStatus;
 import db.Restaurant;
 
 import java.io.Serializable;
@@ -101,6 +102,7 @@ public class Order implements Serializable{
 		
 		if(this.invoice != null) return;	//lock order for editing when invoice already generated
 		this.invoice = new Invoice(this);
+		this.fromReservation.getReserveTable().setStatus(TableStatus.VACATED);
 
 	}
 	
