@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Table implements Serializable{
 
 	private static final long serialVersionUID = -696513068399675213L;
-	public enum TableStatus {VACATED, OCCUPIED, RESERVED};
+	public enum TableStatus {VACATED, OCCUPIED};
 	private int table_id;
 	private int capacity;
 	private TableStatus status;
@@ -16,7 +16,7 @@ public class Table implements Serializable{
 	public Table (int table_id, int capacity) {
 		this.table_id	= table_id;
 		this.capacity	= capacity;
-		this.reservedBy	= null;
+		this.reservedBy	= new ArrayList<Reservation>();
 		this.status		= TableStatus.VACATED;
 	}
 	

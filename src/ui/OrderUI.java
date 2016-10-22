@@ -53,6 +53,7 @@ public class OrderUI {
 	
 	public static void printInvoice(Order order){
 		if(order.getInvoice() == null){
+			
 			order.generateInvoice();
 			Restaurant.invoices.add(order.getInvoice());
 		}

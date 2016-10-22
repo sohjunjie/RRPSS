@@ -2,6 +2,8 @@ package ui;
 
 import java.util.Scanner;
 
+import mgr.FoodMenuMgr;
+
 public class FoodMenuUI {
 	
 	public static void menuShowFoodMenuOptions(){
@@ -21,10 +23,13 @@ public class FoodMenuUI {
             
             switch (choice) {
                 case 1: 
+                		FoodMenuMgr.createNewFood();
                         break;
                 case 2:
+                		FoodMenuMgr.createNewPromotionPackage();
                         break;
                 case 3:
+                		FoodMenuMgr.removeMenuItem();
                     	break;
                 case 4:
             }
