@@ -34,6 +34,11 @@ public class Reservation implements Serializable{
 		Restaurant.reservations.remove(this);
 		Restaurant.settledReservations.add(this);
 	}
+	
+	public void beRemoved(){
+		Restaurant.reservations.remove(this);
+		Restaurant.settledReservations.add(this);
+	}
 
 	public boolean getAcceptedStatus(){ return this.accepted; }
 	public String getCustomerName(){ return this.customerName; }

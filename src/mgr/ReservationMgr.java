@@ -52,21 +52,36 @@ public class ReservationMgr {
 		System.out.print("Enter number of people: ");			int numPax = sc.nextInt();
 		Calendar arrivalTime = getValidReservationDateTime();
 
-		Table reserveTable = TableMgr.findReservationTable(arrivalTime);
+		Table reserveTable = TableMgr.findReservationTable(arrivalTime,numPax);
 		
-		if(reserveTable != null)
+		if(reserveTable != null){
 			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));
-		else
-			System.out.println("No tables available for reservation on datetime " + arrivalTime.getTime());
+		}
+		//else		/////////////////////////////////moved this part to TableMgr.showTableAvailability//////////////////////
+			//System.out.println("No tables available for reservation on datetime " + arrivalTime.getTime());
 		
 		sc.close();
 		
 	}
 
+
 	public static void removeExpiredReservation(){
-		
-		// TODO: move reservations more than 30mins late from arrivaltime to settledReservations
-		
+		Calendar currentTime = Calendar.getInstance();
+		for(int i =0;i<reservations.size();i++){	//reservation.year/month/date/hour < currentTime equivalent means it is expired
+			if(currentTime.YEAR>reservations.get(i).getArrivalTime().YEAR){reservations.get(i).beRemoved();}
+			else if(currentTime.YEAR==reservations.get(i).getArrivalTime().YEAR){		
+				 if(currentTime.MONTH>reservations.get(i).getArrivalTime().MONTH){reservations.get(i).beRemoved();}
+				 else if(currentTime.MONTH==reservations.get(i).getArrivalTime().MONTH){				
+					  if(currentTime.DATE>reservations.get(i).getArrivalTime().DATE){reservations.get(i).beRemoved();}
+					  else if(currentTime.DATE==reservations.get(i).getArrivalTime().DATE){			
+						   if(currentTime.HOUR>reservations.get(i).getArrivalTime().HOUR){reservations.get(i).beRemoved();}
+						   else	if(currentTime.HOUR==reservations.get(i).getArrivalTime().HOUR){
+							    if(currentTime.MINUTE-reservations.get(i).getArrivalTime().MINUTE>30){reservations.get(i).beRemoved();}
+						   }
+					  }
+				 }
+			}
+		}		
 	}
 	
 	public static Calendar getValidReservationDateTime(){
