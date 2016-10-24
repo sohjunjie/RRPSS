@@ -9,11 +9,18 @@ import ui.FoodMenuUI;
 import ui.ReservationUI;
 
 
-
-public class application {
+/**
+ * Main application class to start up the Restaurant Reservation
+ * Point of Sales (RRPSS) application. Provides an interface for
+ * restaurant staff to perform reservation, order and manage
+ * restaurant backend.
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-10-24
+ */
+public class Application {
 	
-	public static Staff thisStaff = null;
-	public static Scanner sc = new Scanner(System.in);
+	public static Staff thisStaff = null;	
 	
 	public static void main(String[] args) {
 
@@ -31,8 +38,16 @@ public class application {
 	}
 
 
-	
+	/**
+	 * Method for user to select his staff identity
+	 * from a given printed list of staff registered
+	 * in the restaurant.
+	 * @param staffs List of staff registered in this restaurant
+	 * @return Staff representing the user
+	 */
 	public static Staff menuGetStaffIdentity(ArrayList<Staff> staffs){
+		
+		Scanner sc = new Scanner(System.in);
 		
 		int index = 0;
 		System.out.println("Who are you ?");
@@ -40,7 +55,9 @@ public class application {
 			System.out.println("(" + index++ + ") " + s);
 		}
     	System.out.print("    Enter the number of your choice: ");
+    	
 		int choice = sc.nextInt();
+		sc.close();
 		
 		try {
 			return staffs.get(choice);
@@ -48,11 +65,16 @@ public class application {
 			System.out.println("Invalid index entered!");
 			return null;
 		}
-
+		
 	}
 	
+	/**
+	 * Display a list of restaurant options staff can perform through
+	 * the application.
+	 */
 	public void menuShowRestaurantOptions(){
-		
+
+		Scanner sc = new Scanner(System.in);
 		int choice;
 		
         do {
@@ -84,6 +106,8 @@ public class application {
 
         } while (choice < 5);
 
+        sc.close();
+        
 	}
 
 	
