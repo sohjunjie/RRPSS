@@ -11,56 +11,56 @@ import db.Restaurant;
 
 public class TableMgr {
 
-	public static ArrayList<Table>			tables = Restaurant.tables;
+	public static ArrayList<Table> tables = Restaurant.tables;
+	private static Scanner sc = new Scanner(System.in);
 	
-	// TODO: Find list of table for reservation given datetime and allow
-	//		 user to select the table to reserve
+	
 	public static Table findReservationTable(Calendar reserveDateTime, int numPax){
 		
-		ArrayList<Table> availableTables = checkTableAvailability(reserveDateTime, numPax);
-		if(availableTables == null){return null;}			///////??????? question-not sure if empty array = null
+		ArrayList<Table> availableTables = checkAvailableTables(reserveDateTime, numPax);
+		if(availableTables == null){
+			System.out.println("No tables available for reservation on datetime " + reserveDateTime.getTime());
+			return null;
+		}
 		
-		Scanner sc = new Scanner(System.in);
-		showTableAvailability(reserveDateTime, numPax);
-		System.out.println("Please enter the chosen Selection No.");
+		showTableAvailability(availableTables, reserveDateTime, numPax);
+		System.out.println("Please enter a selection number.");
+		
 		int choice = sc.nextInt();
-		while(choice<1||choice>availableTables.size()+1){
-			System.out.println("Invalid Selection No.");			//error message
-			System.out.println("Please enter the chosen Selection No.");
+		while(choice < 0 || choice >= availableTables.size()){
+			System.out.print("Invalid table number! Please enter again: ");
 			choice = sc.nextInt();
 		}
-		sc.close();
-		return (availableTables.get(choice+1));
+		return (availableTables.get(choice));
 		
 	}
 	
 	
 	// TODO: print list of table available for given date, and numPax
-	public static void showTableAvailability(Calendar reserveDateTime, int numPax){
-		ArrayList<Table> availableTables = checkTableAvailability(reserveDateTime, numPax);
-		if(availableTables==null){
-			System.out.println("No tables available for reservation on datetime " + reserveDateTime.getTime());
-		}
-		System.out.println("Selection No.		TableID			Capacity");
-		for(int i=0;i<availableTables.size();i++){
-		System.out.println(i+"					"+availableTables.get(i).getTableId()+"			"+availableTables.get(i).getCapacity());
-		}
+	public static void showTableAvailability(ArrayList<Table> availableTables, Calendar reserveDateTime, int numPax){
+
+		System.out.println("The following tables are available for Pax no " + numPax + " and datetime " + reserveDateTime.getTime());
+		System.out.println("Selection no.			Table number			Capacity");
+		
+		for(Table t : availableTables)
+			System.out.println(availableTables.indexOf(t) + "			" + t.getTableId() + "			" + t.getCapacity());
+
 	}
 	
 	
 	// finds array of available tables for particular timing
-	public static ArrayList<Table> checkTableAvailability(Calendar reserveDateTime, int numPax){
+	public static ArrayList<Table> checkAvailableTables(Calendar reserveDateTime, int numPax){
 		ReservationMgr.removeExpiredReservation();
 		ArrayList<Table> availableTables = new ArrayList<Table>();
 		boolean isLunchSession=false;						//check lunch or dinner session for reserveDateTime
-		if(reserveDateTime.get(Calendar.HOUR)<15){isLunchSession=true;}
+		if(reserveDateTime.get(Calendar.HOUR) < Restaurant.AMEndTime){isLunchSession=true;}
 		boolean alsoLunchSession;							//check lunch or dinner session for existing reservation
 		boolean available;
 		
 		for(Table t : tables){
 			available = true;
 			alsoLunchSession=false;
-			if(t.getCapacity() >= numPax||t.getStatus()!=TableStatus.OCCUPIED){
+			if(t.getCapacity() >= numPax && t.getStatus()!=TableStatus.OCCUPIED){
 				for(Reservation r : t.getReserveBy()){
 					if(r.getArrivalTime().get(Calendar.MONTH)==reserveDateTime.get(Calendar.MONTH)){	//check same month
 						if(r.getArrivalTime().get(Calendar.DATE)==reserveDateTime.get(Calendar.DATE)){	//check same date

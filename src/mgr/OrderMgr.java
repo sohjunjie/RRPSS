@@ -10,6 +10,7 @@ import ui.OrderUI;
 
 public class OrderMgr {
 
+	private static Scanner sc = new Scanner(System.in);
 	public static ArrayList<Order> orders = Restaurant.orders;
 	
 	public static void editPendingOrder(){
@@ -21,7 +22,6 @@ public class OrderMgr {
 		
 		int index = 0;
 		Order order;
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Select an order.");
 		for(Order o : orders){

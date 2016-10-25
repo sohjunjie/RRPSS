@@ -14,24 +14,24 @@ import db.Restaurant;
 
 public class ReservationMgr {
 
-	public static ArrayList<Reservation> 	reservations = Restaurant.reservations;
-	public static ArrayList<Reservation> 	settledReservations = Restaurant.settledReservations;
+	private static Scanner sc = new Scanner (System.in);
+	
+	public static ArrayList<Reservation> reservations = Restaurant.reservations;
+	public static ArrayList<Reservation> settledReservations = Restaurant.settledReservations;
 	
 	public static void acceptReservation(Staff staff){
 
 		removeExpiredReservation();
 		
 		int index = 0;
-		Scanner sc = new Scanner (System.in);
 		
-		System.out.print("Select which reservation to accept: ");
+		System.out.println("Select which reservation to accept: ");
 		for(Reservation r : reservations){
 			System.out.println("(" + index++ + ") Customer Name:" + r.getCustomerName() + 
 												"    Contact: " + r.getCustomerContact() +
 												"    Arrival time: " + r.getArrivalTime().getTime());
 		}
 		int choice = sc.nextInt();
-		sc.close();
 		
 		try {
 			Reservation reservation = reservations.get(choice);
@@ -39,51 +39,49 @@ public class ReservationMgr {
 			moveToSettledReservation(reservation);
 			System.out.println("Reservation accepted.");
 		}catch(IndexOutOfBoundsException e){
-			System.out.println("Fail to accept reservation! (Invalid index provided");
+			System.out.println("Fail to accept reservation! (Invalid index provided)");
 		}
 		
 	}
 	
 	public static void makeReservation() {
-		
-		Scanner sc = new Scanner (System.in);
-		
+				
 		System.out.print("Enter customer name: "); 				String customerName = sc.nextLine();
 		System.out.print("Enter customer contact number: "); 	int customerContact = sc.nextInt();
 		System.out.print("Enter number of people: ");			int numPax = sc.nextInt();
+		sc.nextLine();	// get dummy line
 		Calendar arrivalTime = getValidReservationDateTime();
 
 		Table reserveTable = TableMgr.findReservationTable(arrivalTime,numPax);
 		
-		if(reserveTable != null)
-			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));		
-		//else		/////////////////////////////////moved this part to TableMgr.showTableAvailability//////////////////////
-			//System.out.println("No tables available for reservation on datetime " + arrivalTime.getTime());
-		
-		sc.close();
-		
+		if(reserveTable != null){
+			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));
+			System.out.println("Reservation added.");
+		}
+				
 	}
 
 	public static void removeExpiredReservation(){
 		
 		Calendar expiredDateTime = Calendar.getInstance();
 		expiredDateTime.add(Calendar.MINUTE, -30);
+		Reservation r;
 		
-		for(Reservation r : reservations)
-			if(r.getArrivalTime().after(expiredDateTime))
+		for (int i = reservations.size()-1; i >= 0; i--){
+			r = reservations.get(i);
+		    if(r.getArrivalTime().before(expiredDateTime))
 				moveToSettledReservation(r);
+		 }
 
 	}
 	
 	public static void moveToSettledReservation(Reservation reservation){
-		reservations.remove(reservation);
 		settledReservations.add(reservation);
+		reservations.remove(reservation);
 	}
 	
 	public static Calendar getValidReservationDateTime(){
 
-		Scanner sc = new Scanner (System.in);
-		
 		String date = "";
 	    Date parsedDate = null;
 	    SimpleDateFormat dateFormat = null;
@@ -104,9 +102,7 @@ public class ReservationMgr {
 		    validDate = checkValidReservationDate(arrivalTime);
 
 		} while(!validDate);
-		
-		sc.close();
-		
+				
 		return arrivalTime;
 	}
 	
