@@ -23,7 +23,7 @@ public class OrderMgr {
 		int index = 0;
 		Order order;
 		
-		System.out.println("Select an order.");
+		System.out.println("\nSelect an order.");
 		for(Order o : orders){
 			System.out.println("(" + index++ + ") " + o.getOrderID());
 		}
