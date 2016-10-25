@@ -16,8 +16,8 @@ public class InvoiceMgr {
 		double totalRevenue = totalRevenue(month, year);
 		int[] productSales = productStatistics(month, year);
 		System.out.println("Sales Revenue Report for Number " + month + " of year " + year);
-		System.out.println("\nTotal Sales Revenue: " + totalRevenue);
-		System.out.println("\nTotal Number of Food Products: \n");
+		System.out.println("Total Sales Revenue: " + totalRevenue);
+		System.out.println("Total Number of Food Products: ");
 		for (MenuItem fd: foodMenu){
 			System.out.println(fd.getMenuName() + ": " + productSales[foodMenu.indexOf(fd)]);
 		}

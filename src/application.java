@@ -24,6 +24,9 @@ public class application {
 		while(thisStaff == null)
 			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
 
+		
+		menuShowRestaurantOptions();
+		
 		// close shop - settle all pending orders before closing application
 		
 		Restaurant.saveRestaurant();
@@ -53,7 +56,7 @@ public class application {
 
 	}
 	
-	public void menuShowRestaurantOptions(){
+	public static void menuShowRestaurantOptions(){
 		
 		int choice, month, year;
 		
