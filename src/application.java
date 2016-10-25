@@ -18,7 +18,7 @@ import ui.ReservationUI;
  * @version 1.0
  * @since 2016-10-24
  */
-public class Application {
+public class application {
 	
 	public static Staff thisStaff = null;	
 	
