@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
+import classes.Reservation;
 import classes.Table;
+import classes.Table.TableStatus;
 import db.Restaurant;
 
 public class TableMgr {
@@ -50,30 +52,32 @@ public class TableMgr {
 	public static ArrayList<Table> checkTableAvailability(Calendar reserveDateTime, int numPax){
 		ReservationMgr.removeExpiredReservation();
 		ArrayList<Table> availableTables = new ArrayList<Table>();
-		boolean isAM=false;						//check am or pm session for reserveDateTime
-		if(reserveDateTime.HOUR<15){isAM=true;}
-		boolean isAMtoo;						//check am or pm session for existing reservation
+		boolean isLunchSession=false;						//check lunch or dinner session for reserveDateTime
+		if(reserveDateTime.get(Calendar.HOUR)<15){isLunchSession=true;}
+		boolean alsoLunchSession;							//check lunch or dinner session for existing reservation
 		boolean available;
-		for(int i=0;i<tables.size();i++){
+		
+		for(Table t : tables){
 			available = true;
-			isAMtoo=false;
-			if(tables.get(i).getCapacity()>=numPax){
-				for(int j=0;j<tables.get(i).getReserveBy().size();j++){				//compare same month, same date, same session
-					if(tables.get(i).getReserveBy().get(j).getArrivalTime().MONTH==reserveDateTime.MONTH){
-						if(tables.get(i).getReserveBy().get(j).getArrivalTime().DATE==reserveDateTime.DATE){
-							if(tables.get(i).getReserveBy().get(j).getArrivalTime().HOUR<15){isAMtoo=true;}
-							if(isAM == isAMtoo){
-								available = false;
-								break;			//table is unavailable, proceed to check next table
+			alsoLunchSession=false;
+			if(t.getCapacity() >= numPax||t.getStatus()!=TableStatus.OCCUPIED){
+				for(Reservation r : t.getReserveBy()){
+					if(r.getArrivalTime().get(Calendar.MONTH)==reserveDateTime.get(Calendar.MONTH)){	//check same month
+						if(r.getArrivalTime().get(Calendar.DATE)==reserveDateTime.get(Calendar.DATE)){	//check same date
+							if(r.getArrivalTime().get(Calendar.HOUR)<15){alsoLunchSession=true;}
+							if(isLunchSession==alsoLunchSession){										//check same session
+								available=false;
+								break;
 							}
 						}
-					}	
+					}
 				}
-			}
-			else{available = false;}
-			if (available == true){availableTables.add(tables.get(i));}
-		}		
+			}else{available=false;}
+			if (available == true){availableTables.add(t);}
+		}
+		
 		return availableTables;
+	
 	}
 	
 	

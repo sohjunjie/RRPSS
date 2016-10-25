@@ -36,6 +36,7 @@ public class ReservationMgr {
 		try {
 			Reservation reservation = reservations.get(choice);
 			staff.acceptReservation(reservation);
+			moveToSettledReservation(reservation);
 			System.out.println("Reservation accepted.");
 		}catch(IndexOutOfBoundsException e){
 			System.out.println("Fail to accept reservation! (Invalid index provided");
