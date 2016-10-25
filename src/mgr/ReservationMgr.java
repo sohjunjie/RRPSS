@@ -52,12 +52,12 @@ public class ReservationMgr {
 		System.out.print("Enter number of people: ");			int numPax = sc.nextInt();
 		Calendar arrivalTime = getValidReservationDateTime();
 
-		Table reserveTable = TableMgr.findReservationTable(arrivalTime);
+		Table reserveTable = TableMgr.findReservationTable(arrivalTime,numPax);
 		
 		if(reserveTable != null)
-			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));
-		else
-			System.out.println("No tables available for reservation on datetime " + arrivalTime.getTime());
+			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));		
+		//else		/////////////////////////////////moved this part to TableMgr.showTableAvailability//////////////////////
+			//System.out.println("No tables available for reservation on datetime " + arrivalTime.getTime());
 		
 		sc.close();
 		
@@ -65,8 +65,18 @@ public class ReservationMgr {
 
 	public static void removeExpiredReservation(){
 		
-		// TODO: move reservations more than 30mins late from arrivaltime to settledReservations
+		Calendar expiredDateTime = Calendar.getInstance();
+		expiredDateTime.add(Calendar.MINUTE, -30);
 		
+		for(Reservation r : reservations)
+			if(r.getArrivalTime().after(expiredDateTime))
+				moveToSettledReservation(r);
+
+	}
+	
+	public static void moveToSettledReservation(Reservation reservation){
+		reservations.remove(reservation);
+		settledReservations.add(reservation);
 	}
 	
 	public static Calendar getValidReservationDateTime(){
@@ -98,6 +108,7 @@ public class ReservationMgr {
 		
 		return arrivalTime;
 	}
+	
 	public static boolean checkValidReservationDate(Calendar date){
 		
 		boolean validDate = false;
