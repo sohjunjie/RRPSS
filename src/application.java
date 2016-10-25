@@ -29,6 +29,8 @@ public class application {
 		while(thisStaff == null)
 			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
 
+		menuShowRestaurantOptions();
+		
 		// close shop - settle all pending orders before closing application
 		
 		Restaurant.saveRestaurant();
@@ -72,7 +74,7 @@ public class application {
 	 * Display a list of restaurant options staff can perform through
 	 * the application.
 	 */
-	public void menuShowRestaurantOptions(){
+	public static void menuShowRestaurantOptions(){
 		
 		Scanner sc = new Scanner(System.in);
 		int choice, month, year;
