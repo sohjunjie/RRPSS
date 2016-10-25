@@ -5,7 +5,6 @@ import classes.*;
 import db.Restaurant;
 import mgr.InvoiceMgr;
 import mgr.OrderMgr;
-import mgr.ReservationMgr;
 import ui.FoodMenuUI;
 import ui.ReservationUI;
 
@@ -31,13 +30,12 @@ public class application {
 		while(thisStaff == null)
 			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
 
-		menuShowRestaurantOptions();
-//		
-//		// close shop - settle all pending orders before closing application
-//		
-//		Restaurant.saveRestaurant();
-//		
-//		System.exit(0);
+		showRestaurantOptions();
+
+		// close shop - settle all pending orders before closing application
+
+		Restaurant.saveRestaurant();		
+		System.exit(0);
 
 	}
 
@@ -70,11 +68,15 @@ public class application {
 		
 	}
 	
-	public static void printSalesReport(){
+	/**
+	 * Method for user to select which month and year
+	 * for the sales report to be printed.
+	 */
+	public static void showSalesReportUI(){
 		
 		int month, year;
 		
-		System.out.println("Month:");
+		System.out.println("\nMonth:");
 		System.out.println("1. January");
 		System.out.println("2. Feburary");
 		System.out.println("3. March");
@@ -95,12 +97,11 @@ public class application {
 		
 	}
 	
-	
 	/**
 	 * Display a list of restaurant options staff can perform through
 	 * the application.
 	 */
-	public static void menuShowRestaurantOptions(){
+	public static void showRestaurantOptions(){
 		
 		int choice;
 		
@@ -126,7 +127,7 @@ public class application {
                 		FoodMenuUI.menuShowFoodMenuOptions();
                     	break;
                 case 4:
-                		printSalesReport();
+                		showSalesReportUI();
                 		break;
                 case 5:
             }

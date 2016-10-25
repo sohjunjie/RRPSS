@@ -3,9 +3,7 @@ package ui;
 import java.util.Scanner;
 
 import classes.Order;
-import classes.Staff;
 import db.Restaurant;
-import classes.Invoice;
 
 public class OrderUI {
 

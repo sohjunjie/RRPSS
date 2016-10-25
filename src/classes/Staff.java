@@ -1,12 +1,9 @@
 package classes;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Scanner;
-
 import db.Restaurant;
+
+//TODO: JAVADOC
 
 public class Staff implements Serializable{
 	private static final long serialVersionUID = -3686894603777756471L;

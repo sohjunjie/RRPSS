@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import classes.Table.TableStatus;
-import db.Restaurant;
 
 /**
- * 
+ * Represents a reservation made by a customer
  * @author wang_xingyue
  * @version 1.0
  * @since 2016-10-25
@@ -15,13 +14,41 @@ import db.Restaurant;
 public class Reservation implements Serializable{
 	
 	private static final long serialVersionUID = 3558136592677236481L;
-	private int 		reservationID;
-	private int 		numPax;
-	private String 		customerName;
-	private int 		customerContact;
-	private boolean 	accepted;
-	private Calendar 	arrivalTime;
-	private Table		reserveTable;
+	
+	/**
+	 * Unique reservation id identifying a unique reservation instance
+	 */
+	private int reservationID;
+	
+	/**
+	 * Number of people for the reservation
+	 */
+	private int numPax;
+	
+	/**
+	 * Name of the customer making the reservation
+	 */
+	private String customerName;
+	
+	/**
+	 * Contact number of the customer
+	 */
+	private int customerContact;
+	
+	/**
+	 * Indicate whether reservation has been accepted
+	 */
+	private boolean accepted;
+	
+	/**
+	 * Arrival time of the customer.
+	 */
+	private Calendar arrivalTime;
+	
+	/**
+	 * Table reserved for the reservation
+	 */
+	private Table reserveTable;
 	
 	/**
 	 * create a new reservation having a customer name, customer contact number, number of expected people,
@@ -59,31 +86,37 @@ public class Reservation implements Serializable{
 	 * @return this reservation's accepted status
 	 */
 	public boolean getAcceptedStatus(){ return this.accepted; }
+	
 	/**
 	 * get the name of the customer who made this reservation
 	 * @return this reservation's customer's name
 	 */
 	public String getCustomerName(){ return this.customerName; }
+	
 	/**
 	 * get the contact number of the customer who made this reservation
 	 * @return this reservation's customer contact number
 	 */
 	public int getCustomerContact(){ return this.customerContact; }
+	
 	/**
 	 * get the number of expected people for this reservation
 	 * @return this reservation's number of expected people
 	 */
 	public int getNumPax(){ return this.numPax; }
+	
 	/**
 	 * get the unique ID of this reservation
 	 * @return this reservation's unique ID
 	 */
 	public int getReservationID(){ return this.reservationID; }
+	
 	/**
 	 * get the expected arrival time of this reservation
 	 * @return this reservation's expected arrival time
 	 */
 	public Calendar getArrivalTime(){ return this.arrivalTime; }
+	
 	/**
 	 * get the table reserved for this reservation
 	 * @return this reservation's reserved table

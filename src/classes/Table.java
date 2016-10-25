@@ -3,6 +3,8 @@ package classes;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+//TODO: JAVADOC
+
 public class Table implements Serializable{
 
 	private static final long serialVersionUID = -696513068399675213L;
