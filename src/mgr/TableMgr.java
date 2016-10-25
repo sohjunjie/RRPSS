@@ -31,12 +31,17 @@ public class TableMgr {
 			System.out.print("Invalid table number! Please enter again: ");
 			choice = sc.nextInt();
 		}
-		return (availableTables.get(choice));
 		
+		Table retTable = null;
+		try {
+			retTable = (availableTables.get(choice));
+		}catch(IndexOutOfBoundsException e){
+			System.out.print("Invalid selection number.");
+		}
+		return retTable;
 	}
 	
 	
-	// TODO: print list of table available for given date, and numPax
 	public static void showTableAvailability(ArrayList<Table> availableTables, Calendar reserveDateTime, int numPax){
 
 		System.out.println("The following tables are available for Pax no " + numPax + " and datetime " + reserveDateTime.getTime());
@@ -48,7 +53,7 @@ public class TableMgr {
 	}
 	
 	
-	// finds array of available tables for particular timing
+	// TODO: improve readability of checkAvailableTables code
 	public static ArrayList<Table> checkAvailableTables(Calendar reserveDateTime, int numPax){
 		ReservationMgr.removeExpiredReservation();
 		ArrayList<Table> availableTables = new ArrayList<Table>();

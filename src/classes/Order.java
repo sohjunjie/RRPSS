@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+//TODO: JAVADOC
+
 public class Order implements Serializable{
 	
 	private static final long serialVersionUID = -9135686500512288865L;

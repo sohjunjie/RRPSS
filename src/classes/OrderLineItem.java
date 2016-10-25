@@ -2,6 +2,8 @@ package classes;
 
 import java.io.Serializable;
 
+//TODO: JAVADOC
+
 public class OrderLineItem implements Serializable{
 
 	private static final long serialVersionUID = -1249371886974645374L;

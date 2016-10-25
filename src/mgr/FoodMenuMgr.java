@@ -2,8 +2,6 @@ package mgr;
 import java.util.ArrayList;
 
 import classes.MenuItem;
-import classes.Food;
-import classes.PromotionPackage;
 import db.Restaurant;
 
 public class FoodMenuMgr {
