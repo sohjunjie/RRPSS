@@ -54,9 +54,8 @@ public class ReservationMgr {
 
 		Table reserveTable = TableMgr.findReservationTable(arrivalTime,numPax);
 		
-		if(reserveTable != null){
-			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));
-		}
+		if(reserveTable != null)
+			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));		
 		//else		/////////////////////////////////moved this part to TableMgr.showTableAvailability//////////////////////
 			//System.out.println("No tables available for reservation on datetime " + arrivalTime.getTime());
 		
@@ -64,24 +63,20 @@ public class ReservationMgr {
 		
 	}
 
-
 	public static void removeExpiredReservation(){
-		Calendar currentTime = Calendar.getInstance();
-		for(int i =0;i<reservations.size();i++){	//reservation.year/month/date/hour < currentTime equivalent means it is expired
-			if(currentTime.YEAR>reservations.get(i).getArrivalTime().YEAR){reservations.get(i).beRemoved();}
-			else if(currentTime.YEAR==reservations.get(i).getArrivalTime().YEAR){		
-				 if(currentTime.MONTH>reservations.get(i).getArrivalTime().MONTH){reservations.get(i).beRemoved();}
-				 else if(currentTime.MONTH==reservations.get(i).getArrivalTime().MONTH){				
-					  if(currentTime.DATE>reservations.get(i).getArrivalTime().DATE){reservations.get(i).beRemoved();}
-					  else if(currentTime.DATE==reservations.get(i).getArrivalTime().DATE){			
-						   if(currentTime.HOUR>reservations.get(i).getArrivalTime().HOUR){reservations.get(i).beRemoved();}
-						   else	if(currentTime.HOUR==reservations.get(i).getArrivalTime().HOUR){
-							    if(currentTime.MINUTE-reservations.get(i).getArrivalTime().MINUTE>30){reservations.get(i).beRemoved();}
-						   }
-					  }
-				 }
-			}
-		}		
+		
+		Calendar expiredDateTime = Calendar.getInstance();
+		expiredDateTime.add(Calendar.MINUTE, -30);
+		
+		for(Reservation r : reservations)
+			if(r.getArrivalTime().after(expiredDateTime))
+				moveToSettledReservation(r);
+
+	}
+	
+	public static void moveToSettledReservation(Reservation reservation){
+		reservations.remove(reservation);
+		settledReservations.add(reservation);
 	}
 	
 	public static Calendar getValidReservationDateTime(){
@@ -113,6 +108,7 @@ public class ReservationMgr {
 		
 		return arrivalTime;
 	}
+	
 	public static boolean checkValidReservationDate(Calendar date){
 		
 		boolean validDate = false;
