@@ -19,6 +19,7 @@ public class Invoice implements Serializable{
 	private double gst;
 	private double price;
 	private double totalPrice;
+	private Calendar dateGenerated;
 	public static final double GSTPERCENTAGE = 0.07;
 	
 	public Invoice(Order order){
@@ -27,7 +28,12 @@ public class Invoice implements Serializable{
 		this.price = order.calculateTotalOrderPrice();
 		this.gst = GSTPERCENTAGE * this.price;
 		this.totalPrice = this.price + this.gst;
+		this.dateGenerated = Calendar.getInstance();
 	}
+	
+	public Calendar getDateGenerated() { return dateGenerated; }
+	public double getTotalPrice() { return totalPrice; }
+	public Order getOrder() { return order; }
 	
 	public void printInvoice(){
 		System.out.println("Date & Time: " + this.order.getDateTime());
