@@ -6,10 +6,11 @@ import mgr.FoodMenuMgr;
 
 public class FoodMenuUI {
 	
+	private static Scanner sc = new Scanner(System.in);
+	
 	public static void menuShowFoodMenuOptions(){
 		
 		int choice;
-		Scanner sc = new Scanner(System.in);
 		
         do {
             System.out.println("\nSelect a choice: ");
@@ -36,7 +37,6 @@ public class FoodMenuUI {
 
         } while (choice < 4);
 		
-        sc.close();
 	}
 	
 }

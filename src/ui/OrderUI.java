@@ -9,10 +9,11 @@ import classes.Invoice;
 
 public class OrderUI {
 
+	private static Scanner sc = new Scanner(System.in);
+	
 	public static void menuShowOrderOptions(Order order){
 		
 		int choice;
-		Scanner sc = new Scanner(System.in);
 		
         do {
             System.out.println("\nSelect a choice: ");
@@ -38,8 +39,6 @@ public class OrderUI {
             }
 
         } while (choice < 4);
-		
-        sc.close();
         
 	}
 	

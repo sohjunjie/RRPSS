@@ -52,7 +52,7 @@ public class Order implements Serializable{
 		OrderLineItem orderItem;
 		ArrayList<MenuItem> foodMenu = Restaurant.foodMenu;
 		
-		System.out.println("Select the food item to add to the order:");
+		System.out.println("\nSelect the food item to add to the order:");
 		for(MenuItem menuItem : foodMenu)
 			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
 
@@ -79,7 +79,7 @@ public class Order implements Serializable{
 		int choice, index;
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("What item would you like to remove from the order?");
+		System.out.println("\nWhat item would you like to remove from the order?");
 		
 		index = 0;
 		for (OrderLineItem orderItem : orderLineItems)

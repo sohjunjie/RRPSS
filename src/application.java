@@ -5,6 +5,7 @@ import classes.*;
 import db.Restaurant;
 import mgr.InvoiceMgr;
 import mgr.OrderMgr;
+import mgr.ReservationMgr;
 import ui.FoodMenuUI;
 import ui.ReservationUI;
 
@@ -20,7 +21,8 @@ import ui.ReservationUI;
  */
 public class application {
 	
-	public static Staff thisStaff = null;	
+	private static Scanner sc = new Scanner(System.in);
+	private static Staff thisStaff = null;	
 	
 	public static void main(String[] args) {
 
@@ -29,11 +31,13 @@ public class application {
 		while(thisStaff == null)
 			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
 
-		// close shop - settle all pending orders before closing application
-		
-		Restaurant.saveRestaurant();
-		
-		System.exit(0);
+		menuShowRestaurantOptions();
+//		
+//		// close shop - settle all pending orders before closing application
+//		
+//		Restaurant.saveRestaurant();
+//		
+//		System.exit(0);
 
 	}
 
@@ -47,35 +51,58 @@ public class application {
 	 */
 	public static Staff menuGetStaffIdentity(ArrayList<Staff> staffs){
 		
-		Scanner sc = new Scanner(System.in);
+		Staff retStaff = null;
 		
 		int index = 0;
 		System.out.println("Who are you ?");
 		for(Staff s : staffs){
 			System.out.println("(" + index++ + ") " + s);
 		}
-    	System.out.print("    Enter the number of your choice: ");
-    	
-		int choice = sc.nextInt();
-		sc.close();
+    	System.out.print("    Enter the number of your choice: "); int choice = sc.nextInt();
 		
 		try {
-			return staffs.get(choice);
+			retStaff = staffs.get(choice);
 		}catch(IndexOutOfBoundsException e){
 			System.out.println("Invalid index entered!");
-			return null;
 		}
 		
+		return retStaff;
+		
 	}
+	
+	public static void printSalesReport(){
+		
+		int month, year;
+		
+		System.out.println("Month:");
+		System.out.println("1. January");
+		System.out.println("2. Feburary");
+		System.out.println("3. March");
+		System.out.println("4. April");
+		System.out.println("5. May");
+		System.out.println("6. June");
+		System.out.println("7. July");
+		System.out.println("8. August");
+		System.out.println("9. September");
+		System.out.println("10. October");
+		System.out.println("11. November");
+		System.out.println("12. December");
+		
+		System.out.print("Enter month (1~12): "); 	month = sc.nextInt(); 
+		System.out.print("Year(YYYY): "); 			year = sc.nextInt();
+		
+		InvoiceMgr.printSalesRevenueReport(month, year);
+		
+	}
+	
 	
 	/**
 	 * Display a list of restaurant options staff can perform through
 	 * the application.
 	 */
-	public void menuShowRestaurantOptions(){
+	public static void menuShowRestaurantOptions(){
 		
-		Scanner sc = new Scanner(System.in);
-		int choice, month, year;
+		int choice;
 		
         do {
             System.out.println("\nSelect a choice: ");
@@ -99,30 +126,12 @@ public class application {
                 		FoodMenuUI.menuShowFoodMenuOptions();
                     	break;
                 case 4:
-                		System.out.println("Month:");
-                		System.out.println("1. January\n"
-                				+ "2. Feburary\n"
-                				+ "3. March\n"
-                				+ "4. April\n"
-                				+ "5. May\n"
-                				+ "6. June\n"
-                				+ "7. July\n"
-                				+ "8. August\n"
-                				+ "9. September\n"
-                				+ "10. October\n"
-                				+ "11. November\n"
-                				+ "12. December\n");
-                		month = sc.nextInt();
-                		System.out.println("Year(YYYY):");
-                		year = sc.nextInt();
-                		InvoiceMgr.printSalesRevenueReport(month, year);
+                		printSalesReport();
                 		break;
                 case 5:
             }
 
         } while (choice < 5);
-
-        sc.close();
         
 	}
 
