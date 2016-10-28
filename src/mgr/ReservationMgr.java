@@ -55,13 +55,13 @@ public class ReservationMgr {
 	    
 		int index = 0;
 		System.out.println("Select which reservation to accept: ");
-		for(Reservation r : reservations){
+		for(Reservation r : reservations)
 			if(AMSession == (r.getArrivalTime().after(AMStartCal) && r.getArrivalTime().before(AMEndCal)))
 				System.out.println("(" + index++ + ") Customer Name:" + r.getCustomerName() +
 													"    Contact: " + r.getCustomerContact() +
 													"    Arrival time: " + r.getArrivalTime().getTime());
 
-		}
+
 		int choice = sc.nextInt();
 		
 		try {
