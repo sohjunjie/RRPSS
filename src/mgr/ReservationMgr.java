@@ -140,15 +140,15 @@ public class ReservationMgr {
 	    PMStartCal.set(Calendar.MILLISECOND, 0);
 	    
 	    if(date != null)
-	    	if(date.before(now.getTime()))
+	    	if(date.before(now))
 	    		System.out.println("Reservation datetime cannot be in the past!");
-	    	else if(date.after(maxBookingDate.getTime()))
+	    	else if(date.after(maxBookingDate))
 	    		System.out.println("Reservation is for 1 month in advance only!");
 	    	else if(!(date.after(AMStartCal) && date.before(AMEndCal)) || (date.after(PMStartCal) && date.before(PMEndCal)))
 	    		System.out.println("Reservation must be within operation hours");
 	    	else
 	    		validDate = true;
-	    		
+	    
 		return validDate;
 	}
 	

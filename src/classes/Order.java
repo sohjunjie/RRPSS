@@ -10,18 +10,47 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-//TODO: JAVADOC
-
 public class Order implements Serializable{
 	
 	private static final long serialVersionUID = -9135686500512288865L;
+	private static Scanner sc = new Scanner(System.in);
+	
+	/**
+	 * Auto-generated ID of the Order
+	 */
 	private int							orderID;
+	
+	/**
+	 * Contains individual items ordered in an order
+	 */
 	private ArrayList<OrderLineItem> 	orderLineItems;
+	
+	/**
+	 * Staff that created the order
+	 */
 	private Staff 						createdByStaff;
+	
+	/**
+	 * Reservation in which order was created from
+	 */
 	private Reservation					fromReservation;
+	
+	/**
+	 * Datetime the order was created
+	 */
 	private Date 						dateTime;
+	
+	/**
+	 * Invoice of the order.
+	 */
 	private Invoice 					invoice;
 
+	/**
+	 * Creates a new order. Invoice of an order will be null for a
+	 * newly created order as invoice is yet to be generated.
+	 * @param createdByStaff Staff creating the order
+	 * @param fromReservation Reservation the order is made for
+	 */
 	public Order(Staff createdByStaff, Reservation fromReservation){
 		this.orderID			= Calendar.getInstance().hashCode();
 		this.orderLineItems		= new ArrayList<OrderLineItem>();
@@ -31,26 +60,55 @@ public class Order implements Serializable{
 		this.invoice			= null;
 	}
 	
+	/**
+	 * Get the order ID of this order
+	 * @return This order id
+	 */
 	public int getOrderID(){ return this.orderID; }
-	public ArrayList<OrderLineItem> getorderLineItems(){return this.orderLineItems;}
+	
+	/**
+	 * Get arraylist of items currently ordered in this order
+	 * @return list of items currently ordered
+	 */
+	public ArrayList<OrderLineItem> getOrderLineItems(){return this.orderLineItems;}
+	
+	/**
+	 * Get the datetime the order was created
+	 * @return Datetime the order was created
+	 */
 	public Date getDateTime(){return this.dateTime;}
+	
+	/**
+	 * Get the staff that created this order
+	 * @return Staff that created the order
+	 */
 	public Staff getStaffCreated(){return this.createdByStaff;}
+	
+	/**
+	 * Get the invoice of this order.
+	 * @return This order's invoice
+	 */
 	public Invoice getInvoice(){ return this.invoice; }
 	
-	public void setOrderLineItems(ArrayList<OrderLineItem> orderLineItems){this.orderLineItems = orderLineItems;}
-	
+	/**
+	 * Add an item to the order
+	 * @param orderItem Item to be added to the order
+	 */
 	public void addOrderItem(OrderLineItem orderItem){
 		if(this.invoice != null) return;	//lock order for editing when invoice already generated
 		orderLineItems.add(orderItem);
 	}
 	
+	/**
+	 * Method to add item to the order. User will be asked to
+	 * select an item from a printed list of menu items
+	 */
 	public void addOrderItem(){
 		
 		if(this.invoice != null) return;	//lock order for editing when invoice already generated
 		
 		int choice;
 		int index = 0;
-		Scanner sc = new Scanner(System.in);
 		OrderLineItem orderItem;
 		ArrayList<MenuItem> foodMenu = Restaurant.foodMenu;
 		
@@ -60,7 +118,6 @@ public class Order implements Serializable{
 
     	System.out.print("    Enter the number of your choice: ");
 		choice = sc.nextInt();
-		sc.close();
 		
 		try {
 			String orderItemAdded = orderLineItems.get(choice).toString();
@@ -74,12 +131,15 @@ public class Order implements Serializable{
 
 	}
 	
+	/**
+	 * Remove an item from the order. User will be asked to select 
+	 * an item to be removed from a printed list of ordered items.
+	 */
 	public void removeOrderItem(){
 		
 		if(this.invoice != null) return;	//lock order for editing when invoice already generated
 		
 		int choice, index;
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("\nWhat item would you like to remove from the order?");
 		
@@ -89,7 +149,6 @@ public class Order implements Serializable{
 
     	System.out.print("    Enter the number of your choice: ");
 		choice = sc.nextInt();
-		sc.close();
 		
 		try {
 			String orderItemRemoved = orderLineItems.get(choice).toString();
@@ -100,6 +159,10 @@ public class Order implements Serializable{
 		}
 	}
 	
+	
+	/**
+	 * Generate an invoice for the order
+	 */
 	public void generateInvoice(){
 		
 		if(this.invoice != null) return;	//lock order for editing when invoice already generated
@@ -108,6 +171,10 @@ public class Order implements Serializable{
 
 	}
 	
+	/**
+	 * Calculate the current total order price
+	 * @return Order current total price
+	 */
 	public double calculateTotalOrderPrice(){
 		double retPrice = 0;
 		for(OrderLineItem o : this.orderLineItems)
@@ -115,6 +182,9 @@ public class Order implements Serializable{
 		return retPrice;
 	}	
 	
+	/**
+	 * prints order items in the order's orderlineitems
+	 */
 	public String toString(){
 		String printOrderString = "";
 		for(OrderLineItem o : orderLineItems){

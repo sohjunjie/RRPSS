@@ -39,7 +39,7 @@ public class InvoiceMgr {
 
 		for (Invoice i: invoices) {
 			if ((i.getDateGenerated().get(Calendar.MONTH) + 1 == month) && (i.getDateGenerated().get(Calendar.YEAR) == year))
-				for (OrderLineItem ol: i.getOrder().getorderLineItems()){
+				for (OrderLineItem ol: i.getOrder().getOrderLineItems()){
 					productSales[foodMenu.indexOf(ol.getMenuItem())] += 1;
 				}
 		}
