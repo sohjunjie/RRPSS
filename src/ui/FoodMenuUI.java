@@ -4,9 +4,21 @@ import java.util.Scanner;
 
 import mgr.FoodMenuMgr;
 
+/**
+ * Represents the UI displayed to the user when changing the food menu.
+ * @author Sean
+ *
+ */
+
 public class FoodMenuUI {
 	
 	private static Scanner sc = new Scanner(System.in);
+	
+	/**
+	 * While loop that scans user input to decide which operation to execute.
+	 * Can Add new food, new promotion package or remove menu item from menu.
+	 * Terminate by entering number greater than 4.
+	 */
 	
 	public static void menuShowFoodMenuOptions(){
 		
