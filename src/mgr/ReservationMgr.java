@@ -26,10 +26,13 @@ public class ReservationMgr {
 		int index = 0;
 		
 		System.out.println("Select which reservation to accept: ");
+		Calendar now = Calendar.getInstance();
 		for(Reservation r : reservations){
+			if(r.getArrivalTime().get(Calendar.DATE) == now.get(Calendar.DATE)){
 			System.out.println("(" + index++ + ") Customer Name:" + r.getCustomerName() + 
 												"    Contact: " + r.getCustomerContact() +
 												"    Arrival time: " + r.getArrivalTime().getTime());
+			}
 		}
 		int choice = sc.nextInt();
 		
@@ -46,7 +49,8 @@ public class ReservationMgr {
 	
 	public static void makeReservation() {
 				
-		System.out.print("Enter customer name: "); 				String customerName = sc.nextLine();
+		System.out.print("Enter customer name: "); 				String customerName = sc.next();
+		sc.nextLine(); // get dummy line
 		System.out.print("Enter customer contact number: "); 	int customerContact = sc.nextInt();
 		System.out.print("Enter number of people: ");			int numPax = sc.nextInt();
 		sc.nextLine();	// get dummy line
@@ -113,7 +117,7 @@ public class ReservationMgr {
 		Calendar now = Calendar.getInstance();
 		
 	    Calendar maxBookingDate = Calendar.getInstance();
-	    maxBookingDate.add(Calendar.MONTH, Restaurant.bookingMthInAdvance);
+	    maxBookingDate.add(Calendar.DAY_OF_MONTH, 30);
 	    
 	    Calendar AMStartCal = (Calendar) date.clone();
 	    AMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
@@ -139,16 +143,26 @@ public class ReservationMgr {
 	    PMStartCal.set(Calendar.SECOND, 0);
 	    PMStartCal.set(Calendar.MILLISECOND, 0);
 	    
+	    ///debugging/////////////////////////////////////////////////////////////////////////
+	    //System.out.println(date.getTime());
+	    //System.out.println(now.getTime());
+	    //System.out.println(maxBookingDate.getTime());
+	    //System.out.println(date.before(maxBookingDate.getTime()));
+	    //System.out.println(date.after(maxBookingDate.getTime()));
+	    //System.out.println(date.getTime().compareTo(maxBookingDate.getTime())>0);
+	    //System.out.println(date.before(now));
+	    //System.out.println(date.after(now));
+	    //System.out.println(date.getTime().compareTo(now.getTime())<0);
+	    //debugging///////////////////////////////////////////////////////////////////////////
 	    if(date != null)
-	    	if(date.before(now.getTime()))
+	    	if(date.before(now))
 	    		System.out.println("Reservation datetime cannot be in the past!");
-	    	else if(date.after(maxBookingDate.getTime()))
+	    	else if(date.after(maxBookingDate))
 	    		System.out.println("Reservation is for 1 month in advance only!");
 	    	else if(!(date.after(AMStartCal) && date.before(AMEndCal)) || (date.after(PMStartCal) && date.before(PMEndCal)))
 	    		System.out.println("Reservation must be within operation hours");
 	    	else
-	    		validDate = true;
-	    		
+	    		validDate = true;	
 		return validDate;
 	}
 	
