@@ -21,46 +21,21 @@ public class ReservationMgr {
 	public static ArrayList<Reservation> settledReservations = Restaurant.settledReservations;
 	
 	public static void acceptReservation(Staff staff){
-				
-		Calendar now = Calendar.getInstance();
 		
-	    Calendar AMStartCal = (Calendar) now.clone();
-	    AMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
-	    AMStartCal.set(Calendar.MINUTE, 0);
-	    AMStartCal.set(Calendar.SECOND, 0);
-	    AMStartCal.set(Calendar.MILLISECOND, 0);
-	    
-	    Calendar AMEndCal = (Calendar) now.clone();
-	    AMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMEndTime);
-	    AMEndCal.set(Calendar.MINUTE, 0);
-	    AMEndCal.set(Calendar.SECOND, 0);
-	    AMEndCal.set(Calendar.MILLISECOND, 0);
-	    
-	    Calendar PMStartCal = (Calendar) now.clone();
-	    PMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMStartTime);
-	    PMStartCal.set(Calendar.MINUTE, 0);
-	    PMStartCal.set(Calendar.SECOND, 0);
-	    PMStartCal.set(Calendar.MILLISECOND, 0);
-	    
-	    Calendar PMEndCal = (Calendar) now.clone();
-	    PMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMEndTime);
-	    PMStartCal.set(Calendar.MINUTE, 0);
-	    PMStartCal.set(Calendar.SECOND, 0);
-	    PMStartCal.set(Calendar.MILLISECOND, 0);
+		Calendar now = Calendar.getInstance();
 		
 		removeExpiredReservation();
 		boolean AMSession;
 		
-		AMSession = (now.after(AMStartCal) && now.before(AMEndCal));
-	    
+		AMSession = (now.get(Calendar.HOUR) < Restaurant.AMEndTime);
 		int index = 0;
 		System.out.println("Select which reservation to accept: ");
 		for(Reservation r : reservations)
-			if(AMSession == (r.getArrivalTime().after(AMStartCal) && r.getArrivalTime().before(AMEndCal)))
-				System.out.println("(" + index++ + ") Customer Name:" + r.getCustomerName() +
-													"    Contact: " + r.getCustomerContact() +
-													"    Arrival time: " + r.getArrivalTime().getTime());
-
+			if(now.get(Calendar.DATE) == r.getArrivalTime().get(Calendar.DATE))
+				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR) < Restaurant.AMEndTime))
+					System.out.println("(" + index++ + ") Customer Name:" + r.getCustomerName() +
+														"    Contact: " + r.getCustomerContact() +
+														"    Arrival time: " + r.getArrivalTime().getTime());
 
 		int choice = sc.nextInt();
 		
