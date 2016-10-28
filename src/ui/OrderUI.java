@@ -6,22 +6,20 @@ import classes.Order;
 import db.Restaurant;
 
 /**
- * Represents the UI displayed to the user when creating, changing or finalising orders.
+ * Represents the UI displayed to the user when creating, changing or finalising an order.
  * @author Sean
- *
+ * @version 1.0
+ * @since 2016-10-28
  */
-
 public class OrderUI {
 
 	private static Scanner sc = new Scanner(System.in);
-	
 
 	/**
-	 * While loop that scans user input to decide which operation to execute.
-	 * Can create order, remove order line item from order or create invoice.
-	 * Terminate by entering number greater than 4.
-	 */
-	
+	 * Display options user can perform on an order.
+	 * User can take order, remove item from an order,
+	 * or print the order's invoice.
+	 */	
 	public static void menuShowOrderOptions(Order order){
 		
 		int choice;
@@ -57,7 +55,6 @@ public class OrderUI {
 	 * Adds order line item to order
 	 * @param order Order that is added to
 	 */
-	
 	public static void takeOrder(Order order){
 		order.addOrderItem();
 	}
@@ -66,19 +63,14 @@ public class OrderUI {
 	 * Remove order line item from order
 	 * @param order Order that is removed from
 	 */
-	
 	public static void removeOrderItem(Order order){
 		order.removeOrderItem();
 	}
 	
 	/**
-	 * Generates invoice for the order if it does not exist.
-	 * Adds the invoice to the restaurant's ArrayList of all of its invoices.
-	 * Prints the invoice showing date and time, invoice number, all items ordered,
-	 * price of the items, GST applied and total price to be paid.
+	 * Generates invoice for an order and prints the invoice.
 	 * @param order Order that invoice is generated for
 	 */
-	
 	public static void printInvoice(Order order){
 		if(order.getInvoice() == null){
 			
