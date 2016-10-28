@@ -24,20 +24,21 @@ public class TableMgr {
 		}
 		
 		showTableAvailability(availableTables, reserveDateTime, numPax);
-		System.out.println("Please enter a selection number.");
+		System.out.println("Please enter selected table number.");
 		
 		int choice = sc.nextInt();
-		while(choice < 0 || choice >= availableTables.size()){
+		Table retTable = null;
+		
+		do{for(Table t : availableTables){
+				if (t.getTableId()==choice){
+					retTable = t;	
+					break;}
+			}		
+			if(retTable!=null){break;}
 			System.out.print("Invalid table number! Please enter again: ");
 			choice = sc.nextInt();
-		}
-		
-		Table retTable = null;
-		try {
-			retTable = (availableTables.get(choice));
-		}catch(IndexOutOfBoundsException e){
-			System.out.print("Invalid selection number.");
-		}
+		}while(retTable==null);
+
 		return retTable;
 	}
 	
@@ -45,10 +46,10 @@ public class TableMgr {
 	public static void showTableAvailability(ArrayList<Table> availableTables, Calendar reserveDateTime, int numPax){
 
 		System.out.println("The following tables are available for Pax no " + numPax + " and datetime " + reserveDateTime.getTime());
-		System.out.println("Selection no.			Table number			Capacity");
+		System.out.println("Table number			Capacity");
 		
 		for(Table t : availableTables)
-			System.out.println(availableTables.indexOf(t) + "			" + t.getTableId() + "			" + t.getCapacity());
+			System.out.println(t.getTableId() + "				" + t.getCapacity());
 
 	}
 	
