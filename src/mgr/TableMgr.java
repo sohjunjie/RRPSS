@@ -86,7 +86,6 @@ public class TableMgr {
 		
 		ReservationMgr.removeExpiredReservation();
 		ArrayList<Table> availableTables = new ArrayList<Table>();
-		ArrayList<Reservation> tableReservations;
 		
 		boolean isLunchSession=false;						//check lunch or dinner session for reserveDateTime
 		if(reserveDateTime.get(Calendar.HOUR) < Restaurant.AMEndTime){isLunchSession=true;}
@@ -97,8 +96,7 @@ public class TableMgr {
 			available = true;
 			alsoLunchSession=false;
 			if(t.getCapacity() >= numPax && t.getStatus()!=TableStatus.OCCUPIED){
-				tableReservations = t.getReserveBy();
-				for(Reservation r : tableReservations){
+				for(Reservation r : t.getReservedBy()){
 					if(r.getArrivalTime().get(Calendar.MONTH)==reserveDateTime.get(Calendar.MONTH)){	//check same month
 						if(r.getArrivalTime().get(Calendar.DATE)==reserveDateTime.get(Calendar.DATE)){	//check same date
 							if(r.getArrivalTime().get(Calendar.HOUR)<15){alsoLunchSession=true;}
