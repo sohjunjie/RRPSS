@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * @author Sean
  *
  */
-
 public class Table implements Serializable{
 
 	private static final long serialVersionUID = -696513068399675213L;
@@ -18,26 +17,22 @@ public class Table implements Serializable{
 	
 	/**
 	 * Unique table id identifying a unique table instance
-	 */
-	
+	 */	
 	private int table_id;
 	
 	/**
 	 * Capacity of the table. Can be 2, 4, 8 or 10
-	 */
-	
+	 */	
 	private int capacity;
 	
 	/**
 	 * Status of the table. Uses TableStatus enum: VACATED, OCCUPIED
-	 */
-	
+	 */	
 	private TableStatus status;
 	
 	/**
 	 * ArrayList of all reservations of the table
-	 */
-	
+	 */	
 	private ArrayList<Reservation> reservedBy;
 	
 	/**
@@ -45,8 +40,7 @@ public class Table implements Serializable{
 	 * reservedBy ArrayList. Default table status is vacated
 	 * @param table_id 		table id of the table
 	 * @param capacity 		capacity of the table
-	 */
-	
+	 */	
 	public Table (int table_id, int capacity) {
 		this.table_id	= table_id;
 		this.capacity	= capacity;
@@ -57,43 +51,37 @@ public class Table implements Serializable{
 	/**
 	 * get the table_id of the table
 	 * @return this table's table_id
-	 */
-	
+	 */	
 	public int getTableId(){ return table_id; }
 	
 	/**
 	 * get the capacity of the table
 	 * @return this table's capacity
-	 */
-	
+	 */	
 	public int getCapacity(){ return capacity; }
 	
 	/**
 	 * get the status of the table
 	 * @return this table's status (VACATED or OCCUPIED)
-	 */
-	
+	 */	
 	public TableStatus getStatus(){ return status; }
 	
 	/**
 	 * get the ArrayList of reservations
 	 * @return this table's reservations
-	 */
-	
+	 */	
 	public ArrayList<Reservation> getReservedBy(){ return this.reservedBy; }
 	
 	/**
 	 * change the status of the table
 	 * @param status New status for this table (VACATED or OCCUPIED)
 	 */
-	
 	public void setStatus(TableStatus status){ this.status=status; }
 	
 	/**
 	 * add a reservation to the table's reservation list
 	 * @param reservation New reservation for the table
 	 */
-	
 	public void addTableReservation(Reservation reservation){ this.reservedBy.add(reservation); }
 	
 	/**
@@ -101,14 +89,12 @@ public class Table implements Serializable{
 	 * reservation from the reservation list
 	 * @param index Index of the reservation to be removed
 	 */
-	
 	public void removeTableReservation(int index){ this.reservedBy.remove(index); }
 	
 	/**
 	 * Use reservation to remove a reservation from the reservation list
 	 * @param reservation Reservation to be removed
 	 */
-	
 	public void removeTableReservation(Reservation reservation){ this.reservedBy.remove(reservation); }
 	
 }
