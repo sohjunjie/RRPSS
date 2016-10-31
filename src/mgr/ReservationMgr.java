@@ -8,18 +8,31 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
+import classes.Order;
 import classes.Reservation;
 import classes.Staff;
 import classes.Table;
 import db.Restaurant;
 
+/**
+ * Reservation Manager class for user to create, accept, and
+ * cancel reservations.
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-10-31
+ */
 public class ReservationMgr {
 
 	private static Scanner sc = new Scanner (System.in);
 	
-	public static ArrayList<Reservation> reservations = Restaurant.reservations;
-	public static ArrayList<Reservation> settledReservations = Restaurant.settledReservations;
+	private static ArrayList<Reservation> reservations = Restaurant.reservations;
+	private static ArrayList<Reservation> settledReservations = Restaurant.settledReservations;
 	
+	/**
+	 * Allow the user to accept a reservation and create
+	 * an order from the reservation
+	 * @param staff Staff accepting the reservation
+	 */
 	public static void acceptReservation(Staff staff){
 		
 		Calendar now = Calendar.getInstance();
@@ -41,7 +54,8 @@ public class ReservationMgr {
 		
 		try {
 			Reservation reservation = reservations.get(choice);
-			staff.acceptReservation(reservation);
+			Order newOrder = staff.acceptReservation(reservation);
+			Restaurant.orders.add(newOrder);
 			moveToSettledReservation(reservation);
 			System.out.println("Reservation accepted.");
 		}catch(IndexOutOfBoundsException e){
@@ -50,12 +64,15 @@ public class ReservationMgr {
 		
 	}
 	
+	/**
+	 * Allow user to make a reservation
+	 */
 	public static void makeReservation() {
 				
 		System.out.print("Enter customer name: "); 				String customerName = sc.next();
 		sc.nextLine(); // get dummy line
 		System.out.print("Enter customer contact number: "); 	int customerContact = sc.nextInt();
-		System.out.print("Enter number of people: ");			int numPax = sc.nextInt();
+		System.out.print("Enter number of people: "); 			int numPax = sc.nextInt();
 		sc.nextLine();	// get dummy line
 		Calendar arrivalTime = getValidReservationDateTime();
 
@@ -68,6 +85,10 @@ public class ReservationMgr {
 				
 	}
 
+	/**
+	 * Remove reservation that are more than 30min 
+	 * past arrival time
+	 */
 	public static void removeExpiredReservation(){
 		
 		Calendar expiredDateTime = Calendar.getInstance();
@@ -82,11 +103,19 @@ public class ReservationMgr {
 
 	}
 	
+	/**
+	 * Move pending reservation to settled
+	 * @param reservation Reservation to move to settled
+	 */
 	public static void moveToSettledReservation(Reservation reservation){
 		settledReservations.add(reservation);
 		reservations.remove(reservation);
 	}
 	
+	/**
+	 * Get a valid reservation date time from the user
+	 * @return Valid reservation date time
+	 */
 	public static Calendar getValidReservationDateTime(){
 
 		String date = "";
@@ -113,6 +142,12 @@ public class ReservationMgr {
 		return arrivalTime;
 	}
 	
+	/**
+	 * Check if a reservation datetime is valid
+	 * according to restaurant operation hours
+	 * @param date Reservation datetime to check
+	 * @return True-False value indicating valid or invalid reservation datetime
+	 */
 	public static boolean checkValidReservationDate(Calendar date){
 		
 		boolean validDate = false;
@@ -146,17 +181,6 @@ public class ReservationMgr {
 	    PMStartCal.set(Calendar.SECOND, 0);
 	    PMStartCal.set(Calendar.MILLISECOND, 0);
 	    
-	    ///debugging/////////////////////////////////////////////////////////////////////////
-	    //System.out.println(date.getTime());
-	    //System.out.println(now.getTime());
-	    //System.out.println(maxBookingDate.getTime());
-	    //System.out.println(date.before(maxBookingDate.getTime()));
-	    //System.out.println(date.after(maxBookingDate.getTime()));
-	    //System.out.println(date.getTime().compareTo(maxBookingDate.getTime())>0);
-	    //System.out.println(date.before(now));
-	    //System.out.println(date.after(now));
-	    //System.out.println(date.getTime().compareTo(now.getTime())<0);
-	    //debugging///////////////////////////////////////////////////////////////////////////
 	    if(date != null)
 	    	if(date.before(now))
 	    		System.out.println("Reservation datetime cannot be in the past!");
