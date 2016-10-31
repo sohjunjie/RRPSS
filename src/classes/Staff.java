@@ -1,7 +1,6 @@
 package classes;
 
 import java.io.Serializable;
-import db.Restaurant;
 
 /**
  * Represents a staff in the restaurant.
@@ -103,26 +102,16 @@ public class Staff implements Serializable{
 	 */
 	public void setJobTitle(String jobTitle){ this.jobTitle = jobTitle; }
 
-	/**
-	 * Create a new order from existing reservation and
-	 * add it to the restaurant's list of orders
-	 * @param fromReservation Existing reservation that is to be changed to an order
-	 */
-	public void createNewOrder(Reservation fromReservation){
-		Order order = new Order(this, fromReservation);
-		Restaurant.orders.add(order);
-	}
 	
+	//TODO: Remove createNewOrder method from class diagram	
 	/**
-	 * Set accepted attribute from false to true
-	 * Change reserved table's tableStatus attribute to OCCUPIED
-	 * Remove this reservation from table's array of reservations
-	 * Order automatically created upon accepting reservation
-	 * @param reservation Reservation to be accepted
+	 * Accept and create new order from the reservation
+	 * @param reservation
+	 * @return Order created from the reservation
 	 */
-	public void acceptReservation(Reservation reservation){
+	public Order acceptReservation(Reservation reservation){
 		reservation.setAccepted();
-		this.createNewOrder(reservation);
+		return new Order(this, reservation);
 	}
 
 }

@@ -8,12 +8,23 @@ import classes.PromotionPackage;
 import classes.Table;
 import db.Restaurant;
 
+/**
+ * Food Menu Manager class that manages creation, removal
+ * of menu item in a food menu
+ * @author user soh jun jie
+ * @version 1.0
+ * @since 2016-10-31
+ */
 public class FoodMenuMgr {
 
-	public static ArrayList<MenuItem> foodMenu = Restaurant.foodMenu;
-	
+	private static ArrayList<MenuItem> foodMenu = Restaurant.foodMenu;	
 	private static Scanner sc = new Scanner(System.in);
 	
+	/**
+	 * Create new food item into the restaurant food menu.
+	 * User will be prompt for its menu name, description,
+	 * price and course type.
+	 */
 	public static void createNewFood(){
 		// TODO: Create new food and add to food menu
 		String foodName;
@@ -58,6 +69,12 @@ public class FoodMenuMgr {
 		
 	}
 	
+	/**
+	 * Create a promotion package menu item and add to
+	 * the restaurant food menu. User will be prompt for
+	 * its name, description, price and the food to add
+	 * to promotion package.
+	 */
 	public static void createNewPromotionPackage(){
 
 		String menuName;
@@ -84,6 +101,11 @@ public class FoodMenuMgr {
 		
 	}
 	
+	/**
+	 * Remove a menu item from the restaurant food menu.
+	 * User will be prompt to select the menu item to
+	 * remove.
+	 */
 	public static void removeMenuItem(){
 		
 		int choice;
