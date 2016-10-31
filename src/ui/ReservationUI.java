@@ -22,7 +22,9 @@ public class ReservationUI {
             System.out.println("(1) Show table availability");
             System.out.println("(2) Make reservation");
             System.out.println("(3) Accept reservation");
-            System.out.println("(4) Back");
+            System.out.println("(4) Remove reservation");
+            System.out.println("(5) Show reservations");
+            System.out.println("(6) Back");
         	System.out.println();
         	System.out.print("    Enter the number of your choice: ");
             choice = sc.nextInt();
@@ -38,9 +40,12 @@ public class ReservationUI {
                 		ReservationMgr.acceptReservation(staff);
                     	break;
                 case 4:
+                		ReservationMgr.removeReservation();
+                case 5:
+                		ReservationMgr.showReservations();
             }
 
-        } while (choice < 4);
+        } while (choice < 6);
 
 	}
 

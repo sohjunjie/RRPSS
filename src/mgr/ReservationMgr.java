@@ -29,6 +29,18 @@ public class ReservationMgr {
 	private static ArrayList<Reservation> settledReservations = Restaurant.settledReservations;
 	
 	/**
+	 * Show all reservations for the next month
+	 */
+	public static void showReservations(){
+		removeExpiredReservation();
+		System.out.println("Showing reservations for the next 30 days: ");
+		int index = 0;
+		for(Reservation r : reservations){
+			printReservation(index,r);
+			index++;}
+	}
+	
+	/**
 	 * Allow the user to accept a reservation and create
 	 * an order from the reservation
 	 * @param staff Staff accepting the reservation
@@ -45,10 +57,9 @@ public class ReservationMgr {
 		System.out.println("Select which reservation to accept: ");
 		for(Reservation r : reservations)
 			if(now.get(Calendar.DATE) == r.getArrivalTime().get(Calendar.DATE))
-				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR) < Restaurant.AMEndTime))
-					System.out.println("(" + index++ + ") Customer Name:" + r.getCustomerName() +
-														"    Contact: " + r.getCustomerContact() +
-														"    Arrival time: " + r.getArrivalTime().getTime());
+				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR) < Restaurant.AMEndTime)){
+					printReservation(index,r);
+					index++;}
 
 		int choice = sc.nextInt();
 		
@@ -62,6 +73,42 @@ public class ReservationMgr {
 			System.out.println("Fail to accept reservation! (Invalid index provided)");
 		}
 		
+	}
+	
+	/**
+	 * Print selected reservation on screen
+	 * @param index Index number of reservation to be printed
+	 * @param r Reservation to be printed
+	 */
+	public static void printReservation(int index, Reservation r){
+		System.out.println("(" + index + ") Customer Name:" + r.getCustomerName() +
+				"    Contact: " + r.getCustomerContact() +
+				"    Arrival time: " + r.getArrivalTime().getTime()+
+				"	 Reservation ID: "+ r.getReservationID()+
+				"	 Table ID: "+ r.getReserveTable().getTableId());
+		
+	}
+	
+	/**
+	 * Allow user to remove a reservation
+	 * @param staff Staff removing the reservation
+	 */
+	public static void removeReservation(){
+		removeExpiredReservation();
+		System.out.println("Select which reservation to remove: ");
+		int index = 0;
+		for(Reservation r : reservations){
+			printReservation(index,r);
+			index++;}
+		int choice = sc.nextInt();
+		
+		try {
+			Reservation reservation = reservations.get(choice);
+			moveToSettledReservation(reservation);
+			System.out.println("Reservation removed.");
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Fail to remove reservation! (Invalid index provided)");
+		}
 	}
 	
 	/**
@@ -108,6 +155,7 @@ public class ReservationMgr {
 	 * @param reservation Reservation to move to settled
 	 */
 	public static void moveToSettledReservation(Reservation reservation){
+		reservation.getReserveTable().removeTableReservation(reservation);
 		settledReservations.add(reservation);
 		reservations.remove(reservation);
 	}
