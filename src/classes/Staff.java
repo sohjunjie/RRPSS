@@ -34,16 +34,11 @@ public class Staff implements Serializable{
 	public void setEmpId(int empId){ this.empId = empId; }
 	public void setGender(char gender){ this.gender = gender; }
 	public void setJobTitle(String jobTitle){ this.jobTitle = jobTitle; }
-
-	public void createNewOrder(Reservation fromReservation){
-		Order order = new Order(this, fromReservation);
-		Restaurant.orders.add(order);
-	}
 	
 	// order automatically created upon accepting reservation
-	public void acceptReservation(Reservation reservation){
+	public Order acceptReservation(Reservation reservation){
 		reservation.setAccepted();
-		this.createNewOrder(reservation);
+		return new Order(this, reservation);
 	}
 
 }
