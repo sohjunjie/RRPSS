@@ -7,11 +7,22 @@ import classes.Order;
 import db.Restaurant;
 import ui.OrderUI;
 
+/**
+ * Order Manager class allowing user
+ * to select an order to edit
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-10-31
+ */
 public class OrderMgr {
 
 	private static Scanner sc = new Scanner(System.in);
-	public static ArrayList<Order> orders = Restaurant.orders;
+	private static ArrayList<Order> orders = Restaurant.orders;
 	
+	/**
+	 * Allow user to select an order and display
+	 * a UI to interact with that order
+	 */
 	public static void editPendingOrder(){
 		
 		if(orders.size() == 0){ 
