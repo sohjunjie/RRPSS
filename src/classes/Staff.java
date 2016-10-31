@@ -35,6 +35,8 @@ public class Staff implements Serializable{
 	public void setGender(char gender){ this.gender = gender; }
 	public void setJobTitle(String jobTitle){ this.jobTitle = jobTitle; }
 	
+	//TODO: Remove createNewOrder method from class diagram
+	
 	// order automatically created upon accepting reservation
 	public Order acceptReservation(Reservation reservation){
 		reservation.setAccepted();
