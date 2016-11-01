@@ -27,8 +27,8 @@ public class InvoiceMgr {
 	 * @param year Year for statistics to be reported
 	 */
 	public static void printSalesRevenueReport(int month, int year){
-		double totalRevenue = totalRevenue(month, year);
-		int[] productSales = productStatistics(month, year);
+		double totalRevenue = getPeriodTotalRevenue(month, year);
+		int[] productSales = getPeriodProductStatistics(month, year);
 		System.out.println("\nSales Revenue Report for Number " + month + " of year " + year);
 		System.out.println("Total Sales Revenue: " + totalRevenue);
 		System.out.println("Total Number of Food Products: \n");
@@ -44,8 +44,7 @@ public class InvoiceMgr {
 	 * @param year Year for statistics to be reported
 	 * @return Total revenue for reporting period
 	 */
-	private static double totalRevenue(int month, int year){
-		int j=0;
+	private static double getPeriodTotalRevenue(int month, int year){
 		double total = 0;
 		for (Invoice i: invoices) {
 			if ((i.getDateGenerated().get(Calendar.MONTH) + 1 == month) && (i.getDateGenerated().get(Calendar.YEAR) == year))
@@ -61,7 +60,7 @@ public class InvoiceMgr {
 	 * @param year Year for statistics to be reported
 	 * @return Array containing quantity sold for each menu item
 	 */
-	private static int[] productStatistics(int month, int year){
+	private static int[] getPeriodProductStatistics(int month, int year){
 		
 		int[] productSales = new int[foodMenu.size()];
 
