@@ -56,7 +56,7 @@ public class ReservationUI {
 
 	}
 
-	public static void showTableAvailability(){
+	private static void showTableAvailability(){
 		
 		System.out.print("Enter number of people: "); int numPax = sc.nextInt();
 		Calendar reserveDateTime = ReservationMgr.getValidReservationDateTime();

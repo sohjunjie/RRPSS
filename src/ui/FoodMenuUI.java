@@ -58,7 +58,7 @@ public class FoodMenuUI {
 	 * Show a UI that prompts user for menu item to be
 	 * removed.
 	 */
-	public static void removeMenuItemUI(){
+	private static void removeMenuItemUI(){
 		
 		int choice;
 		ArrayList<MenuItem> foodMenu = FoodMenuMgr.getRestaurantFoodMenu();
@@ -79,7 +79,7 @@ public class FoodMenuUI {
 	 * Show a UI that prompts user for details of
 	 * the promotion package to be created.
 	 */
-	public static void createNewPromotionPackageUI(){
+	private static void createNewPromotionPackageUI(){
 		
 		String menuName;
 		String menuDesc;
@@ -92,15 +92,11 @@ public class FoodMenuUI {
 		FoodMenuMgr.createNewPromotionPackage(menuName, menuDesc, menuPrice);
 	}
 	
-	public static void getFoodUI(ArrayList<MenuItem> foodMenu){
-		
-	}
-	
 	/**
 	 * Show a UI that prompts user for details of
 	 * the food to be created.
 	 */
-	public static void createNewFoodUI(){
+	private static void createNewFoodUI(){
 		
 		String foodName;
 		String foodDesc;

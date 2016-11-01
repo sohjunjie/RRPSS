@@ -60,13 +60,12 @@ public class FoodMenuMgr {
 	/**
 	 * Remove a menu item from the restaurant food menu
 	 * base on a menu index
-	 * @param menuIndex menu item to remove
+	 * @param menuIndex Menu item to remove
 	 */
 	public static void removeMenuItem(int menuIndex){
 		
-		String itemRemoved;
 		try {
-			itemRemoved = foodMenu.get(menuIndex).getMenuName();
+			String itemRemoved = foodMenu.get(menuIndex).getMenuName();
 			foodMenu.remove(menuIndex);
 			System.out.println(itemRemoved + " removed from food menu."); 
 		}catch(IndexOutOfBoundsException e){

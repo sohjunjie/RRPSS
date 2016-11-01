@@ -127,7 +127,7 @@ public class ReservationMgr {
 		sc.nextLine();	// get dummy line
 		Calendar arrivalTime = getValidReservationDateTime();
 
-		Table reserveTable = TableMgr.findReservationTable(arrivalTime,numPax);
+		Table reserveTable = TableMgr.findReservationTable(arrivalTime, numPax);
 		
 		if(reserveTable != null){
 			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));
@@ -146,9 +146,9 @@ public class ReservationMgr {
 		if(!checkValidReservationDate(arrivalTime))
 			return;
 		
-		Table reserveTable = TableMgr.findReservationTable(arrivalTime,numPax);
+		Table reserveTable = TableMgr.findReservationTable(arrivalTime, numPax);
 		
-		if(reserveTable != null){			
+		if(reserveTable != null){
 			Reservation dineInReservation = new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable);			
 			createOrderFromReservation(staff, dineInReservation);
 			System.out.println("Walk-in order created.");
