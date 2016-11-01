@@ -71,7 +71,9 @@ public class ReservationMgr {
 
 		try {
 			Reservation reservation = reservations.get(choice);
-			Order newOrder = staff.acceptReservation(reservation);
+			reservation.setAccepted();
+			Order newOrder = new Order(staff, reservation);
+			
 			Restaurant.orders.add(newOrder);
 			moveToSettledReservation(reservation);
 			System.out.println("Reservation accepted.");

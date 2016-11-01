@@ -103,16 +103,4 @@ public class Staff implements Serializable{
 	 */
 	public void setJobTitle(String jobTitle){ this.jobTitle = jobTitle; }
 
-	
-	//TODO: Remove createNewOrder method from class diagram	
-	/**
-	 * Accept and create new order from the reservation
-	 * @param reservation
-	 * @return Order created from the reservation
-	 */
-	public Order acceptReservation(Reservation reservation){
-		reservation.setAccepted();
-		return new Order(this, reservation);
-	}
-
 }
