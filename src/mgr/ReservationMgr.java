@@ -48,21 +48,29 @@ public class ReservationMgr {
 	public static void acceptReservation(Staff staff){
 		
 		Calendar now = Calendar.getInstance();
+		ArrayList<Reservation> acceptReservations = new ArrayList<Reservation>();
 		
 		removeExpiredReservation();
 		boolean AMSession;
 		
 		AMSession = (now.get(Calendar.HOUR) < Restaurant.AMEndTime);
-		int index = 0;
 		System.out.println("Select which reservation to accept: ");
 		for(Reservation r : reservations)
 			if(now.get(Calendar.DATE) == r.getArrivalTime().get(Calendar.DATE))
-				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR) < Restaurant.AMEndTime)){
-					printReservation(index,r);
-					index++;}
+				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR) < Restaurant.AMEndTime))
+					acceptReservations.add(r);
+
+		
+		if(acceptReservations.size() <= 0)
+			return;
+
+		int index = 0;
+		System.out.println("Select which reservation to accept: ");
+		for(Reservation ar : acceptReservations)
+			printReservation(index++, ar);
 
 		int choice = sc.nextInt();
-		
+
 		try {
 			Reservation reservation = reservations.get(choice);
 			Order newOrder = staff.acceptReservation(reservation);
@@ -72,7 +80,7 @@ public class ReservationMgr {
 		}catch(IndexOutOfBoundsException e){
 			System.out.println("Fail to accept reservation! (Invalid index provided)");
 		}
-		
+
 	}
 	
 	/**
@@ -115,7 +123,7 @@ public class ReservationMgr {
 	 * Allow user to make a reservation
 	 */
 	public static void makeReservation() {
-				
+		
 		System.out.print("Enter customer name: "); 				String customerName = sc.next();
 		sc.nextLine(); // get dummy line
 		System.out.print("Enter customer contact number: "); 	int customerContact = sc.nextInt();
@@ -224,20 +232,22 @@ public class ReservationMgr {
 	    PMStartCal.set(Calendar.MILLISECOND, 0);
 	    
 	    Calendar PMEndCal = (Calendar) date.clone();
-	    PMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMEndTime);
-	    PMStartCal.set(Calendar.MINUTE, 0);
-	    PMStartCal.set(Calendar.SECOND, 0);
-	    PMStartCal.set(Calendar.MILLISECOND, 0);
+	    PMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMEndTime);
+	    PMEndCal.set(Calendar.MINUTE, 0);
+	    PMEndCal.set(Calendar.SECOND, 0);
+	    PMEndCal.set(Calendar.MILLISECOND, 0);
 	    
-	    if(date != null)
+	    if(date != null){
 	    	if(date.before(now))
 	    		System.out.println("Reservation datetime cannot be in the past!");
 	    	else if(date.after(maxBookingDate))
 	    		System.out.println("Reservation is for 1 month in advance only!");
-	    	else if(!(date.after(AMStartCal) && date.before(AMEndCal)) || (date.after(PMStartCal) && date.before(PMEndCal)))
+	    	else if(!((date.after(AMStartCal) && date.before(AMEndCal)) || (date.after(PMStartCal) && date.before(PMEndCal))))
 	    		System.out.println("Reservation must be within operation hours");
 	    	else
 	    		validDate = true;	
+	    }
+	    
 		return validDate;
 	}
 	
