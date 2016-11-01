@@ -34,7 +34,7 @@ public class TestReservation {
 	}
 	
 	@Test
-	public void testFullReservationScenario(){
+	public void testMakeReservationWhenFull(){
 		
 		Calendar now = Calendar.getInstance();
 		now.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
@@ -51,7 +51,8 @@ public class TestReservation {
 		int fullReservationSize = testReservations.size();
 		
 // TODO		try create reservation with full reservation for current session
-//		ReservationMgr.makeWalkInReservation(testStaff);
+//			how to deal with scanner input through unit test
+		ReservationMgr.makeWalkInReservation(testStaff);
 		
 		assertEquals(fullReservationSize, testReservations.size());	// ensure reservation size still same
 		
