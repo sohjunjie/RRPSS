@@ -266,7 +266,7 @@ public class ReservationMgr {
 	    		System.out.println("Reservation datetime cannot be in the past!");
 	    	else if(date.after(maxBookingDate))
 	    		System.out.println("Reservation is for 1 month in advance only!");
-	    	else if(!((date.after(AMStartCal) && date.before(AMEndCal)) || (date.after(PMStartCal) && date.before(PMEndCal))))
+	    	else if((date.before(AMStartCal) || date.after(AMEndCal)) && (date.before(PMStartCal) || date.after(PMEndCal)))
 	    		System.out.println("Reservation must be within operation hours");
 	    	else
 	    		validDate = true;	

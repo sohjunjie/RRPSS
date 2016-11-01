@@ -33,9 +33,9 @@ public class FoodMenuMgr {
 		
 		Food newFood;
 		
-		System.out.print("Enter menu name of promotion package: "); foodName = sc.nextLine();
-		System.out.print("Enter menu description of promotion package: "); foodDesc = sc.nextLine();
-		System.out.print("Enter price of promotion package: "); foodPrice = sc.nextDouble();
+		System.out.print("Enter menu name of food: "); foodName = sc.nextLine();
+		System.out.print("Enter menu description of food: "); foodDesc = sc.nextLine();
+		System.out.print("Enter price of food: "); foodPrice = sc.nextDouble();
 		
 		int choice;
 		do{
