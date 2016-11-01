@@ -59,15 +59,13 @@ public class ReservationMgr {
 			if(now.get(Calendar.DATE) == r.getArrivalTime().get(Calendar.DATE))
 				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR) < Restaurant.AMEndTime))
 					acceptReservations.add(r);
-
 		
 		if(acceptReservations.size() <= 0)
 			return;
 
-		int index = 0;
 		System.out.println("Select which reservation to accept: ");
 		for(Reservation ar : acceptReservations)
-			printReservation(index++, ar);
+			printReservation(reservations.indexOf(ar), ar);
 
 		int choice = sc.nextInt();
 
