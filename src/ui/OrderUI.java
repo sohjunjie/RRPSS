@@ -60,7 +60,7 @@ public class OrderUI {
 	 * Adds order line item to order
 	 * @param order Order that is added to
 	 */
-	public static void takeOrder(Order order){
+	private static void takeOrder(Order order){
 		order.addOrderItem();
 	}
 	
@@ -68,7 +68,7 @@ public class OrderUI {
 	 * Remove order line item from order
 	 * @param order Order that is removed from
 	 */
-	public static void removeOrderItem(Order order){
+	private static void removeOrderItem(Order order){
 		order.removeOrderItem();
 	}
 	
@@ -76,9 +76,9 @@ public class OrderUI {
 	 * Generates invoice for an order and prints the invoice.
 	 * @param order Order that invoice is generated for
 	 */
-	public static void printInvoice(Order order){
+	private static void printInvoice(Order order){
 		if(order.getInvoice() == null){
-			order.generateInvoice();			
+			order.generateInvoice();
 			Restaurant.invoices.add(order.getInvoice());
 			OrderMgr.moveToSettledOrder(order);
 		}
