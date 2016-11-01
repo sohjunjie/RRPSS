@@ -7,7 +7,7 @@ import classes.Table.TableStatus;
 
 /**
  * Represents a reservation made by a customer
- * @author wang_xingyue
+ * @author wang xing yue
  * @version 1.0
  * @since 2016-10-25
  */

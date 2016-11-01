@@ -10,6 +10,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * Represents an order made by a staff
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-10-31
+ */
 public class Order implements Serializable{
 	
 	private static final long serialVersionUID = -9135686500512288865L;
