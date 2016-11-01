@@ -10,7 +10,6 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import classes.Invoice;
 import classes.Order;
 import classes.Reservation;
 import classes.Staff;
@@ -30,8 +29,6 @@ public class TestOrder {
 	private ArrayList<Table> testTables;
 	private ArrayList<Reservation> testReservations;
 	private ArrayList<Order> testOrders;
-	private ArrayList<Order> testSettledOrders;
-	private ArrayList<Invoice> testInvoices;
 	private Staff testStaff;
 	
 	@Before
@@ -50,12 +47,11 @@ public class TestOrder {
 		this.testReservations = Restaurant.reservations;
 		this.testStaff = Restaurant.staffs.get(0);
 		this.testOrders = Restaurant.orders;
-		this.testSettledOrders = Restaurant.settledOrders;
 		
 	}
 	
 	@Test
-	public void testInvoicePrint() {
+	public void testOrderInvoicePrint() {
 		
 		Calendar now = Calendar.getInstance();
 		now.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
@@ -78,6 +74,7 @@ public class TestOrder {
 		Order order = testOrders.get(0);
 		Class<OrderUI> c = OrderUI.class;
 
+		@SuppressWarnings("rawtypes")
 		Class[] cArg = new Class[1];
         cArg[0] = Order.class;
 		
