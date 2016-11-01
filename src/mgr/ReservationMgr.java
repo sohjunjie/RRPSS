@@ -70,12 +70,8 @@ public class ReservationMgr {
 		int choice = sc.nextInt();
 
 		try {
-			Reservation reservation = reservations.get(choice);
-			reservation.setAccepted();
-			Order newOrder = new Order(staff, reservation);
-			
-			Restaurant.orders.add(newOrder);
-			moveToSettledReservation(reservation);
+			Reservation reservation = reservations.get(choice);			
+			createOrderFromReservation(staff, reservation);			
 			System.out.println("Reservation accepted.");
 		}catch(IndexOutOfBoundsException e){
 			System.out.println("Fail to accept reservation! (Invalid index provided)");
@@ -137,9 +133,37 @@ public class ReservationMgr {
 			reservations.add(new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable));
 			System.out.println("Reservation added.");
 		}
-				
+	
 	}
-
+	
+	public static void makeWalkInReservation(Staff staff){
+		
+		String customerName = "Unknown";
+		int customerContact = 0;
+		System.out.print("Enter number of people: "); int numPax = sc.nextInt();
+		
+		Calendar arrivalTime = Calendar.getInstance();
+		if(!checkValidReservationDate(arrivalTime))
+			return;
+		
+		Table reserveTable = TableMgr.findReservationTable(arrivalTime,numPax);
+		
+		if(reserveTable != null){			
+			Reservation dineInReservation = new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable);			
+			createOrderFromReservation(staff, dineInReservation);
+			System.out.println("Walk-in order created.");
+		}
+		
+	}
+	
+	public static void createOrderFromReservation(Staff staff, Reservation reservation){
+		reservations.add(reservation);
+		reservation.setAccepted();
+		Order newOrder = new Order(staff, reservation);
+		Restaurant.orders.add(newOrder);
+		moveToSettledReservation(reservation);
+	}
+	
 	/**
 	 * Remove reservation that are more than 30min 
 	 * past arrival time

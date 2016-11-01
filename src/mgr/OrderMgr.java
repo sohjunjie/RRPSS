@@ -18,6 +18,12 @@ public class OrderMgr {
 
 	private static Scanner sc = new Scanner(System.in);
 	private static ArrayList<Order> orders = Restaurant.orders;
+	private static ArrayList<Order> settledOrders = Restaurant.settledOrders;
+	
+	public static void moveToSettledOrder(Order order){
+		settledOrders.add(order);
+		orders.remove(order);
+	}
 	
 	/**
 	 * Allow user to select an order and display

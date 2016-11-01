@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import classes.Order;
 import db.Restaurant;
+import mgr.OrderMgr;
 
 /**
  * Represents the UI displayed to the user when creating, changing or finalising an order.
@@ -26,28 +27,32 @@ public class OrderUI {
 		
         do {
             System.out.println("\nSelect a choice: ");
-            System.out.println("(1) Take order");
-            System.out.println("(2) Remove order line item");
-            System.out.println("(3) Print invoice");
-            System.out.println("(4) Back");
+            System.out.println("(1) Show order details");
+            System.out.println("(2) Take order");
+            System.out.println("(3) Remove order line item");
+            System.out.println("(4) Print invoice");
+            System.out.println("(5) Back");
         	System.out.println();
         	System.out.print("    Enter the number of your choice: ");
             choice = sc.nextInt();
             
             switch (choice) {
-                case 1:
+            	case 1:
+            			System.out.println(order);
+            			break;
+                case 2:
                 		takeOrder(order);
                         break;
-                case 2:
+                case 3:
                 		removeOrderItem(order);
                         break;
-                case 3:
+                case 4:
                 		printInvoice(order);
                     	break;
-                case 4:
+                case 5:
             }
 
-        } while (choice < 4);
+        } while (choice < 5);
         
 	}
 	
@@ -73,9 +78,9 @@ public class OrderUI {
 	 */
 	public static void printInvoice(Order order){
 		if(order.getInvoice() == null){
-			
-			order.generateInvoice();
+			order.generateInvoice();			
 			Restaurant.invoices.add(order.getInvoice());
+			OrderMgr.moveToSettledOrder(order);
 		}
 		order.getInvoice().printInvoice();
 	}
