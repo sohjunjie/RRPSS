@@ -41,8 +41,12 @@ public class ReservationUI {
                     	break;
                 case 4:
                 		ReservationMgr.removeReservation();
+                		break;
                 case 5:
                 		ReservationMgr.showReservations();
+                		break;
+                case 6:
+                		
             }
 
         } while (choice < 6);
