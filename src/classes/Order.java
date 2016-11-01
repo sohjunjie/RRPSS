@@ -95,6 +95,14 @@ public class Order implements Serializable{
 	 * @return This order's invoice
 	 */
 	public Invoice getInvoice(){ return this.invoice; }
+
+	/**
+	 * Get the reservation this order was created from
+	 * @return This order reservation
+	 */
+	public Reservation getFromReservation(){
+		return this.fromReservation; 
+	}
 	
 	/**
 	 * Add an item to the order
@@ -133,7 +141,6 @@ public class Order implements Serializable{
 		}catch(IndexOutOfBoundsException e){
 			System.out.println("Add order item failed! (Invalid index provided)");
 		}
-		
 
 	}
 	
@@ -186,7 +193,7 @@ public class Order implements Serializable{
 		for(OrderLineItem o : this.orderLineItems)
 			retPrice += o.getMenuItem().getPrice();
 		return retPrice;
-	}	
+	}
 	
 	/**
 	 * prints order items in the order's orderlineitems

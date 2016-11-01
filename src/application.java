@@ -128,7 +128,6 @@ public class application {
                     	break;
                 case 4:
                 		showSalesReportUI();
-                		System.out.println("test");
                 		break;
                 case 5:
             }

@@ -35,7 +35,7 @@ public class OrderMgr {
 		
 		System.out.println("\nSelect an order.");
 		for(Order o : orders){
-			System.out.println("(" + index++ + ") " + o.getOrderID());
+			System.out.println("(" + index++ + ") OrderID: " + o.getOrderID() + "    TableID: " + o.getFromReservation().getReserveTable().getTableId());
 		}
     	System.out.print("    Enter the number of your choice: ");
 		int choice = sc.nextInt();
