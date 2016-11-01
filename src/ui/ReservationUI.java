@@ -20,11 +20,12 @@ public class ReservationUI {
         do {
             System.out.println("\nSelect a choice: ");
             System.out.println("(1) Show table availability");
-            System.out.println("(2) Make reservation");
-            System.out.println("(3) Accept reservation");
-            System.out.println("(4) Remove reservation");
-            System.out.println("(5) Show reservations");
-            System.out.println("(6) Back");
+            System.out.println("(2) Walk in dining");
+            System.out.println("(3) Make reservation");
+            System.out.println("(4) Accept reservation");
+            System.out.println("(5) Remove reservation");
+            System.out.println("(6) Show reservations");
+            System.out.println("(7) Back");
         	System.out.println();
         	System.out.print("    Enter the number of your choice: ");
             choice = sc.nextInt();
@@ -34,22 +35,24 @@ public class ReservationUI {
                 		showTableAvailability();
                         break;
                 case 2:
+                		ReservationMgr.makeWalkInReservation(staff);
+                		break;
+                case 3:
                 		ReservationMgr.makeReservation();
                         break;
-                case 3:
+                case 4:
                 		ReservationMgr.acceptReservation(staff);
                     	break;
-                case 4:
+                case 5:
                 		ReservationMgr.removeReservation();
                 		break;
-                case 5:
+                case 6:
                 		ReservationMgr.showReservations();
                 		break;
-                case 6:
-                		
+                case 7:
             }
 
-        } while (choice < 6);
+        } while (choice < 7);
 
 	}
 

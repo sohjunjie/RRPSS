@@ -5,7 +5,6 @@ import java.util.Scanner;
 import classes.Food;
 import classes.MenuItem;
 import classes.PromotionPackage;
-import classes.Table;
 import db.Restaurant;
 
 /**
