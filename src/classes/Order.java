@@ -126,12 +126,12 @@ public class Order implements Serializable{
 		choice = sc.nextInt();
 		
 		try {
-			String orderItemAdded = orderLineItems.get(choice).toString();
+			String orderItemAdded = foodMenu.get(choice).getMenuName();
 			orderItem = new OrderLineItem(foodMenu.get(choice));
 			this.orderLineItems.add(orderItem);
 			System.out.println(orderItemAdded + " added to order."); 
 		}catch(IndexOutOfBoundsException e){
-			System.out.println("Add order item failed! (Invalid index provided");
+			System.out.println("Add order item failed! (Invalid index provided)");
 		}
 		
 
