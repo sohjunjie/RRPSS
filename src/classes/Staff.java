@@ -6,7 +6,8 @@ import java.io.Serializable;
  * Represents a staff in the restaurant.
  * Every staff has an id, name, gender and job title.
  * @author Sean
- *
+ * @version 1.0
+ * @since 2016-10-31
  */
 public class Staff implements Serializable{
 	private static final long serialVersionUID = -3686894603777756471L;

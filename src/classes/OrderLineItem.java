@@ -2,6 +2,12 @@ package classes;
 
 import java.io.Serializable;
 
+/**
+ * Represents a line item in an order
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-10-31
+ */
 public class OrderLineItem implements Serializable{
 
 	private static final long serialVersionUID = -1249371886974645374L;

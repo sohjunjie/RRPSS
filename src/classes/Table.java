@@ -7,7 +7,8 @@ import java.util.ArrayList;
  * Represents a table in the restaurant.
  * Every table has an ID, a capacity, a status, and an ArrayList of reservations.
  * @author Sean
- *
+ * @version 1.0
+ * @since 2016-10-31
  */
 public class Table implements Serializable{
 
