@@ -23,12 +23,7 @@ public class TestReservation {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		Restaurant.initTables();
-		Restaurant.initReservations();
-		Restaurant.initSettledReservations();
-		Restaurant.initStaffs();
-		Restaurant.initOrders();
-		
+				
 		testTables = Restaurant.tables;
 		testReservations = Restaurant.reservations;
 		testOrders = Restaurant.orders;
@@ -42,11 +37,15 @@ public class TestReservation {
 		Restaurant.settledReservations.clear();
 		Restaurant.reservations.clear();
 		Restaurant.orders.clear();
+		Restaurant.invoices.clear();
 		
+		for(Table t : Restaurant.tables)
+			t.getReservedBy().clear();
 	}
 	
 	@Test
 	public void testMakeReservationWhenFull() {
+		
 		Reservation newReservation;
 		Calendar reserveCal = Calendar.getInstance();
 		reserveCal.add(Calendar.DATE, 1);
@@ -122,7 +121,7 @@ public class TestReservation {
 		
 		Calendar reserveCal;
 		Calendar now = Calendar.getInstance();
-		now.add(Calendar.MINUTE, -30);
+		now.add(Calendar.MINUTE, -60);
 		int year = now.get(Calendar.YEAR);
 		int month = now.get(Calendar.MONTH);
 		int day = now.get(Calendar.DATE);
@@ -136,7 +135,6 @@ public class TestReservation {
 		for(Table t : testTables){
 			reserveCal = new GregorianCalendar(year, month, day, hour, minute);
 			newReservation = new Reservation("cust"+index, index, t.getCapacity(), reserveCal, t);
-			System.out.println(newReservation.getArrivalTime().getTime());
 			testReservations.add(newReservation);
 			index++;
 		}

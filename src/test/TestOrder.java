@@ -25,14 +25,6 @@ public class TestOrder {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		
-		Restaurant.initTables();
-		Restaurant.initReservations();
-		Restaurant.initSettledReservations();
-		Restaurant.initStaffs();
-		Restaurant.initOrders();
-		Restaurant.initSettledOrders();
-		Restaurant.initInvoices();
 
 		testTables = Restaurant.tables;
 		testReservations = Restaurant.reservations;
@@ -48,10 +40,14 @@ public class TestOrder {
 		Restaurant.reservations.clear();
 		Restaurant.orders.clear();
 		Restaurant.invoices.clear();
+		
+		for(Table t : Restaurant.tables)
+			t.getReservedBy().clear();
+		
 	}
 
 	@Test
-	public void testOrderInvoicePrint() {
+	public void testTableReleaseAfterInvoicePrinted() {
 		
 		Calendar now = Calendar.getInstance();
 		
