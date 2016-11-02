@@ -55,7 +55,7 @@ public class Restaurant {
 	
 	public static void saveRestaurant(){
 		saveTables();
-		saveStaff();
+		saveStaffs();
 		saveFoodMenu();
 		saveInvoices();
 		saveOrders();
@@ -66,7 +66,7 @@ public class Restaurant {
 
 	public static void loadRestaurant(){
 		loadTables();
-		loadStaff();
+		loadStaffs();
 		loadFoodMenu();
 		loadInvoices();
 		loadOrders();
@@ -75,6 +75,9 @@ public class Restaurant {
 		loadSettledReservations();
 	}
 	
+	public static void resetTables(){
+		Restaurant.tables = null;
+	}
 	public static void initTables(){
 		ArrayList<Table> tables = new ArrayList<Table>();
 		int i;
@@ -123,7 +126,10 @@ public class Restaurant {
 
 	}
 	
-	public static void initStaff(){
+	public static void resetStaffs(){
+		Restaurant.staffs = null;
+	}
+	public static void initStaffs(){
 		ArrayList<Staff> staffs = new ArrayList<Staff>();
 		staffs.add(new Staff("John", 1, 'M', "Chef"));
 		staffs.add(new Staff("May", 2, 'F', "Cashier"));
@@ -131,7 +137,7 @@ public class Restaurant {
 		staffs.add(new Staff("Miki", 4, 'F', "Cashier"));
 		Restaurant.staffs = staffs;
 	}
-	public static void saveStaff(){
+	public static void saveStaffs(){
 		Path 				saveFileName 	= Paths.get(dataPath.toString(), staffFileName);
 		FileOutputStream   	fos 			= null;
 		ObjectOutputStream 	oos 			= null;
@@ -146,7 +152,7 @@ public class Restaurant {
 			ex.printStackTrace();
 		}
 	}
-	public static void loadStaff(){
+	public static void loadStaffs(){
 
 		Path saveData 			= Paths.get(dataPath.toString(), staffFileName);
 		FileInputStream fis 	= null;
@@ -159,14 +165,17 @@ public class Restaurant {
 			ois.close();
 		} catch (IOException ex) {
 			System.out.println(staffFileName + " not found or does not exists. Default settings will be loaded.");
-			initStaff();
+			initStaffs();
 		} catch (ClassCastException|ClassNotFoundException ex) {
 			System.out.println("Data file " + staffFileName + " is corrupted. Default settings will be loaded instead.");
-			initStaff();
+			initStaffs();
 		}
 
 	}
 	
+	public static void resetFoodMenu(){
+		Restaurant.foodMenu = null;
+	}
 	public static void initFoodMenu(){
 		
 		ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
@@ -249,6 +258,9 @@ public class Restaurant {
 
 	}
 	
+	public static void resetInvoices(){
+		Restaurant.invoices = null;
+	}
 	public static void initInvoices(){
         Restaurant.invoices = new ArrayList<Invoice>();
 	}
@@ -287,6 +299,9 @@ public class Restaurant {
 
 	}
 	
+	public static void resetOrders(){
+		Restaurant.orders = null;
+	}
 	public static void initOrders(){
 		Restaurant.orders = new ArrayList<Order>();
 	}
@@ -325,6 +340,9 @@ public class Restaurant {
 
 	}
 	
+	public static void resetSettledOrders(){
+		Restaurant.settledOrders = null;
+	}
 	public static void initSettledOrders(){
         Restaurant.settledOrders = new ArrayList<Order>();
 	}
@@ -363,6 +381,9 @@ public class Restaurant {
 
 	}
 	
+	public static void resetReservations(){
+		Restaurant.reservations = null;
+	}
 	public static void initReservations(){
         Restaurant.reservations = new ArrayList<Reservation>();
 	}
@@ -401,6 +422,9 @@ public class Restaurant {
 
 	}
 	
+	public static void resetSettledReservations(){
+		Restaurant.settledReservations = null;
+	}
 	public static void initSettledReservations(){
         Restaurant.settledReservations = new ArrayList<Reservation>();
 	}
