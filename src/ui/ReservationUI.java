@@ -38,7 +38,7 @@ public class ReservationUI {
                 		ReservationMgr.makeWalkInReservation(staff);
                 		break;
                 case 3:
-                		ReservationMgr.makeReservation();
+                		makeReservationUI();
                         break;
                 case 4:
                 		ReservationMgr.acceptReservation(staff);
@@ -56,17 +56,44 @@ public class ReservationUI {
 
 	}
 
+	
+	/**
+	 * Prompts user for reservation details and make a 
+	 * reservation.
+	 */
+	private static void makeReservationUI(){
+		
+		System.out.print("Enter customer name: "); 				String customerName = sc.nextLine();
+		System.out.print("Enter customer contact number: "); 	int customerContact = sc.nextInt();
+		sc.nextLine();	// get dummy line
+		System.out.print("Enter number of people: "); 			int numPax = sc.nextInt();
+		sc.nextLine();	// get dummy line
+		Calendar arrivalTime = ReservationMgr.getValidReservationDateTime();
+		
+		ReservationMgr.makeReservation(customerName, customerContact, numPax, arrivalTime);
+
+	}
+	
+	/**
+	 * Prompt user for a reservation datetime and #pax
+	 * and display available tables for reservation.
+	 */
 	private static void showTableAvailability(){
 		
 		System.out.print("Enter number of people: "); int numPax = sc.nextInt();
+		sc.nextLine();	// get dummy line
 		Calendar reserveDateTime = ReservationMgr.getValidReservationDateTime();
 		
 		ArrayList<Table> availableTables = TableMgr.checkAvailableTables(reserveDateTime, numPax);
-		
-		if(availableTables == null)
+		if(availableTables == null){
 			System.out.println("No tables available for reservation on datetime " + reserveDateTime.getTime());
-		else
-			TableMgr.showTableAvailability(availableTables, reserveDateTime, numPax);
+			return;
+		}
+		
+		System.out.println("The following tables are available for Pax no " + numPax + " and datetime " + reserveDateTime.getTime());
+		System.out.println("Table number			Capacity");
+		for(Table t : availableTables)
+			System.out.println(t.getTableId() + "				" + t.getCapacity());
 
 	}
 	

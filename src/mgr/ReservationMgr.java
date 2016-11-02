@@ -28,6 +28,153 @@ public class ReservationMgr {
 	private static ArrayList<Reservation> reservations = Restaurant.reservations;
 	private static ArrayList<Reservation> settledReservations = Restaurant.settledReservations;
 	
+	////////////////////// NEW CHANGES //////////////////////////////////////
+	/**
+	 * Find all reservations that are not yet expired
+	 * @return Reservations not yet expired
+	 */
+	public static ArrayList<Reservation> getUnexpiredReservations(){
+		removeExpiredReservation();
+		return reservations;
+	}
+	
+	/**
+	 * Find all reservations to be accepted with arrival time in
+	 * the current dining session
+	 * @return Reservation with arrival time in current session
+	 */
+	public static ArrayList<Reservation> getNowSessionAcceptReservation(){
+		removeExpiredReservation();
+
+		Calendar now = Calendar.getInstance();
+		ArrayList<Reservation> acceptReservations = new ArrayList<Reservation>();
+
+		boolean AMSession = (now.get(Calendar.HOUR) < Restaurant.AMEndTime);
+		for(Reservation r : reservations)
+			if(now.get(Calendar.DATE) == r.getArrivalTime().get(Calendar.DATE))
+				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR) < Restaurant.AMEndTime))
+					acceptReservations.add(r);
+		
+		return acceptReservations;
+	}
+	
+	/**
+	 * Allow user to make a reservation
+	 */
+	public static void makeReservation(String customerName, int customerContact, int numPax, Calendar arrivalTime) {
+		
+		Reservation newReservation;
+
+		Table reserveTable = TableMgr.findReservationTable(arrivalTime, numPax);
+		
+		if(reserveTable != null){
+			newReservation = new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable);
+			reservations.add(newReservation);
+			System.out.println("Reservation Confirmation");
+			System.out.println("Customer name: " + newReservation.getCustomerName());
+			System.out.println("Contact number: " + newReservation.getCustomerContact());
+			System.out.println("#PAX: " + newReservation.getNumPax());
+			System.out.println("Reservation datetime: " + newReservation.getArrivalTime().getTime());
+			System.out.println("Reservation Table: " + newReservation.getReserveTable().getTableId());
+		}else{
+			System.out.println("Reservation table could not be found for datetime " +
+								arrivalTime.getTime() + " for " + numPax + " person(s).");
+		}
+	
+	}
+	
+	public static void makeWalkInReservation(Staff staff, int numPax){
+		
+		String customerName = "Unknown";
+		int customerContact = 0;
+		
+		Calendar arrivalTime = Calendar.getInstance();
+		if(!checkValidWalkInDate(arrivalTime))
+			return;
+		
+		Table reserveTable = TableMgr.findReservationTable(arrivalTime, numPax);
+		
+		if(reserveTable != null){
+			Reservation dineInReservation = new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable);			
+			acceptReservation(staff, dineInReservation);
+			System.out.println("Walk-in order created.");
+		}
+
+	}
+	
+	public static void acceptReservation(Staff staff, Reservation reservation){
+		reservations.add(reservation);
+		reservation.setAccepted();
+		Order newOrder = new Order(staff, reservation);
+		Restaurant.orders.add(newOrder);
+		moveToSettledReservation(reservation);
+	}
+	
+	/**
+	 * Check valid reservation datetime. Datetime must not be in the past
+	 * @param date Reservation date time
+	 * @return True-False value indicating valid or invalid reservation date time
+	 */
+	public static boolean checkValidReservationDate(Calendar date){
+    	
+		Calendar now = Calendar.getInstance();
+		if(date.before(now)){
+    		System.out.println("Reservation datetime cannot be in the past!");
+    		return false;
+		}
+		return checkValidWalkInDate(date);
+		
+	}
+	
+	/**
+	 * Check if a reservation datetime is valid for walk-in
+	 * on that day according to restaurant operation hours
+	 * @param date Datetime to check
+	 * @return True-False value indicating valid or invalid walk in datetime
+	 */
+	public static boolean checkValidWalkInDate(Calendar date){
+		
+		boolean validDate = false;
+		
+	    Calendar maxBookingDate = Calendar.getInstance();
+	    maxBookingDate.add(Calendar.DAY_OF_MONTH, 30);
+	    
+	    Calendar AMStartCal = (Calendar) date.clone();
+	    AMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
+	    AMStartCal.set(Calendar.MINUTE, 0);
+	    AMStartCal.set(Calendar.SECOND, 0);
+	    AMStartCal.set(Calendar.MILLISECOND, 0);
+	    
+	    Calendar AMEndCal = (Calendar) date.clone();
+	    AMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMEndTime);
+	    AMEndCal.set(Calendar.MINUTE, 0);
+	    AMEndCal.set(Calendar.SECOND, 0);
+	    AMEndCal.set(Calendar.MILLISECOND, 0);
+	    
+	    Calendar PMStartCal = (Calendar) date.clone();
+	    PMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMStartTime);
+	    PMStartCal.set(Calendar.MINUTE, 0);
+	    PMStartCal.set(Calendar.SECOND, 0);
+	    PMStartCal.set(Calendar.MILLISECOND, 0);
+	    
+	    Calendar PMEndCal = (Calendar) date.clone();
+	    PMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMEndTime);
+	    PMEndCal.set(Calendar.MINUTE, 0);
+	    PMEndCal.set(Calendar.SECOND, 0);
+	    PMEndCal.set(Calendar.MILLISECOND, 0);
+
+    	if(date.after(maxBookingDate))
+    		System.out.println("Reservation is for 1 month in advance only!");
+    	else if((date.before(AMStartCal) || date.after(AMEndCal)) && (date.before(PMStartCal) || date.after(PMEndCal)))
+    		System.out.println("Reservation must be within operation hours");
+    	else
+    		validDate = true;
+	    
+		return validDate;
+	}
+	
+	///////////////////////////////////////////////
+	
 	/**
 	 * Show all reservations for the next month
 	 */
@@ -220,59 +367,6 @@ public class ReservationMgr {
 		} while(!validDate);
 				
 		return arrivalTime;
-	}
-	
-	/**
-	 * Check if a reservation datetime is valid
-	 * according to restaurant operation hours
-	 * @param date Reservation datetime to check
-	 * @return True-False value indicating valid or invalid reservation datetime
-	 */
-	public static boolean checkValidReservationDate(Calendar date){
-		
-		boolean validDate = false;
-		
-		Calendar now = Calendar.getInstance();
-		
-	    Calendar maxBookingDate = Calendar.getInstance();
-	    maxBookingDate.add(Calendar.DAY_OF_MONTH, 30);
-	    
-	    Calendar AMStartCal = (Calendar) date.clone();
-	    AMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
-	    AMStartCal.set(Calendar.MINUTE, 0);
-	    AMStartCal.set(Calendar.SECOND, 0);
-	    AMStartCal.set(Calendar.MILLISECOND, 0);
-	    
-	    Calendar AMEndCal = (Calendar) date.clone();
-	    AMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMEndTime);
-	    AMEndCal.set(Calendar.MINUTE, 0);
-	    AMEndCal.set(Calendar.SECOND, 0);
-	    AMEndCal.set(Calendar.MILLISECOND, 0);
-	    
-	    Calendar PMStartCal = (Calendar) date.clone();
-	    PMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMStartTime);
-	    PMStartCal.set(Calendar.MINUTE, 0);
-	    PMStartCal.set(Calendar.SECOND, 0);
-	    PMStartCal.set(Calendar.MILLISECOND, 0);
-	    
-	    Calendar PMEndCal = (Calendar) date.clone();
-	    PMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMEndTime);
-	    PMEndCal.set(Calendar.MINUTE, 0);
-	    PMEndCal.set(Calendar.SECOND, 0);
-	    PMEndCal.set(Calendar.MILLISECOND, 0);
-	    
-	    if(date != null){
-	    	if(date.before(now))
-	    		System.out.println("Reservation datetime cannot be in the past!");
-	    	else if(date.after(maxBookingDate))
-	    		System.out.println("Reservation is for 1 month in advance only!");
-	    	else if((date.before(AMStartCal) || date.after(AMEndCal)) && (date.before(PMStartCal) || date.after(PMEndCal)))
-	    		System.out.println("Reservation must be within operation hours");
-	    	else
-	    		validDate = true;	
-	    }
-	    
-		return validDate;
 	}
 	
 
