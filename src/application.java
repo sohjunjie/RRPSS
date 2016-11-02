@@ -57,7 +57,8 @@ public class application {
 			System.out.println("(" + index++ + ") " + s);
 		}
     	System.out.print("    Enter the number of your choice: "); int choice = sc.nextInt();
-		
+        sc.nextLine(); // get dummy line
+        
 		try {
 			retStaff = staffs.get(choice);
 		}catch(IndexOutOfBoundsException e){
@@ -90,8 +91,8 @@ public class application {
 		System.out.println("11. November");
 		System.out.println("12. December");
 		
-		System.out.print("Enter month (1~12): "); 	month = sc.nextInt(); 
-		System.out.print("Year(YYYY): "); 			year = sc.nextInt();
+		System.out.print("Enter month (1~12): "); month = sc.nextInt(); sc.nextLine(); // get dummy line
+		System.out.print("Year(YYYY): "); year = sc.nextInt(); sc.nextLine(); // get dummy line
 		
 		InvoiceMgr.printSalesRevenueReport(month, year);
 		
@@ -114,7 +115,7 @@ public class application {
             System.out.println("(5) Exit");
         	System.out.println();
         	System.out.print("    Enter the number of your choice: ");
-            choice = sc.nextInt();
+            choice = sc.nextInt(); sc.nextLine(); // get dummy line
             
             switch (choice) {
                 case 1: // reservation

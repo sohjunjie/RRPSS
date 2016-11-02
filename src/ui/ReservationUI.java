@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
+import classes.Reservation;
 import classes.Staff;
 import classes.Table;
 import mgr.ReservationMgr;
@@ -28,26 +29,26 @@ public class ReservationUI {
             System.out.println("(7) Back");
         	System.out.println();
         	System.out.print("    Enter the number of your choice: ");
-            choice = sc.nextInt();
+            choice = sc.nextInt(); sc.nextLine(); // get dummy line
             
             switch (choice) {
                 case 1:
                 		showTableAvailability();
                         break;
                 case 2:
-                		ReservationMgr.makeWalkInReservation(staff);
+                		makeWalkInReservationUI(staff);
                 		break;
                 case 3:
                 		makeReservationUI();
                         break;
                 case 4:
-                		ReservationMgr.acceptReservation(staff);
+                		acceptReservationUI(staff);
                     	break;
                 case 5:
-                		ReservationMgr.removeReservation();
+                		removeReservationUI();
                 		break;
                 case 6:
-                		ReservationMgr.showReservations();
+                		showReservationsUI();
                 		break;
                 case 7:
             }
@@ -58,16 +59,100 @@ public class ReservationUI {
 
 	
 	/**
+	 * Show user list of reservations for the next 30 days
+	 */
+	private static void showReservationsUI(){
+		
+		ArrayList<Reservation> validReservations = ReservationMgr.getUnexpiredReservations();
+		System.out.println("Showing reservations for the next 30 days: ");
+		
+		int index = 0;
+		for(Reservation r : validReservations){
+			System.out.println("("+ (index++) + ") " + r);
+		}
+		
+	}
+	
+	/**
+	 * Prompt user for the reservation to be removed
+	 */
+	private static void removeReservationUI(){
+		ArrayList<Reservation> removeReservations = ReservationMgr.getUnexpiredReservations();
+		if(removeReservations.size() <= 0){
+			System.out.println("No reservations needed to be removed.");
+			return;
+		}
+		
+		System.out.println("Select which reservation to remove:");
+		int index = 0;		
+		for(Reservation r : removeReservations){
+			System.out.println("("+ (index++) + ") " + r);
+		}
+		
+		int choice = sc.nextInt();
+		sc.nextLine(); // get dummy line
+		try {
+			Reservation reservation = removeReservations.get(choice);
+			ReservationMgr.moveToSettledReservation(reservation);
+			System.out.println("Reservation removed.");
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Fail to remove reservation! (Invalid index provided)");
+		}
+		
+	}
+	
+	/**
+	 * Prompt user for the reservation to be accepted. Accepting
+	 * a reservation means creating an order from it
+	 * @param staff Staff creating the order from the reservation
+	 */
+	private static void acceptReservationUI(Staff staff){
+		
+		ArrayList<Reservation> acceptReservations = ReservationMgr.getNowSessionAcceptReservation();
+		if(acceptReservations.size() <= 0){
+			System.out.println("No reservations to accept for current dining session.");
+			return;
+		}
+
+		System.out.println("Select which reservation to accept:");		
+		int index = 0;
+		for(Reservation ar : acceptReservations)
+			System.out.println("("+ (index++) + ") " + ar);
+		
+		int choice = sc.nextInt();
+		sc.nextLine(); // get dummy line
+		
+		try {
+			Reservation reservation = acceptReservations.get(choice);
+			ReservationMgr.acceptReservation(staff, reservation);
+			System.out.println("Reservation accepted.");
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Fail to accept reservation! (Invalid index provided)");
+		}
+		
+	}
+	
+	
+	/**
+	 * Make a walk-in reservation by creating a reservation
+	 * and then instantly create an order from it.
+	 * @param staff Staff creating the order from the reservation
+	 */
+	private static void makeWalkInReservationUI(Staff staff){
+		System.out.print("Enter number of people: "); int numPax = sc.nextInt();
+		sc.nextLine();	// get dummy line
+		ReservationMgr.makeWalkInReservation(staff, numPax);
+	}
+	
+	/**
 	 * Prompts user for reservation details and make a 
 	 * reservation.
 	 */
 	private static void makeReservationUI(){
 		
-		System.out.print("Enter customer name: "); 				String customerName = sc.nextLine();
-		System.out.print("Enter customer contact number: "); 	int customerContact = sc.nextInt();
-		sc.nextLine();	// get dummy line
-		System.out.print("Enter number of people: "); 			int numPax = sc.nextInt();
-		sc.nextLine();	// get dummy line
+		System.out.print("Enter customer name: "); String customerName = sc.nextLine();
+		System.out.print("Enter customer contact number: "); int customerContact = sc.nextInt(); sc.nextLine(); // get dummy line
+		System.out.print("Enter number of people: "); int numPax = sc.nextInt(); sc.nextLine();	// get dummy line
 		Calendar arrivalTime = ReservationMgr.getValidReservationDateTime();
 		
 		ReservationMgr.makeReservation(customerName, customerContact, numPax, arrivalTime);
@@ -80,8 +165,7 @@ public class ReservationUI {
 	 */
 	private static void showTableAvailability(){
 		
-		System.out.print("Enter number of people: "); int numPax = sc.nextInt();
-		sc.nextLine();	// get dummy line
+		System.out.print("Enter number of people: "); int numPax = sc.nextInt(); sc.nextLine();	// get dummy line
 		Calendar reserveDateTime = ReservationMgr.getValidReservationDateTime();
 		
 		ArrayList<Table> availableTables = TableMgr.checkAvailableTables(reserveDateTime, numPax);
