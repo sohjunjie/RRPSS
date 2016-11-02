@@ -34,7 +34,7 @@ public class OrderUI {
             System.out.println("(5) Back");
         	System.out.println();
         	System.out.print("    Enter the number of your choice: ");
-            choice = sc.nextInt();
+            choice = sc.nextInt(); sc.nextLine(); // get dummy line
             
             switch (choice) {
             	case 1:

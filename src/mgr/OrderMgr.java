@@ -44,7 +44,7 @@ public class OrderMgr {
 			System.out.println("(" + index++ + ") OrderID: " + o.getOrderID() + "    TableID: " + o.getFromReservation().getReserveTable().getTableId());
 		}
     	System.out.print("    Enter the number of your choice: ");
-		int choice = sc.nextInt();
+		int choice = sc.nextInt(); sc.nextLine(); // get dummy line
 		
 		try {
 			order = orders.get(choice);

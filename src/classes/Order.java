@@ -131,7 +131,7 @@ public class Order implements Serializable{
 			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
 
     	System.out.print("    Enter the number of your choice: ");
-		choice = sc.nextInt();
+		choice = sc.nextInt(); sc.nextLine(); // get dummy line
 		
 		try {
 			String orderItemAdded = foodMenu.get(choice).getMenuName();
@@ -161,7 +161,7 @@ public class Order implements Serializable{
 			System.out.println(index++ + ": " + orderItem.getMenuItem().getMenuName());
 
     	System.out.print("    Enter the number of your choice: ");
-		choice = sc.nextInt();
+		choice = sc.nextInt(); sc.nextLine(); // get dummy line
 		
 		try {
 			String orderItemRemoved = orderLineItems.get(choice).toString();

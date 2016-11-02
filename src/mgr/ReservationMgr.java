@@ -28,7 +28,6 @@ public class ReservationMgr {
 	private static ArrayList<Reservation> reservations = Restaurant.reservations;
 	private static ArrayList<Reservation> settledReservations = Restaurant.settledReservations;
 	
-	////////////////////// NEW CHANGES //////////////////////////////////////
 	/**
 	 * Find all reservations that are not yet expired
 	 * @return Reservations not yet expired
@@ -172,14 +171,6 @@ public class ReservationMgr {
 	    
 		return validDate;
 	}
-	
-	///////////////////////////////////////////////
-	
-
-	
-	
-	
-
 	
 	public static void createOrderFromReservation(Staff staff, Reservation reservation){
 		reservations.add(reservation);

@@ -35,7 +35,7 @@ public class FoodMenuUI {
             System.out.println("(4) Back");
         	System.out.println();
         	System.out.print("    Enter the number of your choice: ");
-            choice = sc.nextInt();
+            choice = sc.nextInt(); sc.nextLine(); // get dummy line
             
             switch (choice) {
                 case 1: 
@@ -69,7 +69,7 @@ public class FoodMenuUI {
 			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
 
     	System.out.print("    Enter the number of your choice: ");
-		choice = sc.nextInt();
+		choice = sc.nextInt(); sc.nextLine(); // get dummy line
 
 		FoodMenuMgr.removeMenuItem(choice);
 
@@ -114,7 +114,7 @@ public class FoodMenuUI {
 			for (Food.CourseType courseType : Food.CourseType.values())
 				System.out.println((index++) + " " + courseType);
 	    	System.out.print("    Enter the number of your choice: ");
-	    	choice = sc.nextInt();
+	    	choice = sc.nextInt(); sc.nextLine(); // get dummy line
 	    	switch (choice) {
 		        case 1:
 		        	foodCourseType = Food.CourseType.MAIN_COURSE;
