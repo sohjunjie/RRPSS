@@ -135,4 +135,10 @@ public class Reservation implements Serializable{
 	 */
 	public void setCustomerContact(int newContact) { this.customerContact = newContact; }
 
+	public String toString(){
+		return "Customer Name:" + this.customerName + "    Contact: " + this.customerContact + 
+				"    Arrival time: " + this.arrivalTime.getTime() + "	 Reservation ID: "+ this.reservationID +
+				"	 Table ID: "+ this.reserveTable.getTableId();
+	}
+	
 }

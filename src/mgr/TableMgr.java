@@ -23,9 +23,8 @@ public class TableMgr {
 	private static Scanner sc = new Scanner(System.in);
 	
 	/**
-	 * Prompt user to select from a list of available tables
-	 * that fits criteria of reservation datetime and number
-	 * of people
+	 * Find a reservation that fits the reservation datetime
+	 * and number of people.
 	 * @param reserveDateTime Datetime to reserve the table for
 	 * @param numPax Number of people dining
 	 * @return Reservation table to reserve
@@ -33,45 +32,18 @@ public class TableMgr {
 	public static Table findReservationTable(Calendar reserveDateTime, int numPax){
 		
 		ArrayList<Table> availableTables = checkAvailableTables(reserveDateTime, numPax);
-		if(availableTables == null){
+		if(availableTables.size() == 0 || availableTables == null){
 			System.out.println("No tables available for reservation on datetime " + reserveDateTime.getTime());
 			return null;
 		}
 		
-		showTableAvailability(availableTables, reserveDateTime, numPax);
-		System.out.println("Please enter selected table number.");
-		
-		int choice = sc.nextInt();
-		Table retTable = null;
-		
-		do{for(Table t : availableTables){
-				if (t.getTableId()==choice){
-					retTable = t;	
-					break;}
-			}		
-			if(retTable!=null){break;}
-			System.out.print("Invalid table number! Please enter again: ");
-			choice = sc.nextInt();
-		}while(retTable==null);
+		// GET SMALLEST CAPACITY RESERVATION TABLE
+		Table retTable = availableTables.get(0);
+		for(Table t : availableTables)
+			if(t.getCapacity() < retTable.getCapacity())
+				retTable = t;
 
 		return retTable;
-	}
-	
-	/**
-	 * Display a list of tables available for reservation.
-	 * The table arraylist must be given as an input
-	 * @param availableTables ArrayList of tables available
-	 * @param reserveDateTime Reservation datetime
-	 * @param numPax number of people dining
-	 */
-	public static void showTableAvailability(ArrayList<Table> availableTables, Calendar reserveDateTime, int numPax){
-
-		System.out.println("The following tables are available for Pax no " + numPax + " and datetime " + reserveDateTime.getTime());
-		System.out.println("Table number			Capacity");
-		
-		for(Table t : availableTables)
-			System.out.println(t.getTableId() + "				" + t.getCapacity());
-
 	}
 	
 	
