@@ -2,8 +2,6 @@ package mgr;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Scanner;
-
 import classes.Reservation;
 import classes.Table;
 import classes.Table.TableStatus;
@@ -20,8 +18,6 @@ import db.Restaurant;
 public class TableMgr {
 
 	private static ArrayList<Table> tables = Restaurant.tables;
-	private static Scanner sc = new Scanner(System.in);
-	
 	/**
 	 * Find a reservation that fits the reservation datetime
 	 * and number of people.
@@ -47,6 +43,48 @@ public class TableMgr {
 	}
 	
 	
+//	/**
+//	 * Find all tables that matches satisfy reservation date time and
+//	 * number of people
+//	 * @param reserveDateTime Datetime of reservation
+//	 * @param numPax Number of people
+//	 * @return ArrayList of tables satisfying reservation criteria
+//	 */
+//	public static ArrayList<Table> checkAvailableTables(Calendar reserveDateTime, int numPax){
+//		
+//		ReservationMgr.removeExpiredReservation();
+//		ArrayList<Table> availableTables = new ArrayList<Table>();
+//		
+//		boolean isLunchSession=false;						//check lunch or dinner session for reserveDateTime
+//		if(reserveDateTime.get(Calendar.HOUR) < Restaurant.AMEndTime){isLunchSession=true;}
+//		boolean alsoLunchSession;							//check lunch or dinner session for existing reservation
+//		boolean available;
+//		
+//		for(Table t : tables){
+//			available = true;
+//			alsoLunchSession=false;
+//			if(t.getCapacity() >= numPax && t.getStatus()!=TableStatus.OCCUPIED){
+//				for(Reservation r : t.getReservedBy()){
+//					
+//					if(r.getArrivalTime().get(Calendar.MONTH)==reserveDateTime.get(Calendar.MONTH)){	//check same month
+//						if(r.getArrivalTime().get(Calendar.DATE)==reserveDateTime.get(Calendar.DATE)){	//check same date
+//							if(r.getArrivalTime().get(Calendar.HOUR)<15){alsoLunchSession=true;}
+//							if(isLunchSession==alsoLunchSession){										//check same session
+//								available=false;
+//								break;
+//							}
+//						}
+//					}
+//					
+//				}
+//			}else{available=false;}
+//			if (available == true){availableTables.add(t);}
+//		}
+//		
+//		return availableTables;
+//	
+//	}
+	
 	/**
 	 * Find all tables that matches satisfy reservation date time and
 	 * number of people
@@ -59,28 +97,30 @@ public class TableMgr {
 		ReservationMgr.removeExpiredReservation();
 		ArrayList<Table> availableTables = new ArrayList<Table>();
 		
-		boolean isLunchSession=false;						//check lunch or dinner session for reserveDateTime
-		if(reserveDateTime.get(Calendar.HOUR) < Restaurant.AMEndTime){isLunchSession=true;}
-		boolean alsoLunchSession;							//check lunch or dinner session for existing reservation
+		boolean isAMSession = (reserveDateTime.get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime);
 		boolean available;
 		
 		for(Table t : tables){
+			
+			if(t.getCapacity() < numPax || t.getStatus()==TableStatus.OCCUPIED) continue;
+			
 			available = true;
-			alsoLunchSession=false;
-			if(t.getCapacity() >= numPax && t.getStatus()!=TableStatus.OCCUPIED){
-				for(Reservation r : t.getReservedBy()){
-					if(r.getArrivalTime().get(Calendar.MONTH)==reserveDateTime.get(Calendar.MONTH)){	//check same month
-						if(r.getArrivalTime().get(Calendar.DATE)==reserveDateTime.get(Calendar.DATE)){	//check same date
-							if(r.getArrivalTime().get(Calendar.HOUR)<15){alsoLunchSession=true;}
-							if(isLunchSession==alsoLunchSession){										//check same session
-								available=false;
-								break;
-							}
-						}
-					}
+			for(Reservation r : t.getReservedBy()){
+				
+				if(r.getArrivalTime().get(Calendar.YEAR)!=reserveDateTime.get(Calendar.YEAR))
+					continue;
+				if(r.getArrivalTime().get(Calendar.MONTH)!=reserveDateTime.get(Calendar.MONTH))
+					continue;
+				if(r.getArrivalTime().get(Calendar.DATE)!=reserveDateTime.get(Calendar.DATE))
+					continue;
+				if(isAMSession == (r.getArrivalTime().get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime)){
+					available=false;
+					break;
 				}
-			}else{available=false;}
-			if (available == true){availableTables.add(t);}
+				
+			}
+			if(available) availableTables.add(t);
+
 		}
 		
 		return availableTables;

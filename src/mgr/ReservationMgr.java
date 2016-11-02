@@ -48,10 +48,10 @@ public class ReservationMgr {
 		Calendar now = Calendar.getInstance();
 		ArrayList<Reservation> acceptReservations = new ArrayList<Reservation>();
 
-		boolean AMSession = (now.get(Calendar.HOUR) < Restaurant.AMEndTime);
+		boolean AMSession = (now.get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime);
 		for(Reservation r : reservations)
 			if(now.get(Calendar.DATE) == r.getArrivalTime().get(Calendar.DATE))
-				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR) < Restaurant.AMEndTime))
+				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime))
 					acceptReservations.add(r);
 		
 		return acceptReservations;
