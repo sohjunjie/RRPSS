@@ -82,6 +82,12 @@ public class ReservationMgr {
 	
 	}
 	
+	/**
+	 * Allow walk in orders. Function creates a walk in reservation
+	 * and create an order from the reservation immediately.
+	 * @param staff Staff creating the order from the reservation
+	 * @param numPax Number of people dining
+	 */
 	public static void makeWalkInReservation(Staff staff, int numPax){
 		
 		String customerName = "Unknown";
@@ -101,6 +107,12 @@ public class ReservationMgr {
 
 	}
 	
+	/**
+	 * Accept a reservation. This method creates an order from
+	 * the reservation and remove the reservation.
+	 * @param staff Staff to create the order
+	 * @param reservation Reservation to accept
+	 */
 	public static void acceptReservation(Staff staff, Reservation reservation){
 		reservations.add(reservation);
 		reservation.setAccepted();
@@ -170,14 +182,6 @@ public class ReservationMgr {
     		validDate = true;
 	    
 		return validDate;
-	}
-	
-	public static void createOrderFromReservation(Staff staff, Reservation reservation){
-		reservations.add(reservation);
-		reservation.setAccepted();
-		Order newOrder = new Order(staff, reservation);
-		Restaurant.orders.add(newOrder);
-		moveToSettledReservation(reservation);
 	}
 	
 	/**

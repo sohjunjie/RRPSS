@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.*;
+//import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +15,12 @@ import classes.*;
 import db.Restaurant;
 import mgr.ReservationMgr;
 
+/**
+ * Test the reservation class
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-11-3
+ */
 public class TestReservation {
 
 	private static ArrayList<Table> testTables;
@@ -43,6 +50,10 @@ public class TestReservation {
 			t.getReservedBy().clear();
 	}
 	
+	/**
+	 * Ensure that reservation cannot be made when
+	 * full reservation
+	 */
 	@Test
 	public void testMakeReservationWhenFull() {
 		
@@ -67,6 +78,7 @@ public class TestReservation {
 		assertEquals(fullReservationSize, testReservations.size());	// ensure reservation size still same
 	}
 
+	//TODO: Mock calendar.getInstance() to get specific date
 	@Test
 	public void testMakeWalkInReservationWhenFull(){
 		
@@ -89,14 +101,21 @@ public class TestReservation {
 
 	}
 	
-//	@Test
-//	public void testMakeWalkInReservationSuccess(){
-//		
-//		ReservationMgr.makeWalkInReservation(testStaff, 1);
-//		assertEquals(1, testOrders.size());
-//		
-//	}
+	@Test
+	public void testMakeWalkInReservationSuccess(){
+		
+//		Calendar mockCalendar = Calendar.getInstance();
+//		mockCalendar.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);		
+//		Mockito.when(Calendar.getInstance()).thenReturn(mockCalendar);
+		
+		ReservationMgr.makeWalkInReservation(testStaff, 1);
+		assertEquals(1, testOrders.size());
+		
+	}
 	
+	/**
+	 * Ensure making reservation is successful
+	 */
 	@Test
 	public void testMakeReservationSuccess(){
 		
@@ -113,7 +132,7 @@ public class TestReservation {
 	}
 	
 	/**
-	 * Test reservation made 30min before now and not yet 
+	 * Test reservation made 30min before now and not yet
 	 * accepted is removed.
 	 */
 	@Test
@@ -121,7 +140,7 @@ public class TestReservation {
 		
 		Calendar reserveCal;
 		Calendar now = Calendar.getInstance();
-		now.add(Calendar.MINUTE, -60);
+		now.add(Calendar.MINUTE, -30);
 		int year = now.get(Calendar.YEAR);
 		int month = now.get(Calendar.MONTH);
 		int day = now.get(Calendar.DATE);

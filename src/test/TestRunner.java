@@ -6,6 +6,14 @@ import org.junit.runner.notification.Failure;
 
 import db.Restaurant;
 
+
+/**
+ * Test runner class to run test suite and print
+ * test case statistics
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-11-3
+ */
 public class TestRunner {
 
 	public static void main(String[] args) {
@@ -30,6 +38,9 @@ public class TestRunner {
 		
 	}
 
+	/**
+	 * Set up restaurat database environment
+	 */
 	public static void setupTestEnvironment(){
 		Restaurant.initTables();
 		Restaurant.initReservations();
