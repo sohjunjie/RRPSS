@@ -31,7 +31,7 @@ public class InvoiceMgr {
 		int[] productSales = getPeriodProductStatistics(month, year);
 		System.out.println("\nSales Revenue Report for Number " + month + " of year " + year);
 		System.out.println("Total Sales Revenue: " + totalRevenue);
-		System.out.println("Total Number of Food Products: \n");
+		System.out.println("Total Number of Food Products: ");
 		for (MenuItem fd: foodMenu){
 			System.out.println(fd.getMenuName() + ": " + productSales[foodMenu.indexOf(fd)]);
 		}
@@ -50,7 +50,8 @@ public class InvoiceMgr {
 			if ((i.getDateGenerated().get(Calendar.MONTH) + 1 == month) && (i.getDateGenerated().get(Calendar.YEAR) == year))
 				total += i.getTotalPrice();
 		}
-		return total;
+		double totalRoundOff = Math.round(total * 100.0)/100.0;
+		return totalRoundOff;
 	}
 	
 	/**

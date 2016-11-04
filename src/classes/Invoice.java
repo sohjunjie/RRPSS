@@ -56,8 +56,8 @@ public class Invoice implements Serializable{
 	public Invoice(Order order){
 		this.order = order;
 		this.invoiceNumber = Calendar.getInstance().hashCode();
-		this.price = (double) Math.round(order.calculateTotalOrderPrice() * 100d) / 100d;
-		this.gst = (double) Math.round(GSTPERCENTAGE * this.price * 100d) / 100d;
+		this.price = order.calculateTotalOrderPrice();
+		this.gst = Math.round(GSTPERCENTAGE * this.price * 100.0)/100.0;
 		this.totalPrice = this.price + this.gst;
 		this.dateGenerated = Calendar.getInstance();
 	}
