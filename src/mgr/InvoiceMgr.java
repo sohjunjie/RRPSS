@@ -6,6 +6,7 @@ import classes.MenuItem;
 import classes.OrderLineItem;
 import db.Restaurant;
 import java.util.Calendar;
+import java.text.DateFormatSymbols;
 
 /**
  * Invoice Manager class that manages generation of 
@@ -29,7 +30,9 @@ public class InvoiceMgr {
 	public static void printSalesRevenueReport(int month, int year){
 		double totalRevenue = getPeriodTotalRevenue(month, year);
 		int[] productSales = getPeriodProductStatistics(month, year);
-		System.out.println("\nSales Revenue Report for Number " + month + " of year " + year);
+		
+		String monthName = new DateFormatSymbols().getMonths()[month-1];
+		System.out.println("\nSales Revenue Report for " + monthName + " of Year " + year);
 		System.out.println("Total Sales Revenue: " + totalRevenue);
 		System.out.println("Total Number of Food Products: ");
 		for (MenuItem fd: foodMenu){
