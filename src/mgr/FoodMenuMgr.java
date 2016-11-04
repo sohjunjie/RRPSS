@@ -52,7 +52,7 @@ public class FoodMenuMgr {
 			newPP.addFood(foodMenu);
 			System.out.println("Continue adding menu item to promotion package? (Y/N)");
 			choice = sc.nextLine();
-			continueAdd = ('Y' == choice.charAt(0));
+			continueAdd = ('Y' == Character.toUpperCase(choice.charAt(0)));
 		}while(continueAdd);
 		
 		foodMenu.add((MenuItem) newPP);
