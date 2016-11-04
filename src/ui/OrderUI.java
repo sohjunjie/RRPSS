@@ -77,7 +77,7 @@ public class OrderUI {
 		do{
 			order.addOrderItem();
 			System.out.println("Continue adding to order? (Y/N)");
-			choice = sc.nextLine().charAt(0);
+			choice = Character.toUpperCase(sc.nextLine().charAt(0));
 		}while(choice=='Y');
 
 	}
