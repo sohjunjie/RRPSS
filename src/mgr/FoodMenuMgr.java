@@ -43,14 +43,16 @@ public class FoodMenuMgr {
 	 */
 	public static void createNewPromotionPackage(String menuName, String menuDesc, double menuPrice){
 
-		PromotionPackage newPP;		
+		PromotionPackage newPP;
 		newPP = new PromotionPackage(menuName, menuDesc, menuPrice);
+		String choice = "";
 		
 		boolean continueAdd = true;
 		do{
 			newPP.addFood(foodMenu);
 			System.out.println("Continue adding menu item to promotion package? (Y/N)");
-			continueAdd = ('Y' == Character.toUpperCase(sc.next().charAt(0)));
+			choice = sc.nextLine();
+			continueAdd = ('Y' == choice.charAt(0));
 		}while(continueAdd);
 		
 		foodMenu.add((MenuItem) newPP);

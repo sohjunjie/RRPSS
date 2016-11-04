@@ -133,8 +133,6 @@ public class ReservationMgr {
 	public static boolean checkValidReservationDate(Calendar date){
     	
 		Calendar now = Calendar.getInstance();
-		System.out.println(now.getTime());
-		System.out.println(date.getTime());
 		if(date.before(now)){
     		System.out.println("Reservation datetime cannot be in the past!");
     		return false;
