@@ -153,10 +153,15 @@ public class ReservationUI {
 		System.out.print("Enter customer name: "); String customerName = sc.nextLine();
 		System.out.print("Enter customer contact number: "); int customerContact = sc.nextInt(); sc.nextLine(); // get dummy line
 		System.out.print("Enter number of people: "); int numPax = sc.nextInt(); sc.nextLine();	// get dummy line
+		while (numPax > 10){
+			System.out.print("Only 10 or less pax for one reservation");
+			System.out.print("\nEnter number of people: "); numPax = sc.nextInt(); sc.nextLine();	// get dummy line
+		}
+
 		Calendar arrivalTime = ReservationMgr.getValidReservationDateTime();
 		
 		ReservationMgr.makeReservation(customerName, customerContact, numPax, arrivalTime);
-
+		
 	}
 	
 	/**
