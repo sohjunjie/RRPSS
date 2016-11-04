@@ -108,7 +108,7 @@ public class ReservationMgr {
 		if(reserveTable != null){
 			Reservation dineInReservation = new Reservation(customerName, customerContact, numPax, arrivalTime, reserveTable);			
 			acceptReservation(staff, dineInReservation);
-			System.out.println("Walk-in order created.");
+			System.out.println("Walk-in order created.	Table ID: "+reserveTable.getTableId());
 		}
 
 	}
