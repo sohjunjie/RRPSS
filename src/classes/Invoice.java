@@ -1,6 +1,7 @@
 package classes;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 /**
@@ -55,9 +56,11 @@ public class Invoice implements Serializable{
 	public Invoice(Order order){
 		this.order = order;
 		this.invoiceNumber = Calendar.getInstance().hashCode();
-		this.price = order.calculateTotalOrderPrice();
+		this.price = order.calculateTotalOrderPrice();		
 		this.gst = GSTPERCENTAGE * this.price;
+		
 		this.totalPrice = this.price + this.gst;
+		
 		this.dateGenerated = Calendar.getInstance();
 	}
 	

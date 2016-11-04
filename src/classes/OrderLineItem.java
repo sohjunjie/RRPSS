@@ -43,4 +43,6 @@ public class OrderLineItem implements Serializable{
 	 */
 	public double getChargedPrice(){ return this.chargedPrice; }
 	
+	public String toString(){ return this.getMenuItem().getMenuName(); }
+	
 }

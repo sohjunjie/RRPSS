@@ -48,10 +48,15 @@ public class ReservationMgr {
 		Calendar now = Calendar.getInstance();
 		ArrayList<Reservation> acceptReservations = new ArrayList<Reservation>();
 
-		boolean AMSession = (now.get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime);
+		int sessionCode = getDateTimeSession(now);
+		if(sessionCode == 0)
+			return acceptReservations;
+		
+		boolean AMSession = (sessionCode == 1);
+		
 		for(Reservation r : reservations)
 			if(now.get(Calendar.DATE) == r.getArrivalTime().get(Calendar.DATE))
-				if(AMSession == (r.getArrivalTime().get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime))
+				if(AMSession == (getDateTimeSession(r.getArrivalTime()) == 1))
 					acceptReservations.add(r);
 		
 		return acceptReservations;
@@ -114,7 +119,6 @@ public class ReservationMgr {
 	 * @param reservation Reservation to accept
 	 */
 	public static void acceptReservation(Staff staff, Reservation reservation){
-		reservations.add(reservation);
 		reservation.setAccepted();
 		Order newOrder = new Order(staff, reservation);
 		Restaurant.orders.add(newOrder);
@@ -140,18 +144,12 @@ public class ReservationMgr {
 	}
 	
 	/**
-	 * Check if a reservation datetime is valid for walk-in
-	 * on that day according to restaurant operation hours
-	 * @param date Datetime to check
-	 * @return True-False value indicating valid or invalid walk in datetime
+	 * Find the session code of the datetime given
+	 * @param date Datetime to find the session code
+	 * @return session code. 0 represents invalid session, 1 for AM Session, 2 for PM Session
 	 */
-	public static boolean checkValidWalkInDate(Calendar date){
+	public static int getDateTimeSession(Calendar date){
 		
-		boolean validDate = false;
-		
-	    Calendar maxBookingDate = Calendar.getInstance();
-	    maxBookingDate.add(Calendar.DAY_OF_MONTH, 30);
-	    
 	    Calendar AMStartCal = (Calendar) date.clone();
 	    AMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
 	    AMStartCal.set(Calendar.MINUTE, 0);
@@ -175,10 +173,33 @@ public class ReservationMgr {
 	    PMEndCal.set(Calendar.MINUTE, 0);
 	    PMEndCal.set(Calendar.SECOND, 0);
 	    PMEndCal.set(Calendar.MILLISECOND, 0);
-
+	    
+    	if((date.before(AMStartCal) || date.after(AMEndCal)) && (date.before(PMStartCal) || date.after(PMEndCal)))
+    		return 0;
+    	if(!(date.before(AMStartCal) || date.after(AMEndCal)))	// AM SESSION
+    		return 1;
+    	if(!(date.before(PMStartCal) || date.after(PMEndCal)))		//PM SESSION
+    		return 2;
+    	
+    	return 0;
+	}
+	
+	/**
+	 * Check if a reservation datetime is valid for walk-in
+	 * on that day according to restaurant operation hours
+	 * @param date Datetime to check
+	 * @return True-False value indicating valid or invalid walk in datetime
+	 */
+	public static boolean checkValidWalkInDate(Calendar date){
+		
+		boolean validDate = false;
+		
+	    Calendar maxBookingDate = Calendar.getInstance();
+	    maxBookingDate.add(Calendar.DAY_OF_MONTH, 30);
+	    
     	if(date.after(maxBookingDate))
     		System.out.println("Reservation is for 1 month in advance only!");
-    	else if((date.before(AMStartCal) || date.after(AMEndCal)) && (date.before(PMStartCal) || date.after(PMEndCal)))
+    	else if (getDateTimeSession(date) == 0)
     		System.out.println("Reservation must be within operation hours");
     	else
     		validDate = true;

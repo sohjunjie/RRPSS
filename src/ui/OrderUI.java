@@ -61,7 +61,14 @@ public class OrderUI {
 	 * @param order Order that is added to
 	 */
 	private static void takeOrder(Order order){
-		order.addOrderItem();
+
+		char choice;
+		do{
+			order.addOrderItem();
+			System.out.println("Continue adding to order? (Y/N)");
+			choice = sc.nextLine().charAt(0);
+		}while(choice=='Y');
+
 	}
 	
 	/**
