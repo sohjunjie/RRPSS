@@ -16,6 +16,12 @@ import db.Restaurant;
 import mgr.ReservationMgr;
 import ui.OrderUI;
 
+/**
+ * Test order class and methods
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-11-3
+ */
 public class TestOrder {
 
 	private static ArrayList<Table> testTables;
@@ -46,6 +52,10 @@ public class TestOrder {
 		
 	}
 
+	/**
+	 * Ensure table status changes to VACATED after invoice
+	 * printed
+	 */
 	@Test
 	public void testTableReleaseAfterInvoicePrinted() {
 		

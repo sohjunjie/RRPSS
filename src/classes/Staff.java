@@ -10,6 +10,7 @@ import java.io.Serializable;
  * @since 2016-10-31
  */
 public class Staff implements Serializable{
+	
 	private static final long serialVersionUID = -3686894603777756471L;
 	
 	/**

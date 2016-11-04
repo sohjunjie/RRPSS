@@ -14,6 +14,12 @@ public class Table implements Serializable{
 
 	private static final long serialVersionUID = -696513068399675213L;
 	
+	/**
+	 * enum class for table status
+	 * @author soh jun jie
+	 * @version 1.0
+	 * @since 2016-11-3
+	 */
 	public enum TableStatus {VACATED, OCCUPIED};
 	
 	/**
