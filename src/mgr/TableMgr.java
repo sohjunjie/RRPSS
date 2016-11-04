@@ -56,10 +56,17 @@ public class TableMgr {
 		
 		boolean isAMSession = (reserveDateTime.get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime);
 		boolean available;
+		Calendar now = Calendar.getInstance();	
 		
 		for(Table t : tables){
 			
-			if(t.getCapacity() < numPax || t.getStatus()==TableStatus.OCCUPIED) continue;
+			if(now.get(Calendar.MONTH)==reserveDateTime.get(Calendar.MONTH))
+				if(now.get(Calendar.DATE) == reserveDateTime.get(Calendar.DATE))
+					if(isAMSession == (now.get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime))
+						if(t.getStatus()==TableStatus.OCCUPIED)
+							continue;
+			
+			if(t.getCapacity() < numPax) continue;
 			
 			available = true;
 			for(Reservation r : t.getReservedBy()){

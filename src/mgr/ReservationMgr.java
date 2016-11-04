@@ -55,9 +55,10 @@ public class ReservationMgr {
 		boolean AMSession = (sessionCode == 1);
 		
 		for(Reservation r : reservations)
-			if(now.get(Calendar.DATE) == r.getArrivalTime().get(Calendar.DATE))
-				if(AMSession == (getDateTimeSession(r.getArrivalTime()) == 1))
-					acceptReservations.add(r);
+			if(now.get(Calendar.MONTH)==r.getArrivalTime().get(Calendar.MONTH))
+				if(now.get(Calendar.DATE) == r.getArrivalTime().get(Calendar.DATE))
+					if(AMSession == (getDateTimeSession(r.getArrivalTime()) == 1))
+						acceptReservations.add(r);
 		
 		return acceptReservations;
 	}
