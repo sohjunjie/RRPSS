@@ -129,6 +129,8 @@ public class ReservationMgr {
 	public static boolean checkValidReservationDate(Calendar date){
     	
 		Calendar now = Calendar.getInstance();
+		System.out.println(now.getTime());
+		System.out.println(date.getTime());
 		if(date.before(now)){
     		System.out.println("Reservation datetime cannot be in the past!");
     		return false;
@@ -226,7 +228,7 @@ public class ReservationMgr {
 		
 		do{
 		    System.out.print("Enter reservation datetime (dd/MM/yyyy hh:mm)");	date  = sc.nextLine();
-		    dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		    dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		    try {
 		    	parsedDate = dateFormat.parse(date);
 		    } catch (ParseException e) {
