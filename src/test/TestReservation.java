@@ -40,7 +40,7 @@ public class TestReservation {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-				
+		
 		testTables = Restaurant.tables;
 		testReservations = Restaurant.reservations;
 		testOrders = Restaurant.orders;
@@ -110,7 +110,7 @@ public class TestReservation {
 		assertEquals(prevOrdersSize, testOrders.size());	// ensure order size is still same after failed reservation
 
 	}
-	
+
 //	@Test
 //	public void testMakeWalkInReservationSuccess(){
 //		

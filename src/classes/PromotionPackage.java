@@ -64,7 +64,6 @@ public class PromotionPackage extends MenuItem implements Serializable{
 
     	System.out.print("    Enter the number of your choice: ");
 		int choice = sc.nextInt(); sc.nextLine(); // get dummy line
-		sc.close();
 
 		try {
 			if(foodMenu.get(choice) instanceof Food){

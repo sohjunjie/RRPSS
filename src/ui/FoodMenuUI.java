@@ -87,7 +87,8 @@ public class FoodMenuUI {
 		
 		System.out.print("Enter menu name of promotion package: "); menuName = sc.nextLine();
 		System.out.print("Enter menu description of promotion package: "); menuDesc = sc.nextLine();
-		System.out.print("Enter price of promotion package: "); menuPrice = sc.nextDouble();
+		System.out.print("Enter price of promotion package: "); menuPrice = sc.nextDouble(); 
+		sc.nextLine();	// get dummy line
 		
 		FoodMenuMgr.createNewPromotionPackage(menuName, menuDesc, menuPrice);
 	}

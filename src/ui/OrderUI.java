@@ -38,7 +38,7 @@ public class OrderUI {
             
             switch (choice) {
             	case 1:
-            			System.out.println(order);
+            			showOrderDetails(order);
             			break;
                 case 2:
                 		takeOrder(order);
@@ -53,7 +53,18 @@ public class OrderUI {
             }
 
         } while (choice < 4);
-        
+
+	}
+	
+	/**
+	 * Print the order details
+	 * @param order Order to print from
+	 */
+	private static void showOrderDetails(Order order){
+		if(order.getOrderLineItems().size() <= 0)
+			System.out.println("Order does not have any items.");
+		else
+			System.out.println(order);
 	}
 	
 	/**
@@ -61,7 +72,14 @@ public class OrderUI {
 	 * @param order Order that is added to
 	 */
 	private static void takeOrder(Order order){
-		order.addOrderItem();
+
+		char choice;
+		do{
+			order.addOrderItem();
+			System.out.println("Continue adding to order? (Y/N)");
+			choice = sc.nextLine().charAt(0);
+		}while(choice=='Y');
+
 	}
 	
 	/**
