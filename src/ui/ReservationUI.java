@@ -149,7 +149,7 @@ public class ReservationUI {
 	 * reservation.
 	 */
 	private static void makeReservationUI(){
-				
+		
 		System.out.print("Enter customer name: "); String customerName = sc.nextLine();
 		int customerContact = ScannerExt.nextInt("Enter customer contact number: ");
 		int numPax = ScannerExt.nextInt("Enter number of people: ");
