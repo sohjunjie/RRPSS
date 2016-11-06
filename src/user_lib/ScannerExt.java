@@ -14,6 +14,7 @@ public class ScannerExt {
 		
 		do{
 			try{
+				valid = true;
 				System.out.print(promptMsg);
 				choice = sc.nextInt();
 			}catch(InputMismatchException e){
@@ -34,6 +35,7 @@ public class ScannerExt {
 		
 		do{
 			try{
+				valid = true;
 				System.out.print(promptMsg);
 				choice = sc.nextDouble();
 			}catch(InputMismatchException e){
