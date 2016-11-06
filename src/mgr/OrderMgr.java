@@ -1,8 +1,6 @@
 package mgr;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import classes.Order;
 import db.Restaurant;
 import ui.OrderUI;
@@ -17,7 +15,6 @@ import user_lib.ScannerExt;
  */
 public class OrderMgr {
 
-	private static Scanner sc = new Scanner(System.in);
 	private static ArrayList<Order> orders = Restaurant.orders;
 	private static ArrayList<Order> settledOrders = Restaurant.settledOrders;
 	

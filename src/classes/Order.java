@@ -1,7 +1,6 @@
 package classes;
 
 import java.util.Date;
-import java.util.Scanner;
 
 import classes.Table.TableStatus;
 import db.Restaurant;
@@ -20,7 +19,6 @@ import java.util.Calendar;
 public class Order implements Serializable{
 	
 	private static final long serialVersionUID = -9135686500512288865L;
-	private static Scanner sc = new Scanner(System.in);
 	
 	/**
 	 * Auto-generated ID of the Order
