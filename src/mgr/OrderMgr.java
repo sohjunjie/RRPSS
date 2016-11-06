@@ -6,6 +6,7 @@ import java.util.Scanner;
 import classes.Order;
 import db.Restaurant;
 import ui.OrderUI;
+import user_lib.ScannerExt;
 
 /**
  * Order Manager class allowing user
@@ -43,8 +44,7 @@ public class OrderMgr {
 		for(Order o : orders){
 			System.out.println("(" + index++ + ") OrderID: " + o.getOrderID() + "    TableID: " + o.getFromReservation().getReserveTable().getTableId());
 		}
-    	System.out.print("    Enter the number of your choice: ");
-		int choice = sc.nextInt(); sc.nextLine(); // get dummy line
+    	int choice = ScannerExt.nextInt("    Enter the number of your choice: ");
 		
 		try {
 			order = orders.get(choice);

@@ -7,6 +7,7 @@ import mgr.InvoiceMgr;
 import mgr.OrderMgr;
 import ui.FoodMenuUI;
 import ui.ReservationUI;
+import user_lib.ScannerExt;
 
 
 /**
@@ -56,9 +57,9 @@ public class application {
 		for(Staff s : staffs){
 			System.out.println("(" + index++ + ") " + s);
 		}
-    	System.out.print("    Enter the number of your choice: "); int choice = sc.nextInt();
-        sc.nextLine(); // get dummy line
-        
+
+    	int choice = ScannerExt.nextInt("    Enter the number of your choice: ");
+
 		try {
 			retStaff = staffs.get(choice);
 		}catch(IndexOutOfBoundsException e){
@@ -91,8 +92,8 @@ public class application {
 		System.out.println("11. November");
 		System.out.println("12. December");
 		
-		System.out.print("Enter month (1~12): "); month = sc.nextInt(); sc.nextLine(); // get dummy line
-		System.out.print("Year(YYYY): "); year = sc.nextInt(); sc.nextLine(); // get dummy line
+    	month = ScannerExt.nextInt("Enter month (1~12): ");
+    	year = ScannerExt.nextInt("Year(YYYY): ");
 		
 		InvoiceMgr.printSalesRevenueReport(month, year);
 		
@@ -114,8 +115,7 @@ public class application {
             System.out.println("(4) Sales Revenue report");
             System.out.println("(5) Exit");
         	System.out.println();
-        	System.out.print("    Enter the number of your choice: ");
-            choice = sc.nextInt(); sc.nextLine(); // get dummy line
+            choice = ScannerExt.nextInt("    Enter the number of your choice: ");            
             
             switch (choice) {
                 case 1: // reservation
