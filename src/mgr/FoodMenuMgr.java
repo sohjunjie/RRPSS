@@ -63,7 +63,7 @@ public class FoodMenuMgr {
 	
 	/**
 	 * Remove a menu item from the restaurant food menu
-	 * base on a menu index
+	 * based on a menu index
 	 * @param menuIndex Menu item to remove
 	 */
 	public static void removeMenuItem(int menuIndex){
@@ -78,6 +78,11 @@ public class FoodMenuMgr {
 
 	}
 	
+	/**
+	 * Update a promotion package from the restaurant food menu
+	 * based on a menu index
+	 * @param menuIndex Menu item to update
+	 */
 	public static void updatePromotionPackageFood(int menuIndex) {
 		int choice;
 		int index = 0;
@@ -115,7 +120,12 @@ public class FoodMenuMgr {
 			System.out.println("Update menu item in food menu failed! (Invalid index provided");
 		}
 	}
-
+	
+	/**
+	 * Update the menu item name in the restaurant food menu
+	 * based on a menu index
+	 * @param menuIndex Menu item to be updated
+	 */
 	public static void updateMenuItemName(int menuIndex){
 		String menuName;
 		String itemSearched = foodMenu.get(menuIndex).getMenuName();
@@ -126,6 +136,11 @@ public class FoodMenuMgr {
 		System.out.println("\nMenu name : " + itemSearched + " has been updated to " + menuName);
 	}
 	
+	/**
+	 * Update the menu item description in the restaurant food menu
+	 * based on a menu index
+	 * @param menuIndex Menu item to be updated
+	 */
 	public static void updateMenuItemDesc(int menuIndex){
 		String menuDesc;
 		String itemSearched = foodMenu.get(menuIndex).getMenuName();
@@ -137,6 +152,11 @@ public class FoodMenuMgr {
 		System.out.println("\nDescription of " + itemSearched + " has been updated from '" + itemDesc + "' to '" + menuDesc + "'");
 	}
 	
+	/**
+	 * Update the menu item price in the restaurant food menu
+	 * based on a menu index
+	 * @param menuIndex Menu item to be updated
+	 */
 	public static void updateMenuItemPrice(int menuIndex){
 		double menuPrice;
 		String itemSearched = foodMenu.get(menuIndex).getMenuName();
@@ -147,6 +167,11 @@ public class FoodMenuMgr {
 		System.out.println("\nPrice of " + itemSearched + " has been updated from " + itemPrice + " to " + menuPrice);
 	}
 	
+	/**
+	 * Update the menu item course type in the restaurant food menu
+	 * based on a menu index
+	 * @param menuIndex Menu item to be updated
+	 */
 	public static void updateFoodCourseType(int menuIndex){
 		int menuCourseType;
 		CourseType foodCourseType = null;
@@ -178,5 +203,37 @@ public class FoodMenuMgr {
 		}
 			
 		System.out.println("\nCourse Type of " + itemSearched + " has been updated from " + itemCourseType + " to " + foodCourseType);
+	}
+	
+	/**
+	 * Print out food name, description and price
+	 * based on menu Index
+	 * @param menuIndex Menu item to be printed
+	 */
+	public static void printFood(int menuIndex) {
+		System.out.println("\nFood Name: " + foodMenu.get(menuIndex).getMenuName());
+		System.out.println("Food Description: " + foodMenu.get(menuIndex).getDesc());
+		System.out.println("Food Price: " + foodMenu.get(menuIndex).getPrice());	
+	}
+
+	/**
+	 * Print out Promotion Package name, description and price,
+	 * followed by food items in the promotion package
+	 * based on menu Index
+	 * @param menuIndex Menu item to be printed
+	 */
+	public static void printPromotionPackage(int menuIndex) {
+		int index=0;
+		PromotionPackage pp;
+		
+		System.out.println("\nPromotion Package Name: " + foodMenu.get(menuIndex).getMenuName());
+		System.out.println("Promotion Package Description: " + foodMenu.get(menuIndex).getDesc());
+		System.out.println("Promotion Package Price: " + foodMenu.get(menuIndex).getPrice());
+		
+		pp = (PromotionPackage) foodMenu.get(menuIndex);
+		ArrayList<Food> pp_array = pp.getFoodSet();
+		System.out.println("\nThis Promotion Package contains: ");
+		for(Food food: pp_array)
+			System.out.println("(" + index++ + ") " + food.getMenuName());
 	}
 }

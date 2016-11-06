@@ -35,8 +35,9 @@ public class FoodMenuUI {
             System.out.println("(2) Add new promotion package to food menu");
             System.out.println("(3) Update menu item in food menu");
             System.out.println("(4) Remove a menu item from food menu");
-            System.out.println("(5) Back");
-        	choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 1, 5);
+            System.out.println("(5) View menu item");
+            System.out.println("(6) Back");
+        	choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 1, 6);
         	
         	switch (choice) {
             case 1: 
@@ -52,12 +53,37 @@ public class FoodMenuUI {
             		removeMenuItemUI();
             		break;
             case 5:
+            		viewMenuItemUI();
+            		break;
+            case 6:
         }
 
-    } while (choice < 5);
+    } while (choice < 6);
 	
 }
-	
+	/**
+	 * Show a UI that prompts user for menu item to be
+	 * viewed.
+	 */
+	private static void viewMenuItemUI(){
+		int choice;
+		ArrayList<MenuItem> foodMenu = FoodMenuMgr.getRestaurantFoodMenu();
+		
+		int index = 0;
+		System.out.println("\nList of Menu Items:");
+		for(MenuItem menuItem : foodMenu)
+			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
+		choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 0, index);
+		
+		if (foodMenu.get(choice) instanceof Food){
+			FoodMenuMgr.printFood(choice);
+		}
+		else if (foodMenu.get(choice) instanceof PromotionPackage){
+			FoodMenuMgr.printPromotionPackage(choice);
+		}	
+		else
+			System.out.println("Invalid number!");
+	}
 	/**
 	 * Show a UI that prompts user for menu item to be
 	 * removed.
