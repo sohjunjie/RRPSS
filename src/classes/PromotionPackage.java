@@ -54,7 +54,6 @@ public class PromotionPackage extends MenuItem implements Serializable{
 	 */
 	public void addFood(ArrayList<MenuItem> foodMenu){
 
-		Scanner sc = new Scanner(System.in);
 		int index = 0;
 		
 		System.out.println("What food would you like to add to the Promotion Package?");
@@ -63,13 +62,13 @@ public class PromotionPackage extends MenuItem implements Serializable{
 				System.out.println("(" + index + ") " + menuItem.getMenuName());
 			index++;
 		}
-    	int choice = ScannerExt.nextInt("    Enter the number of your choice: ");
+    	int choice = ScannerExt.nextInt("\n    Enter the number of your choice: \n");
 
 		try {
 			if(foodMenu.get(choice) instanceof Food){
 				Food foodToAdd = (Food) foodMenu.get(choice);
 				this.foodSet.add(foodToAdd);
-				System.out.println(foodToAdd.getMenuName() + " added to promotion package.");				
+				System.out.println(foodToAdd.getMenuName() + " successfully added to promotion package.");				
 			}else{
 				System.out.println("selected item is not a food");
 			}
@@ -90,24 +89,22 @@ public class PromotionPackage extends MenuItem implements Serializable{
 	 * to remove from the promotion package.
 	 */
 	public void removeFood() {
-		
-		Scanner sc = new Scanner(System.in);
+		int i=0;
 		
 		System.out.println("What food would you like to remove from the Promotion Package?");
 		
 		for (Food fd : foodSet)
-			System.out.println(foodSet.indexOf(fd) + ": " + fd.getMenuName());
-    	int index = ScannerExt.nextInt("    Enter the number of your choice: ");
+			System.out.println(i++ + ": " + fd.getMenuName());
+    	int index = ScannerExt.nextInt("\n    Enter the number of your choice: \n");
 		
 		try {
 			String foodNameRemoved = foodSet.get(index).getMenuName();
 			foodSet.remove(index);
-			System.out.println(foodNameRemoved + " removed from promotion package."); 
+			System.out.println(foodNameRemoved + " sucessfully removed from promotion package."); 
 		}catch(IndexOutOfBoundsException e){
 			System.out.println("Food item removal failed! (Invalid index provided");
 		}
 		
 	}
-	
 
 }
