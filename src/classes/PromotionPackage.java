@@ -63,7 +63,7 @@ public class PromotionPackage extends MenuItem implements Serializable{
 				System.out.println("(" + index + ") " + menuItem.getMenuName());
 			index++;
 		}
-    	int choice = ScannerExt.nextInt("    Enter the number of your choice: ");
+    	int choice = ScannerExt.nextInt("\n    Enter the number of your choice: \n");
 
 		try {
 			if(foodMenu.get(choice) instanceof Food){
@@ -90,14 +90,13 @@ public class PromotionPackage extends MenuItem implements Serializable{
 	 * to remove from the promotion package.
 	 */
 	public void removeFood() {
-		
-		Scanner sc = new Scanner(System.in);
+		int i=0;
 		
 		System.out.println("What food would you like to remove from the Promotion Package?");
 		
 		for (Food fd : foodSet)
-			System.out.println(foodSet.indexOf(fd) + ": " + fd.getMenuName());
-    	int index = ScannerExt.nextInt("    Enter the number of your choice: ");
+			System.out.println(i++ + ": " + fd.getMenuName());
+    	int index = ScannerExt.nextInt("\n    Enter the number of your choice: \n");
 		
 		try {
 			String foodNameRemoved = foodSet.get(index).getMenuName();
@@ -108,6 +107,5 @@ public class PromotionPackage extends MenuItem implements Serializable{
 		}
 		
 	}
-	
 
 }
