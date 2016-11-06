@@ -229,7 +229,16 @@ public class ReservationMgr {
 	 * @param reservation Reservation to move to settled
 	 */
 	public static void moveToSettledReservation(Reservation reservation){
-		reservation.getReserveTable().removeTableReservation(reservation);
+
+		Table tempTable;
+		tempTable = reservation.getReserveTable();
+		
+		tempTable.removeTableReservation(reservation);
+		
+		for(Table t: Restaurant.tables){
+			
+		}
+		
 		settledReservations.add(reservation);
 		reservations.remove(reservation);
 	}

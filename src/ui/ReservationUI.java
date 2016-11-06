@@ -88,10 +88,10 @@ public class ReservationUI {
 			return;
 		}
 		
-		int index = 0;		
+		int index = 0;
 		for(Reservation r : removeReservations){
 			System.out.println("("+ (index++) + ") " + r);
-		}		
+		}
 		int choice = ScannerExt.nextInt("Select which reservation to remove:");
 
 		try {
