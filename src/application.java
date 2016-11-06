@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Scanner;
-
 import classes.*;
 import db.Restaurant;
 import mgr.InvoiceMgr;
@@ -22,7 +20,6 @@ import user_lib.ScannerExt;
  */
 public class application {
 	
-	private static Scanner sc = new Scanner(System.in);
 	private static Staff thisStaff = null;	
 	
 	public static void main(String[] args) {
@@ -55,7 +52,7 @@ public class application {
 
 		// close shop - settle all pending orders before closing application
 
-		Restaurant.saveRestaurant();		
+		Restaurant.saveRestaurant();
 		System.exit(0);
 
 	}

@@ -2,8 +2,6 @@ package classes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import user_lib.ScannerExt;
 
 /**
@@ -54,7 +52,6 @@ public class PromotionPackage extends MenuItem implements Serializable{
 	 */
 	public void addFood(ArrayList<MenuItem> foodMenu){
 
-		Scanner sc = new Scanner(System.in);
 		int index = 0;
 		
 		System.out.println("What food would you like to add to the Promotion Package?");
@@ -90,8 +87,6 @@ public class PromotionPackage extends MenuItem implements Serializable{
 	 * to remove from the promotion package.
 	 */
 	public void removeFood() {
-		
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("What food would you like to remove from the Promotion Package?");
 		
