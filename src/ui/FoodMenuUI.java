@@ -35,9 +35,7 @@ public class FoodMenuUI {
             System.out.println("(3) Remove a menu item from food menu");
             System.out.println("(4) Back");
         	System.out.println();
-        	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
-            
-        	
+        	choice = ScannerExt.nextInt("    Enter the number of your choice: ", 1, 4);
         	
             switch (choice) {
                 case 1: 

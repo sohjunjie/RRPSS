@@ -34,7 +34,7 @@ public class OrderUI {
             System.out.println("(4) Print invoice");
             System.out.println("(5) Back");
         	System.out.println();            
-        	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
+        	choice = ScannerExt.nextInt("    Enter the number of your choice: ", 1, 5);
             
             switch (choice) {
             	case 1:

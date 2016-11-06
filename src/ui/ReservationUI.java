@@ -29,7 +29,7 @@ public class ReservationUI {
             System.out.println("(6) Show reservations");
             System.out.println("(7) Back");
         	System.out.println();
-        	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
+        	choice = ScannerExt.nextInt("    Enter the number of your choice: ", 1, 7);
             
             switch (choice) {
                 case 1:

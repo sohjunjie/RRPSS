@@ -115,7 +115,7 @@ public class application {
             System.out.println("(4) Sales Revenue report");
             System.out.println("(5) Exit");
         	System.out.println();
-            choice = ScannerExt.nextInt("    Enter the number of your choice: ");            
+            choice = ScannerExt.nextInt("    Enter the number of your choice: ", 1, 5);
             
             switch (choice) {
                 case 1: // reservation
