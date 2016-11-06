@@ -148,6 +148,8 @@ public class application {
                 		showSalesReportUI();
                 		break;
                 case 5:
+                		System.out.println("Exiting system...");
+                		break;
             }
 
         } while (choice < 5);
