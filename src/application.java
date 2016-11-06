@@ -29,10 +29,29 @@ public class application {
 
 		Restaurant.loadRestaurant();
 		
-		while(thisStaff == null)
-			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
-
-		showRestaurantOptions();
+		////////////////////////////////////
+//		int index = 0;
+//		Reservation newReservation;
+//		Calendar reserveCal = Calendar.getInstance();
+//		reserveCal.set(Calendar.MINUTE, 1);
+//		reserveCal.set(Calendar.HOUR_OF_DAY, 11);
+//		reserveCal.set(Calendar.DATE, reserveCal.get(Calendar.DATE) + 1);
+//		for(Table t : Restaurant.tables){
+//			reserveCal = (Calendar) reserveCal.clone();
+//			reserveCal.set(Calendar.MINUTE, index);
+//			
+//			newReservation = new Reservation("cust"+index, index, t.getCapacity(), reserveCal, t);
+//			Restaurant.reservations.add(newReservation);
+//			index++;
+//		}
+//		for(Reservation r : Restaurant.reservations)
+//			System.out.println(r);
+		/////////////////////////////////////
+		
+//		while(thisStaff == null)
+//			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
+//
+//		showRestaurantOptions();
 
 		// close shop - settle all pending orders before closing application
 
