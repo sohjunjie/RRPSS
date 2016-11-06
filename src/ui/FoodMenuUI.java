@@ -6,6 +6,7 @@ import java.util.Scanner;
 import classes.Food;
 import classes.MenuItem;
 import mgr.FoodMenuMgr;
+import user_lib.ScannerExt;
 
 /**
  * Represents the UI displayed to the user when changing the food menu.
@@ -34,9 +35,10 @@ public class FoodMenuUI {
             System.out.println("(3) Remove a menu item from food menu");
             System.out.println("(4) Back");
         	System.out.println();
-        	System.out.print("    Enter the number of your choice: ");
-            choice = sc.nextInt(); sc.nextLine(); // get dummy line
+        	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
             
+        	
+        	
             switch (choice) {
                 case 1: 
                 		createNewFoodUI();
@@ -67,9 +69,8 @@ public class FoodMenuUI {
 		System.out.println("\nSelect the menu item to remove from the food menu:");
 		for(MenuItem menuItem : foodMenu)
 			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
-
-    	System.out.print("    Enter the number of your choice: ");
-		choice = sc.nextInt(); sc.nextLine(); // get dummy line
+    	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
+		
 
 		FoodMenuMgr.removeMenuItem(choice);
 
@@ -87,8 +88,7 @@ public class FoodMenuUI {
 		
 		System.out.print("Enter menu name of promotion package: "); menuName = sc.nextLine();
 		System.out.print("Enter menu description of promotion package: "); menuDesc = sc.nextLine();
-		System.out.print("Enter price of promotion package: "); menuPrice = sc.nextDouble(); 
-		sc.nextLine();	// get dummy line
+		menuPrice = ScannerExt.nextDouble("Enter price of promotion package: ");
 		
 		FoodMenuMgr.createNewPromotionPackage(menuName, menuDesc, menuPrice);
 	}
@@ -106,7 +106,7 @@ public class FoodMenuUI {
 
 		System.out.print("Enter menu name of food: "); foodName = sc.nextLine();
 		System.out.print("Enter menu description of food: "); foodDesc = sc.nextLine();
-		System.out.print("Enter price of food: "); foodPrice = sc.nextDouble();
+		foodPrice = ScannerExt.nextDouble("Enter price of food: ");
 		
 		int choice;
 		do{
@@ -114,8 +114,8 @@ public class FoodMenuUI {
 			int index = 1;
 			for (Food.CourseType courseType : Food.CourseType.values())
 				System.out.println((index++) + " " + courseType);
-	    	System.out.print("    Enter the number of your choice: ");
-	    	choice = sc.nextInt(); sc.nextLine(); // get dummy line
+        	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
+
 	    	switch (choice) {
 		        case 1:
 		        	foodCourseType = Food.CourseType.MAIN_COURSE;

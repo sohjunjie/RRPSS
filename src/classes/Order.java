@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import classes.Table.TableStatus;
 import db.Restaurant;
+import user_lib.ScannerExt;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -129,9 +130,7 @@ public class Order implements Serializable{
 		System.out.println("\nSelect the food item to add to the order:");
 		for(MenuItem menuItem : foodMenu)
 			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
-
-    	System.out.print("    Enter the number of your choice: ");
-		choice = sc.nextInt(); sc.nextLine(); // get dummy line
+    	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
 		
 		try {
 			String orderItemAdded = foodMenu.get(choice).getMenuName();
@@ -159,9 +158,7 @@ public class Order implements Serializable{
 		index = 0;
 		for (OrderLineItem orderItem : orderLineItems)
 			System.out.println(index++ + ": " + orderItem.getMenuItem().getMenuName());
-
-    	System.out.print("    Enter the number of your choice: ");
-		choice = sc.nextInt(); sc.nextLine(); // get dummy line
+    	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
 		
 		try {
 			String orderItemRemoved = orderLineItems.get(choice).toString();

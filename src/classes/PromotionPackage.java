@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import user_lib.ScannerExt;
+
 /**
  * Represents a promotion package offered by the restaurant.
  * A promotion package comprises of multiple food item which
@@ -61,9 +63,7 @@ public class PromotionPackage extends MenuItem implements Serializable{
 				System.out.println("(" + index + ") " + menuItem.getMenuName());
 			index++;
 		}
-
-    	System.out.print("    Enter the number of your choice: ");
-		int choice = sc.nextInt(); sc.nextLine(); // get dummy line
+    	int choice = ScannerExt.nextInt("    Enter the number of your choice: ");
 
 		try {
 			if(foodMenu.get(choice) instanceof Food){
@@ -97,10 +97,7 @@ public class PromotionPackage extends MenuItem implements Serializable{
 		
 		for (Food fd : foodSet)
 			System.out.println(foodSet.indexOf(fd) + ": " + fd.getMenuName());
-
-    	System.out.print("    Enter the number of your choice: ");
-		int index = sc.nextInt(); sc.nextLine(); // get dummy line
-		sc.close();
+    	int index = ScannerExt.nextInt("    Enter the number of your choice: ");
 		
 		try {
 			String foodNameRemoved = foodSet.get(index).getMenuName();

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import classes.Order;
 import db.Restaurant;
 import mgr.OrderMgr;
+import user_lib.ScannerExt;
 
 /**
  * Represents the UI displayed to the user when creating, changing or finalising an order.
@@ -32,9 +33,8 @@ public class OrderUI {
             System.out.println("(3) Remove order line item");
             System.out.println("(4) Print invoice");
             System.out.println("(5) Back");
-        	System.out.println();
-        	System.out.print("    Enter the number of your choice: ");
-            choice = sc.nextInt(); sc.nextLine(); // get dummy line
+        	System.out.println();            
+        	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
             
             switch (choice) {
             	case 1:
