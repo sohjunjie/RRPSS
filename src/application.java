@@ -48,10 +48,10 @@ public class application {
 //			System.out.println(r);
 		/////////////////////////////////////
 		
-//		while(thisStaff == null)
-//			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
-//
-//		showRestaurantOptions();
+		while(thisStaff == null)
+			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
+
+		showRestaurantOptions();
 
 		// close shop - settle all pending orders before closing application
 

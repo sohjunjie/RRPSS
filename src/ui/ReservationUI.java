@@ -168,7 +168,7 @@ public class ReservationUI {
 		Calendar reserveDateTime = ReservationMgr.getValidReservationDateTime();
 		
 		ArrayList<Table> availableTables = TableMgr.checkAvailableTables(reserveDateTime, numPax);
-		if(availableTables == null){
+		if(availableTables == null || availableTables.size() <= 0){
 			System.out.println("No tables available for reservation on datetime " + reserveDateTime.getTime());
 			return;
 		}
