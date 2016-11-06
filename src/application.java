@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 import classes.*;
@@ -92,8 +93,8 @@ public class application {
 		System.out.println("11. November");
 		System.out.println("12. December");
 		
-    	month = ScannerExt.nextInt("Enter month (1~12): ");
-    	year = ScannerExt.nextInt("Year(YYYY): ");
+    	month = ScannerExt.nextInt("Enter month (1~12): ", 1, 12);
+    	year = ScannerExt.nextInt("Year(YYYY): ", 2015, Calendar.getInstance().get(Calendar.YEAR));
 		
 		InvoiceMgr.printSalesRevenueReport(month, year);
 		
