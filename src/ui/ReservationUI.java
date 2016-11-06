@@ -64,8 +64,13 @@ public class ReservationUI {
 	private static void showReservationsUI(){
 		
 		ArrayList<Reservation> validReservations = ReservationMgr.getUnexpiredReservations();
-		System.out.println("Showing reservations for the next 30 days: ");
 		
+		if(validReservations.size() <= 0 ){
+			System.out.println("No reservations found for the next 30 days.");
+			return;
+		}
+		
+		System.out.println("Showing reservations for the next 30 days: ");		
 		int index = 0;
 		for(Reservation r : validReservations){
 			System.out.println("("+ (index++) + ") " + r);
