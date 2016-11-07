@@ -2,8 +2,6 @@ package classes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import user_lib.ScannerExt;
 
 /**
@@ -89,10 +87,9 @@ public class PromotionPackage extends MenuItem implements Serializable{
 	 * to remove from the promotion package.
 	 */
 	public void removeFood() {
-		int i=0;
-		
+
 		System.out.println("What food would you like to remove from the Promotion Package?");
-		
+		int i=0;		
 		for (Food fd : foodSet)
 			System.out.println(i++ + ": " + fd.getMenuName());
     	int index = ScannerExt.nextInt("\n    Enter the number of your choice: \n");

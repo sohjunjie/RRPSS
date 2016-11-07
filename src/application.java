@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Scanner;
-
 import classes.*;
 import db.Restaurant;
 import mgr.InvoiceMgr;
@@ -22,40 +20,17 @@ import user_lib.ScannerExt;
  */
 public class application {
 	
-	private static Scanner sc = new Scanner(System.in);
 	private static Staff thisStaff = null;	
 	
 	public static void main(String[] args) {
 
 		Restaurant.loadRestaurant();
-		
-		////////////////////////////////////
-//		int index = 0;
-//		Reservation newReservation;
-//		Calendar reserveCal = Calendar.getInstance();
-//		reserveCal.set(Calendar.MINUTE, 1);
-//		reserveCal.set(Calendar.HOUR_OF_DAY, 11);
-//		reserveCal.set(Calendar.DATE, reserveCal.get(Calendar.DATE) + 1);
-//		for(Table t : Restaurant.tables){
-//			reserveCal = (Calendar) reserveCal.clone();
-//			reserveCal.set(Calendar.MINUTE, index);
-//			
-//			newReservation = new Reservation("cust"+index, index, t.getCapacity(), reserveCal, t);
-//			Restaurant.reservations.add(newReservation);
-//			index++;
-//		}
-//		for(Reservation r : Restaurant.reservations)
-//			System.out.println(r);
-		/////////////////////////////////////
-		
+
 		while(thisStaff == null)
 			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
-
 		showRestaurantOptions();
 
-		// close shop - settle all pending orders before closing application
-
-		Restaurant.saveRestaurant();		
+		Restaurant.saveRestaurant();	
 		System.exit(0);
 
 	}
@@ -151,6 +126,8 @@ public class application {
                 		showSalesReportUI();
                 		break;
                 case 5:
+                		System.out.println("Exiting system...");
+                		break;
             }
 
         } while (choice < 5);

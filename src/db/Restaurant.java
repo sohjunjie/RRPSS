@@ -36,6 +36,7 @@ public class Restaurant {
 	public static final String 	settledOrderFileName		= "settledOrder.dat";
 	public static final String 	reservationFileName			= "reservation.dat";
 	public static final String 	settledReservationFileName	= "settledReservation.dat";
+	public static final String 	restaurantFileName			= "restaurant.dat";	
 	
 	public static ArrayList<Table> 				tables;
 	public static ArrayList<Staff> 				staffs;
@@ -54,26 +55,97 @@ public class Restaurant {
 	}
 	
 	public static void saveRestaurant(){
-		saveTables();
-		saveStaffs();
-		saveFoodMenu();
-		saveInvoices();
-		saveOrders();
-		saveSettledOrders();
-		saveReservations();
-		saveSettledReservations();
+		
+		Object[] restaurantMember 	= {tables,
+										staffs, 
+										foodMenu, 
+										invoices, 
+										orders, 
+										settledOrders, 
+										reservations, 
+										settledReservations};
+		
+		Path 				saveFileName 	= Paths.get(dataPath.toString(), restaurantFileName);
+		FileOutputStream   	fos 			= null;
+		ObjectOutputStream 	oos 			= null;
+		
+		try {
+			fos = new FileOutputStream(saveFileName.toString());
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(restaurantMember);
+			oos.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
 	}
-
+	
 	public static void loadRestaurant(){
-		loadTables();
-		loadStaffs();
-		loadFoodMenu();
-		loadInvoices();
-		loadOrders();
-		loadSettledOrders();
-		loadReservations();
-		loadSettledReservations();
+		
+		Object[] restaurantMember 	= null;
+		Path saveData 				= Paths.get(dataPath.toString(), restaurantFileName);
+		FileInputStream fis 		= null;
+		ObjectInputStream ois 		= null;
+		
+		try {
+			fis = new FileInputStream(saveData.toString());
+			ois = new ObjectInputStream(fis);
+			restaurantMember = (Object[]) ois.readObject();
+			
+			if(restaurantMember != null){
+				tables = (ArrayList<Table>) restaurantMember[0];
+				staffs = (ArrayList<Staff>) restaurantMember[1];
+				foodMenu = (ArrayList<MenuItem>) restaurantMember[2];
+				invoices = (ArrayList<Invoice>) restaurantMember[3];
+				orders = (ArrayList<Order>) restaurantMember[4];
+				settledOrders = (ArrayList<Order>) restaurantMember[5];
+				reservations = (ArrayList<Reservation>) restaurantMember[6];
+				settledReservations = (ArrayList<Reservation>) restaurantMember[7];
+			}
+			
+			ois.close();
+		} catch (IOException ex) {
+			System.out.println(restaurantFileName + " not found or does not exists. Default settings will be loaded.");
+			initRestaurant();
+		} catch (ClassCastException|ClassNotFoundException ex) {
+			System.out.println("Data file " + restaurantFileName + " is corrupted. Default settings will be loaded instead.");
+			initRestaurant();
+		}
+		
 	}
+	
+	public static void initRestaurant(){
+		initTables();
+		initStaffs();
+		initFoodMenu();
+		initInvoices();
+		initOrders();
+		initSettledOrders();
+		initReservations();
+		initSettledReservations();
+	}
+	
+//	public static void saveRestaurant(){
+//		saveTables();
+//		saveStaffs();
+//		saveFoodMenu();
+//		saveInvoices();
+//		saveOrders();
+//		saveSettledOrders();
+//		saveReservations();
+//		saveSettledReservations();
+//	}
+//
+//	public static void loadRestaurant(){
+//		loadTables();
+//		loadStaffs();
+//		loadFoodMenu();
+//		loadInvoices();
+//		loadOrders();
+//		loadSettledOrders();
+//		loadReservations();
+//		loadSettledReservations();
+//	}
 	
 	public static void resetTables(){
 		Restaurant.tables = null;
@@ -104,7 +176,8 @@ public class Restaurant {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}
+	}	
+	
 	public static void loadTables(){
 
 		Path saveData 			= Paths.get(dataPath.toString(), tableFileName);

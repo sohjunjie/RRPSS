@@ -18,6 +18,7 @@ import db.Restaurant;
 public class TableMgr {
 
 	private static ArrayList<Table> tables = Restaurant.tables;
+	
 	/**
 	 * Find a reservation that fits the reservation datetime
 	 * and number of people.

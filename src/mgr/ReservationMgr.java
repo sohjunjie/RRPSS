@@ -229,7 +229,10 @@ public class ReservationMgr {
 	 * @param reservation Reservation to move to settled
 	 */
 	public static void moveToSettledReservation(Reservation reservation){
-		reservation.getReserveTable().removeTableReservation(reservation);
+
+		Table tempTable;
+		tempTable = reservation.getReserveTable();		
+		tempTable.removeTableReservation(reservation);		
 		settledReservations.add(reservation);
 		reservations.remove(reservation);
 	}
@@ -247,7 +250,7 @@ public class ReservationMgr {
 		Calendar arrivalTime = Calendar.getInstance();
 		
 		do{
-		    System.out.print("Enter reservation datetime (dd/MM/yyyy HH:mm)");	date  = sc.nextLine();
+		    System.out.print("Enter reservation datetime (dd/MM/yyyy HH:mm): ");	date  = sc.nextLine();
 		    dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		    try {
 		    	parsedDate = dateFormat.parse(date);

@@ -64,7 +64,6 @@ public class Reservation implements Serializable{
 		this.customerContact = customerContact;
 		this.numPax = numPax;
 		this.accepted = false;
-//		this.reservationID = arrivalTime.hashCode();
 		this.reservationID = Calendar.getInstance().hashCode();
 		this.arrivalTime = arrivalTime;
 		this.reserveTable = reserveTable;
