@@ -29,7 +29,7 @@ public class Table implements Serializable{
 	
 	/**
 	 * Capacity of the table. Can be 2, 4, 8 or 10
-	 */	
+	 */
 	private int capacity;
 	
 	/**
@@ -39,7 +39,7 @@ public class Table implements Serializable{
 	
 	/**
 	 * ArrayList of all reservations of the table
-	 */	
+	 */
 	private ArrayList<Reservation> reservedBy;
 	
 	/**
