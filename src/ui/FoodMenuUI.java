@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import classes.Food;
 import classes.MenuItem;
+import classes.PromotionPackage;
 import mgr.FoodMenuMgr;
 import user_lib.ScannerExt;
 
@@ -29,31 +30,60 @@ public class FoodMenuUI {
 		int choice;
 		
         do {
-            System.out.println("\nSelect a choice: ");
+        	System.out.println("\nSelect a choice: ");
             System.out.println("(1) Add new food to food menu");
             System.out.println("(2) Add new promotion package to food menu");
-            System.out.println("(3) Remove a menu item from food menu");
-            System.out.println("(4) Back");
-        	System.out.println();
-        	choice = ScannerExt.nextInt("    Enter the number of your choice: ", 1, 4);
+            System.out.println("(3) Update menu item in food menu");
+            System.out.println("(4) Remove a menu item from food menu");
+            System.out.println("(5) View menu item");
+            System.out.println("(6) Back");
+        	choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 1, 6);
         	
-            switch (choice) {
-                case 1: 
-                		createNewFoodUI();
-                        break;
-                case 2:
-                		createNewPromotionPackageUI();
-                        break;
-                case 3:
-                		removeMenuItemUI();
-                    	break;
-                case 4:
-            }
+        	switch (choice) {
+            case 1: 
+            		createNewFoodUI();
+                    break;
+            case 2:
+            		createNewPromotionPackageUI();
+                    break;
+            case 3:
+            		updateMenuItemUI();
+                	break;
+            case 4:
+            		removeMenuItemUI();
+            		break;
+            case 5:
+            		viewMenuItemUI();
+            		break;
+            case 6:
+        }
 
-        } while (choice < 4);
-		
-	}
+    } while (choice < 6);
 	
+}
+	/**
+	 * Show a UI that prompts user for menu item to be
+	 * viewed.
+	 */
+	private static void viewMenuItemUI(){
+		int choice;
+		ArrayList<MenuItem> foodMenu = FoodMenuMgr.getRestaurantFoodMenu();
+		
+		int index = 0;
+		System.out.println("\nList of Menu Items:");
+		for(MenuItem menuItem : foodMenu)
+			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
+		choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 0, index);
+		
+		if (foodMenu.get(choice) instanceof Food){
+			FoodMenuMgr.printFood(choice);
+		}
+		else if (foodMenu.get(choice) instanceof PromotionPackage){
+			FoodMenuMgr.printPromotionPackage(choice);
+		}	
+		else
+			System.out.println("Invalid number!");
+	}
 	/**
 	 * Show a UI that prompts user for menu item to be
 	 * removed.
@@ -135,4 +165,117 @@ public class FoodMenuUI {
 
 	}
 	
+	/**
+	 * Show a UI that prompts user for menu item to be 
+	 * updated.
+	 */
+	private static void updateMenuItemUI(){
+		
+		int choice;
+		ArrayList<MenuItem> foodMenu = FoodMenuMgr.getRestaurantFoodMenu();
+		
+		int index = 0;
+		System.out.println("\nSelect the menu item to update in the food menu:");
+		for(MenuItem menuItem : foodMenu)
+			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
+		
+		choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 0, index);
+		
+		if (foodMenu.get(choice) instanceof Food){
+			updateFood(choice);
+		}
+		else if (foodMenu.get(choice) instanceof PromotionPackage){
+			updatePromotionPackage(choice);
+		}
+		else
+			System.out.println("Invalid number!");
+	}
+	
+	/**
+	 * Update menu item name, desc or price from restaurant food menu
+	 * based on menu index
+	 * @param menuIndex Menu item to be updated
+	 */
+	private static void updateFood(int menuIndex){
+
+		int choice;
+
+		try {
+			
+			do {
+				System.out.println("\nWhat would you like to update?");
+				System.out.println("(1) Food Name");
+				System.out.println("(2) Food Description");
+				System.out.println("(3) Food Price");
+				System.out.println("(4) Food Course Type");
+				System.out.println("(5) Back"); 
+				choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 1, 5);
+			
+				switch (choice) {
+					case 1:
+							FoodMenuMgr.updateMenuItemName(menuIndex);
+							break;
+					case 2:
+							FoodMenuMgr.updateMenuItemDesc(menuIndex);
+							break;
+					case 3: 
+							FoodMenuMgr.updateMenuItemPrice(menuIndex);
+							break;
+					case 4:
+							FoodMenuMgr.updateFoodCourseType(menuIndex);
+							break;
+					case 5:
+				}
+			
+			} while (choice != 5);
+		
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Update menu item in food menu failed! (Invalid index provided");
+		}
+
+	}
+	
+	/**
+	 * Update promotion package name, desc or price from restaurant food menu
+	 * based on menu index
+	 * @param menuIndex Menu item to be updated
+	 */
+	private static void updatePromotionPackage(int menuIndex){
+		int choice;
+
+		try {
+			
+			do {
+				System.out.println("\nWhat would you like to update?");
+				System.out.println("(1) Promotion Package Name");
+				System.out.println("(2) Promotion Package Description");
+				System.out.println("(3) Promotion Package Price");
+				System.out.println("(4) Promotion Package Food");
+				System.out.println("(5) Back"); 
+				choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 1, 5);
+			
+				switch (choice) {
+					case 1:
+							FoodMenuMgr.updateMenuItemName(menuIndex);
+							break;
+					case 2:
+							FoodMenuMgr.updateMenuItemDesc(menuIndex);
+							break;
+					case 3: 
+							FoodMenuMgr.updateMenuItemPrice(menuIndex);
+							break;
+					case 4:
+							FoodMenuMgr.updatePromotionPackageFood(menuIndex);
+							break;
+					case 5:					
+				}
+			
+			} while (choice != 5);
+		
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Update menu item in food menu failed! (Invalid index provided");
+		}
+
+	}
 }
+
