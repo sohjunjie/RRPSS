@@ -87,7 +87,7 @@ public class Invoice implements Serializable{
 		System.out.println("Date & Time: " + this.order.getDateTime());
 		System.out.println("Invoice Number: " + this.invoiceNumber);
 		System.out.println("Items ordered: " + this.order);
-		System.out.println("Subotal: " + price);
+		System.out.println("Subtotal: " + price);
 		System.out.println("GST: " + gst);
 		System.out.println("Total: " + totalPrice);
 	}
