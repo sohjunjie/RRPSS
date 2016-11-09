@@ -60,13 +60,13 @@ public class PromotionPackage extends MenuItem implements Serializable{
 				System.out.println("(" + index + ") " + menuItem.getMenuName());
 			index++;
 		}
-    	int choice = ScannerExt.nextInt("\n    Enter the number of your choice: \n");
+    	int choice = ScannerExt.nextInt("    Enter the number of your choice: ");
 
 		try {
 			if(foodMenu.get(choice) instanceof Food){
 				Food foodToAdd = (Food) foodMenu.get(choice);
 				this.foodSet.add(foodToAdd);
-				System.out.println(foodToAdd.getMenuName() + " successfully added to promotion package.");				
+				System.out.println(foodToAdd.getMenuName() + " successfully added to promotion package.");
 			}else{
 				System.out.println("selected item is not a food");
 			}
@@ -89,10 +89,10 @@ public class PromotionPackage extends MenuItem implements Serializable{
 	public void removeFood() {
 
 		System.out.println("What food would you like to remove from the Promotion Package?");
-		int i=0;		
+		int i=0;
 		for (Food fd : foodSet)
 			System.out.println(i++ + ": " + fd.getMenuName());
-    	int index = ScannerExt.nextInt("\n    Enter the number of your choice: \n");
+    	int index = ScannerExt.nextInt("    Enter the number of your choice: ");
 		
 		try {
 			String foodNameRemoved = foodSet.get(index).getMenuName();

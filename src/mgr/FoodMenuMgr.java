@@ -51,7 +51,7 @@ public class FoodMenuMgr {
 		boolean continueAdd = true;
 		do{
 			newPP.addFood(foodMenu);
-			System.out.println("Continue adding menu item to promotion package? (Y/N)");
+			System.out.print("Continue adding menu item to promotion package? (Y/N): ");
 			choice = sc.nextLine();
 			continueAdd = ('Y' == Character.toUpperCase(choice.charAt(0)));
 		}while(continueAdd);
