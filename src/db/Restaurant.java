@@ -19,33 +19,36 @@ import classes.Reservation;
 import classes.Staff;
 import classes.Table;
 
+/**
+ * Static restaurant database class keeping track of
+ * objects in the restaurant
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-11-09
+ */
 public class Restaurant {
 
-	public static final int		bookingMthInAdvance			= 1;
-	public static final	int		AMStartTime					= 11;
-	public static final	int		AMEndTime					= 15;
-	public static final	int		PMStartTime					= 18;
-	public static final	int		PMEndTime					= 22;
+	public static final int		BOOKING_MTHINADVANCE		= 1;
+	public static final	int		AMSTARTTIME					= 11;
+	public static final	int		AMENDTIME					= 15;
+	public static final	int		PMSTARTTIME					= 18;
+	public static final	int		PMENDTIME					= 22;
 	
-	public static final Path 	dataPath 					= Paths.get(System.getProperty("user.dir"), "data");
-	public static final String 	restaurantFileName			= "restaurant.dat";	
+	public static final Path 	DATAPATH 					= Paths.get(System.getProperty("user.dir"), "data");
+	public static final String 	RESTAURANT_FILE_NAME		= "restaurant.dat";	
 	
 	public static ArrayList<Table> 				tables;
 	public static ArrayList<Staff> 				staffs;
-	public static ArrayList<MenuItem> 			foodMenu;
-	
-	public static ArrayList<Invoice> 			invoices;
-	
+	public static ArrayList<MenuItem> 			foodMenu;	
+	public static ArrayList<Invoice> 			invoices;	
 	public static ArrayList<Order> 				orders;
 	public static ArrayList<Order> 				settledOrders;
-	
 	public static ArrayList<Reservation>		reservations;
 	public static ArrayList<Reservation>		settledReservations;
 	
-	public static void main(String args[]){
-		System.out.println(dataPath.toString());
-	}
-	
+	/**
+	 * Save restaurant current state
+	 */
 	public static void saveRestaurant(){
 		
 		Object[] restaurantMember 	= {tables,
@@ -57,7 +60,7 @@ public class Restaurant {
 										reservations, 
 										settledReservations};
 		
-		Path 				saveFileName 	= Paths.get(dataPath.toString(), restaurantFileName);
+		Path 				saveFileName 	= Paths.get(DATAPATH.toString(), RESTAURANT_FILE_NAME);
 		FileOutputStream   	fos 			= null;
 		ObjectOutputStream 	oos 			= null;
 		
@@ -72,18 +75,21 @@ public class Restaurant {
 		
 	}
 	
+	/**
+	 * Load restaurant previous save state.
+	 */
+	@SuppressWarnings("unchecked")
 	public static void loadRestaurant(){
 		
 		Object[] restaurantMember 	= null;
-		Path saveData 				= Paths.get(dataPath.toString(), restaurantFileName);
+		Path saveData 				= Paths.get(DATAPATH.toString(), RESTAURANT_FILE_NAME);
 		FileInputStream fis 		= null;
 		ObjectInputStream ois 		= null;
 		
 		try {
 			fis = new FileInputStream(saveData.toString());
 			ois = new ObjectInputStream(fis);
-			restaurantMember = (Object[]) ois.readObject();
-			
+			restaurantMember = (Object[]) ois.readObject();			
 			if(restaurantMember != null){
 				tables = (ArrayList<Table>) restaurantMember[0];
 				staffs = (ArrayList<Staff>) restaurantMember[1];
@@ -94,21 +100,23 @@ public class Restaurant {
 				reservations = (ArrayList<Reservation>) restaurantMember[6];
 				settledReservations = (ArrayList<Reservation>) restaurantMember[7];
 			}
-			
 			ois.close();
 		} catch (IOException ex) {
-			System.out.println(restaurantFileName + " not found or does not exists. Default settings will be loaded.");
+			System.out.println(RESTAURANT_FILE_NAME + " not found or does not exists. Default settings will be loaded.");
 			initRestaurant();
 		} catch (ClassCastException|ClassNotFoundException ex) {
-			System.out.println("Data file " + restaurantFileName + " is corrupted. Default settings will be loaded instead.");
+			System.out.println("Data file " + RESTAURANT_FILE_NAME + " is corrupted. Default settings will be loaded instead.");
 			initRestaurant();
 		}
 		
 	}
 	
+	/**
+	 * Initialise restaurant static members
+	 */
 	public static void initRestaurant(){
 		initTables();
-		initStaffs();
+		initStaff();
 		initFoodMenu();
 		initInvoices();
 		initOrders();
@@ -117,6 +125,9 @@ public class Restaurant {
 		initSettledReservations();
 	}
 	
+	/**
+	 * Initialise restaurant tables
+	 */
 	public static void initTables(){
 		ArrayList<Table> tables = new ArrayList<Table>();
 		int i;
@@ -131,7 +142,10 @@ public class Restaurant {
 		Restaurant.tables = tables;
 	}
 	
-	public static void initStaffs(){
+	/**
+	 * Initialise restaurant staff
+	 */
+	public static void initStaff(){
 		ArrayList<Staff> staffs = new ArrayList<Staff>();
 		staffs.add(new Staff("John", 1, 'M', "Chef"));
 		staffs.add(new Staff("May", 2, 'F', "Cashier"));
@@ -140,6 +154,9 @@ public class Restaurant {
 		Restaurant.staffs = staffs;
 	}
 	
+	/**
+	 * Initialise restaurant food menu
+	 */
 	public static void initFoodMenu(){
 		
 		ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
@@ -185,22 +202,37 @@ public class Restaurant {
 		
 	}
 	
+	/**
+	 * Initialise restaurant invoices
+	 */
 	public static void initInvoices(){
         Restaurant.invoices = new ArrayList<Invoice>();
 	}
 
+	/**
+	 * Initialise restaurant orders
+	 */
 	public static void initOrders(){
 		Restaurant.orders = new ArrayList<Order>();
 	}
 
+	/**
+	 * Initialise restaurant settled orders
+	 */
 	public static void initSettledOrders(){
         Restaurant.settledOrders = new ArrayList<Order>();
 	}
 
+	/**
+	 * Initialise restaurant reservations
+	 */
 	public static void initReservations(){
         Restaurant.reservations = new ArrayList<Reservation>();
 	}
 	
+	/**
+	 * Initialise restaurant settled reservations
+	 */
 	public static void initSettledReservations(){
         Restaurant.settledReservations = new ArrayList<Reservation>();
 	}
