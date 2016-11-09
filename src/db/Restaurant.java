@@ -1,10 +1,12 @@
 package db;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -50,6 +52,14 @@ public class Restaurant {
 	 * Save restaurant current state
 	 */
 	public static void saveRestaurant(){
+		
+		if(!Files.exists(DATAPATH)){
+			System.out.println("Data folder not found!");
+			File dir = new File(DATAPATH.toString());
+			if(dir.mkdir()){
+				System.out.println("Directory " + DATAPATH + " created...");
+			}
+		}
 		
 		Object[] restaurantMember 	= {tables,
 										staffs, 

@@ -30,7 +30,9 @@ public class application {
 			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
 		showRestaurantOptions();
 
-		Restaurant.saveRestaurant();	
+		Restaurant.saveRestaurant();
+		System.out.println("Saving system state...");
+		System.out.println("Exiting system...");
 		System.exit(0);
 
 	}
@@ -126,7 +128,6 @@ public class application {
                 		showSalesReportUI();
                 		break;
                 case 5:
-                		System.out.println("Exiting system...");
                 		break;
             }
 
