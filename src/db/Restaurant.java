@@ -28,14 +28,6 @@ public class Restaurant {
 	public static final	int		PMEndTime					= 22;
 	
 	public static final Path 	dataPath 					= Paths.get(System.getProperty("user.dir"), "data");
-	public static final String 	tableFileName				= "table.dat";
-	public static final String 	staffFileName				= "staff.dat";
-	public static final String 	menuItemFileName			= "menuItem.dat";
-	public static final String 	invoiceFileName				= "invoice.dat";
-	public static final String 	orderFileName				= "order.dat";
-	public static final String 	settledOrderFileName		= "settledOrder.dat";
-	public static final String 	reservationFileName			= "reservation.dat";
-	public static final String 	settledReservationFileName	= "settledReservation.dat";
 	public static final String 	restaurantFileName			= "restaurant.dat";	
 	
 	public static ArrayList<Table> 				tables;
@@ -125,31 +117,6 @@ public class Restaurant {
 		initSettledReservations();
 	}
 	
-//	public static void saveRestaurant(){
-//		saveTables();
-//		saveStaffs();
-//		saveFoodMenu();
-//		saveInvoices();
-//		saveOrders();
-//		saveSettledOrders();
-//		saveReservations();
-//		saveSettledReservations();
-//	}
-//
-//	public static void loadRestaurant(){
-//		loadTables();
-//		loadStaffs();
-//		loadFoodMenu();
-//		loadInvoices();
-//		loadOrders();
-//		loadSettledOrders();
-//		loadReservations();
-//		loadSettledReservations();
-//	}
-	
-	public static void resetTables(){
-		Restaurant.tables = null;
-	}
 	public static void initTables(){
 		ArrayList<Table> tables = new ArrayList<Table>();
 		int i;
@@ -163,45 +130,7 @@ public class Restaurant {
 			tables.add(new Table(i, 2));
 		Restaurant.tables = tables;
 	}
-	public static void saveTables(){
-		Path 				saveFileName 	= Paths.get(dataPath.toString(), tableFileName);
-		FileOutputStream   	fos 			= null;
-		ObjectOutputStream 	oos 			= null;
-		
-		try {
-			fos = new FileOutputStream(saveFileName.toString());
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(Restaurant.tables);
-			oos.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}	
 	
-	public static void loadTables(){
-
-		Path saveData 			= Paths.get(dataPath.toString(), tableFileName);
-		FileInputStream fis 	= null;
-		ObjectInputStream ois 	= null;
-		
-		try {
-			fis = new FileInputStream(saveData.toString());
-			ois = new ObjectInputStream(fis);
-			Restaurant.tables = (ArrayList<Table>) ois.readObject();
-			ois.close();
-		} catch (IOException ex) {
-			System.out.println(tableFileName + " not found or does not exists. Default settings will be loaded.");
-			initTables();
-		} catch (ClassCastException|ClassNotFoundException ex) {
-			System.out.println("Data file " + tableFileName + " is corrupted. Default settings will be loaded instead.");
-			initTables();
-		}
-
-	}
-	
-	public static void resetStaffs(){
-		Restaurant.staffs = null;
-	}
 	public static void initStaffs(){
 		ArrayList<Staff> staffs = new ArrayList<Staff>();
 		staffs.add(new Staff("John", 1, 'M', "Chef"));
@@ -210,45 +139,7 @@ public class Restaurant {
 		staffs.add(new Staff("Miki", 4, 'F', "Cashier"));
 		Restaurant.staffs = staffs;
 	}
-	public static void saveStaffs(){
-		Path 				saveFileName 	= Paths.get(dataPath.toString(), staffFileName);
-		FileOutputStream   	fos 			= null;
-		ObjectOutputStream 	oos 			= null;
-		
-		try {
-			
-			fos = new FileOutputStream(saveFileName.toString());
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(Restaurant.staffs);
-			oos.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-	public static void loadStaffs(){
-
-		Path saveData 			= Paths.get(dataPath.toString(), staffFileName);
-		FileInputStream fis 	= null;
-		ObjectInputStream ois 	= null;
-		
-		try {
-			fis = new FileInputStream(saveData.toString());
-			ois = new ObjectInputStream(fis);
-			Restaurant.staffs = (ArrayList<Staff>) ois.readObject();
-			ois.close();
-		} catch (IOException ex) {
-			System.out.println(staffFileName + " not found or does not exists. Default settings will be loaded.");
-			initStaffs();
-		} catch (ClassCastException|ClassNotFoundException ex) {
-			System.out.println("Data file " + staffFileName + " is corrupted. Default settings will be loaded instead.");
-			initStaffs();
-		}
-
-	}
 	
-	public static void resetFoodMenu(){
-		Restaurant.foodMenu = null;
-	}
 	public static void initFoodMenu(){
 		
 		ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
@@ -293,246 +184,25 @@ public class Restaurant {
 		Restaurant.foodMenu = menuItems;
 		
 	}
-	public static void saveFoodMenu(){
-		
-		Path 				saveFileName 	= Paths.get(dataPath.toString(), menuItemFileName);
-		FileOutputStream   	fos 			= null;
-		ObjectOutputStream 	oos 			= null;
-		
-		try {
-			
-			fos = new FileOutputStream(saveFileName.toString());
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(Restaurant.foodMenu);
-			oos.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		
-	}
-	public static void loadFoodMenu(){
-
-		Path saveData 			= Paths.get(dataPath.toString(), menuItemFileName);
-		FileInputStream fis 	= null;
-		ObjectInputStream ois 	= null;
-		
-		try {
-			fis = new FileInputStream(saveData.toString());
-			ois = new ObjectInputStream(fis);
-			Restaurant.foodMenu = (ArrayList<MenuItem>) ois.readObject();
-			ois.close();
-		} catch (IOException ex) {
-			System.out.println(menuItemFileName + " not found or does not exists. Default settings will be loaded.");
-			initFoodMenu();
-		} catch (ClassCastException|ClassNotFoundException ex) {
-			System.out.println("Data file " + menuItemFileName + " is corrupted. Default settings will be loaded instead.");
-			initFoodMenu();
-		}
-
-	}
 	
-	public static void resetInvoices(){
-		Restaurant.invoices = null;
-	}
 	public static void initInvoices(){
         Restaurant.invoices = new ArrayList<Invoice>();
 	}
-	public static void saveInvoices(){
-		Path 				saveFileName 	= Paths.get(dataPath.toString(), invoiceFileName);
-		FileOutputStream   	fos 			= null;
-		ObjectOutputStream 	oos 			= null;
-		
-		try {
-			fos = new FileOutputStream(saveFileName.toString());
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(Restaurant.invoices);
-			oos.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}	
-	public static void loadInvoices(){
 
-		Path saveData 			= Paths.get(dataPath.toString(), invoiceFileName);
-		FileInputStream fis 	= null;
-		ObjectInputStream ois 	= null;
-		
-		try {
-			fis = new FileInputStream(saveData.toString());
-			ois = new ObjectInputStream(fis);
-			Restaurant.invoices = (ArrayList<Invoice>) ois.readObject();
-			ois.close();
-		} catch (IOException ex) {
-			System.out.println(invoiceFileName + " not found or does not exists. Default settings will be loaded.");
-			initInvoices();
-		} catch (ClassCastException|ClassNotFoundException ex) {
-			System.out.println("Data file " + invoiceFileName + " is corrupted. Default settings will be loaded instead.");
-			initInvoices();
-		}
-
-	}
-	
-	public static void resetOrders(){
-		Restaurant.orders = null;
-	}
 	public static void initOrders(){
 		Restaurant.orders = new ArrayList<Order>();
 	}
-	public static void saveOrders(){
-		Path 				saveFileName 	= Paths.get(dataPath.toString(), orderFileName);
-		FileOutputStream   	fos 			= null;
-		ObjectOutputStream 	oos 			= null;
-		
-		try {
-			fos = new FileOutputStream(saveFileName.toString());
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(Restaurant.orders);
-			oos.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}	
-	public static void loadOrders(){
 
-		Path saveData 			= Paths.get(dataPath.toString(), orderFileName);
-		FileInputStream fis 	= null;
-		ObjectInputStream ois 	= null;
-		
-		try {
-			fis = new FileInputStream(saveData.toString());
-			ois = new ObjectInputStream(fis);
-			Restaurant.orders = (ArrayList<Order>) ois.readObject();
-			ois.close();
-		} catch (IOException ex) {
-			System.out.println(orderFileName + " not found or does not exists. Default settings will be loaded.");
-			initOrders();
-		} catch (ClassCastException|ClassNotFoundException ex) {
-			System.out.println("Data file " + orderFileName + " is corrupted. Default settings will be loaded instead.");
-			initOrders();
-		}
-
-	}
-	
-	public static void resetSettledOrders(){
-		Restaurant.settledOrders = null;
-	}
 	public static void initSettledOrders(){
         Restaurant.settledOrders = new ArrayList<Order>();
 	}
-	public static void saveSettledOrders(){
-		Path 				saveFileName 	= Paths.get(dataPath.toString(), settledOrderFileName);
-		FileOutputStream   	fos 			= null;
-		ObjectOutputStream 	oos 			= null;
-		
-		try {
-			fos = new FileOutputStream(saveFileName.toString());
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(Restaurant.settledOrders);
-			oos.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-	public static void loadSettledOrders(){
 
-		Path saveData 			= Paths.get(dataPath.toString(), settledOrderFileName);
-		FileInputStream fis 	= null;
-		ObjectInputStream ois 	= null;
-		
-		try {
-			fis = new FileInputStream(saveData.toString());
-			ois = new ObjectInputStream(fis);
-			Restaurant.settledOrders = (ArrayList<Order>) ois.readObject();
-			ois.close();
-		} catch (IOException ex) {
-			System.out.println(settledOrderFileName + " not found or does not exists. Default settings will be loaded.");
-			initSettledOrders();
-		} catch (ClassCastException|ClassNotFoundException ex) {
-			System.out.println("Data file " + settledOrderFileName + " is corrupted. Default settings will be loaded instead.");
-			initSettledOrders();
-		}
-
-	}
-	
-	public static void resetReservations(){
-		Restaurant.reservations = null;
-	}
 	public static void initReservations(){
         Restaurant.reservations = new ArrayList<Reservation>();
 	}
-	public static void saveReservations(){
-		Path 				saveFileName 	= Paths.get(dataPath.toString(), reservationFileName);
-		FileOutputStream   	fos 			= null;
-		ObjectOutputStream 	oos 			= null;
-		
-		try {
-			fos = new FileOutputStream(saveFileName.toString());
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(Restaurant.reservations);
-			oos.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}	
-	public static void loadReservations(){
-
-		Path saveData 			= Paths.get(dataPath.toString(), reservationFileName);
-		FileInputStream fis 	= null;
-		ObjectInputStream ois 	= null;
-		
-		try {
-			fis = new FileInputStream(saveData.toString());
-			ois = new ObjectInputStream(fis);
-			Restaurant.reservations = (ArrayList<Reservation>) ois.readObject();
-			ois.close();
-		} catch (IOException ex) {
-			System.out.println(reservationFileName + " not found or does not exists. Default settings will be loaded.");
-			initReservations();
-		} catch (ClassCastException|ClassNotFoundException ex) {
-			System.out.println("Data file " + reservationFileName + " is corrupted. Default settings will be loaded instead.");
-			initReservations();
-		}
-
-	}
 	
-	public static void resetSettledReservations(){
-		Restaurant.settledReservations = null;
-	}
 	public static void initSettledReservations(){
         Restaurant.settledReservations = new ArrayList<Reservation>();
 	}
-	public static void saveSettledReservations(){
-		Path 				saveFileName 	= Paths.get(dataPath.toString(), settledReservationFileName);
-		FileOutputStream   	fos 			= null;
-		ObjectOutputStream 	oos 			= null;
-		
-		try {
-			fos = new FileOutputStream(saveFileName.toString());
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(Restaurant.settledReservations);
-			oos.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}	
-	public static void loadSettledReservations(){
 
-		Path saveData 			= Paths.get(dataPath.toString(), settledReservationFileName);
-		FileInputStream fis 	= null;
-		ObjectInputStream ois 	= null;
-		
-		try {
-			fis = new FileInputStream(saveData.toString());
-			ois = new ObjectInputStream(fis);
-			Restaurant.settledReservations = (ArrayList<Reservation>) ois.readObject();
-			ois.close();
-		} catch (IOException ex) {
-			System.out.println(settledReservationFileName + " not found or does not exists. Default settings will be loaded.");
-			initSettledReservations();
-		} catch (ClassCastException|ClassNotFoundException ex) {
-			System.out.println("Data file " + settledReservationFileName + " is corrupted. Default settings will be loaded instead.");
-			initSettledReservations();
-		}
-
-	}
 }
