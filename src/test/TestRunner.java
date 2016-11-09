@@ -45,7 +45,7 @@ public class TestRunner {
 		Restaurant.initTables();
 		Restaurant.initReservations();
 		Restaurant.initSettledReservations();
-		Restaurant.initStaffs();
+		Restaurant.initStaff();
 		Restaurant.initOrders();
 		Restaurant.initSettledOrders();
 		Restaurant.initInvoices();
