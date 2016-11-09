@@ -129,7 +129,7 @@ public class FoodMenuUI {
 	 */
 	private static void createNewFoodUI(){
 		
-		Food.CourseType foodCourseType = null;
+		CourseType foodCourseType = null;
 
 		System.out.print("Enter menu name of food: "); String foodName = sc.nextLine();
 		System.out.print("Enter menu description of food: "); String foodDesc = sc.nextLine();
@@ -328,7 +328,7 @@ public class FoodMenuUI {
 		int index = 0;
 		for (CourseType courseType : CourseType.values())
 			System.out.println("(" + index++ + ")" + " " + courseType);
-		int choice = ScannerExt.nextInt("    Enter the number of your choice: ", 0, Food.CourseType.values().length-1);
+		int choice = ScannerExt.nextInt("    Enter the number of your choice: ", 0, CourseType.values().length-1);
     	foodCourseType = Food.CourseType.values()[choice];
 		
     	return foodCourseType;

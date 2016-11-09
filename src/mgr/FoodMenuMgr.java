@@ -29,7 +29,7 @@ public class FoodMenuMgr {
 	 * @param foodPrice Price of the food
 	 * @param foodCourseType Course type of the food
 	 */
-	public static void createNewFood(String foodName, String foodDesc, double foodPrice, Food.CourseType foodCourseType){		
+	public static void createNewFood(String foodName, String foodDesc, double foodPrice, CourseType foodCourseType){		
 		Food newFood;
 		newFood = new Food(foodName, foodDesc, foodPrice, foodCourseType);
 		foodMenu.add((MenuItem) newFood);
