@@ -55,7 +55,7 @@ public class TableMgr {
 		ReservationMgr.removeExpiredReservation();
 		ArrayList<Table> availableTables = new ArrayList<Table>();
 		
-		boolean isAMSession = (reserveDateTime.get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime);
+		boolean isAMSession = (reserveDateTime.get(Calendar.HOUR_OF_DAY) < Restaurant.AMENDTIME);
 		boolean available;
 		Calendar now = Calendar.getInstance();	
 		
@@ -63,7 +63,7 @@ public class TableMgr {
 			
 			if(now.get(Calendar.MONTH)==reserveDateTime.get(Calendar.MONTH))
 				if(now.get(Calendar.DATE) == reserveDateTime.get(Calendar.DATE))
-					if(isAMSession == (now.get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime))
+					if(isAMSession == (now.get(Calendar.HOUR_OF_DAY) < Restaurant.AMENDTIME))
 						if(t.getStatus()==TableStatus.OCCUPIED)
 							continue;
 			
@@ -78,7 +78,7 @@ public class TableMgr {
 					continue;
 				if(r.getArrivalTime().get(Calendar.DATE)!=reserveDateTime.get(Calendar.DATE))
 					continue;
-				if(isAMSession == (r.getArrivalTime().get(Calendar.HOUR_OF_DAY) < Restaurant.AMEndTime)){
+				if(isAMSession == (r.getArrivalTime().get(Calendar.HOUR_OF_DAY) < Restaurant.AMENDTIME)){
 					available=false;
 					break;
 				}

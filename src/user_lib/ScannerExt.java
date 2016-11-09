@@ -3,10 +3,22 @@ package user_lib;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Extension of the functionality of scanner class.
+ * Improve error handling due to unexpected user input.
+ * @author soh jun jie
+ * @version 1.0
+ * @since 2016-11-09
+ */
 public class ScannerExt {
 
 	private static Scanner sc = new Scanner(System.in);
 	
+	/**
+	 * Get next integer from user.
+	 * @param promptMsg Error message when input entered is not integer
+	 * @return Entered integer
+	 */
 	public static int nextInt(String promptMsg){
 		
 		int choice = 0;
@@ -28,6 +40,13 @@ public class ScannerExt {
 		return choice;
 	}
 	
+	/**
+	 * Get next integer from user within a specified range.
+	 * @param promptMsg Error message when input entered is not integer
+	 * @param lbound Lower bound
+	 * @param ubound Upper bound
+	 * @return Entered integer
+	 */
 	public static int nextInt(String promptMsg, int lbound, int ubound){
 		
 		int choice = 0;
@@ -55,6 +74,11 @@ public class ScannerExt {
 		return choice;
 	}
 	
+	/**
+	 * Get double value from user
+	 * @param promptMsg Error message when entered value is not double
+	 * @return Entered double
+	 */
 	public static double nextDouble(String promptMsg){
 		
 		double choice = 0;

@@ -70,7 +70,7 @@ public class TestReservation {
 		Reservation newReservation;
 		Calendar reserveCal = Calendar.getInstance();
 		reserveCal.add(Calendar.DATE, 1);
-		reserveCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
+		reserveCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMSTARTTIME);
 		reserveCal.set(Calendar.MINUTE, 0);
 		reserveCal.set(Calendar.SECOND, 0);
 		reserveCal.set(Calendar.MILLISECOND, 0);
@@ -132,7 +132,7 @@ public class TestReservation {
 		
 		Calendar reserveCal = Calendar.getInstance();
 		reserveCal.add(Calendar.DATE, 1);
-		reserveCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
+		reserveCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMSTARTTIME);
 		reserveCal.set(Calendar.MINUTE, 0);
 		reserveCal.set(Calendar.SECOND, 0);
 		reserveCal.set(Calendar.MILLISECOND, 0);

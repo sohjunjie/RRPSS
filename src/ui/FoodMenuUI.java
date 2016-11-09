@@ -6,6 +6,7 @@ import java.util.Scanner;
 import classes.Food;
 import classes.MenuItem;
 import classes.PromotionPackage;
+import classes.Food.CourseType;
 import mgr.FoodMenuMgr;
 import user_lib.ScannerExt;
 
@@ -40,32 +41,33 @@ public class FoodMenuUI {
         	choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 1, 6);
         	
         	switch (choice) {
-            case 1: 
-            		createNewFoodUI();
-                    break;
-            case 2:
-            		createNewPromotionPackageUI();
-                    break;
-            case 3:
-            		updateMenuItemUI();
-                	break;
-            case 4:
-            		removeMenuItemUI();
-            		break;
-            case 5:
-            		viewMenuItemUI();
-            		break;
-            case 6:
-        }
-
-    } while (choice < 6);
+	            case 1: 
+	            		createNewFoodUI();
+	                    break;
+	            case 2:
+	            		createNewPromotionPackageUI();
+	                    break;
+	            case 3:
+	            		updateMenuItemUI();
+	                	break;
+	            case 4:
+	            		removeMenuItemUI();
+	            		break;
+	            case 5:
+	            		viewMenuItemUI();
+	            		break;
+	            case 6:
+        	}
+        } while (choice < 6);
 	
-}
+	}
+
 	/**
 	 * Show a UI that prompts user for menu item to be
 	 * viewed.
 	 */
 	private static void viewMenuItemUI(){
+		
 		int choice;
 		ArrayList<MenuItem> foodMenu = FoodMenuMgr.getRestaurantFoodMenu();
 		
@@ -73,14 +75,13 @@ public class FoodMenuUI {
 		System.out.println("\nList of Menu Items:");
 		for(MenuItem menuItem : foodMenu)
 			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
-		choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 0, index);
+		choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 0, index-1);
 		
-		if (foodMenu.get(choice) instanceof Food){
-			FoodMenuMgr.printFood(choice);
-		}
-		else if (foodMenu.get(choice) instanceof PromotionPackage){
-			FoodMenuMgr.printPromotionPackage(choice);
-		}	
+		MenuItem viewMenuItem = foodMenu.get(choice);
+		if (viewMenuItem instanceof Food)
+			FoodMenuMgr.printFood((Food) viewMenuItem);
+		else if (viewMenuItem instanceof PromotionPackage)
+			FoodMenuMgr.printPromotionPackage((PromotionPackage) viewMenuItem);
 		else
 			System.out.println("Invalid number!");
 	}
@@ -119,6 +120,7 @@ public class FoodMenuUI {
 		menuPrice = ScannerExt.nextDouble("Enter price of promotion package: ");
 		
 		FoodMenuMgr.createNewPromotionPackage(menuName, menuDesc, menuPrice);
+		
 	}
 	
 	/**
@@ -127,40 +129,13 @@ public class FoodMenuUI {
 	 */
 	private static void createNewFoodUI(){
 		
-		String foodName;
-		String foodDesc;
-		double foodPrice;
 		Food.CourseType foodCourseType = null;
 
-		System.out.print("Enter menu name of food: "); foodName = sc.nextLine();
-		System.out.print("Enter menu description of food: "); foodDesc = sc.nextLine();
-		foodPrice = ScannerExt.nextDouble("Enter price of food: ");
+		System.out.print("Enter menu name of food: "); String foodName = sc.nextLine();
+		System.out.print("Enter menu description of food: "); String foodDesc = sc.nextLine();
+		double foodPrice = ScannerExt.nextDouble("Enter price of food: ");
 		
-		int choice;
-		do{
-			System.out.println("\nSelect course type of your food.");
-			int index = 1;
-			for (Food.CourseType courseType : Food.CourseType.values())
-				System.out.println((index++) + " " + courseType);
-        	choice = ScannerExt.nextInt("    Enter the number of your choice: ");
-
-	    	switch (choice) {
-		        case 1:
-		        	foodCourseType = Food.CourseType.MAIN_COURSE;
-		            break;
-		        case 2:
-		        	foodCourseType = Food.CourseType.DRINKS;
-		            break;
-		        case 3:
-		        	foodCourseType = Food.CourseType.DESSERT;
-		            break;
-		        default:
-		        	System.out.println("Invalid choice entered!");
-		            break;
-	        }
-	    
-		}while(choice > 3 || choice < 0);
-		
+		foodCourseType = selectFoodCourseTypeUI("\nSelect course type of your food.");    	
 		FoodMenuMgr.createNewFood(foodName, foodDesc, foodPrice, foodCourseType);
 
 	}
@@ -172,31 +147,35 @@ public class FoodMenuUI {
 	private static void updateMenuItemUI(){
 		
 		int choice;
+		MenuItem menuItemToUpdate;
 		ArrayList<MenuItem> foodMenu = FoodMenuMgr.getRestaurantFoodMenu();
+		
+		if(foodMenu.size() <= 0){
+			System.out.println("There are no menu items in food menu.");
+			return;
+		}
 		
 		int index = 0;
 		System.out.println("\nSelect the menu item to update in the food menu:");
 		for(MenuItem menuItem : foodMenu)
 			System.out.println("(" + index++ + ") " + menuItem.getMenuName());
 		
-		choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 0, index);
+		choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 0, index-1);
+		menuItemToUpdate = foodMenu.get(choice);
 		
-		if (foodMenu.get(choice) instanceof Food){
-			updateFood(choice);
-		}
-		else if (foodMenu.get(choice) instanceof PromotionPackage){
-			updatePromotionPackage(choice);
-		}
+		if (menuItemToUpdate instanceof Food)
+			updateFood(menuItemToUpdate);
+		else if (menuItemToUpdate instanceof PromotionPackage)
+			updatePromotionPackage(menuItemToUpdate);
 		else
 			System.out.println("Invalid number!");
 	}
 	
 	/**
-	 * Update menu item name, desc or price from restaurant food menu
-	 * based on menu index
-	 * @param menuIndex Menu item to be updated
+	 * Update menu item name, desc or price from restaurant food menu.
+	 * @param menuItem Menu item to be updated
 	 */
-	private static void updateFood(int menuIndex){
+	private static void updateFood(MenuItem menuItem){
 
 		int choice;
 
@@ -213,16 +192,17 @@ public class FoodMenuUI {
 			
 				switch (choice) {
 					case 1:
-							FoodMenuMgr.updateMenuItemName(menuIndex);
+							updateMenuItemName(menuItem);
 							break;
 					case 2:
-							FoodMenuMgr.updateMenuItemDesc(menuIndex);
+							updateMenuItemDesc(menuItem);
 							break;
 					case 3: 
-							FoodMenuMgr.updateMenuItemPrice(menuIndex);
+							updateMenuItemPrice(menuItem);
 							break;
 					case 4:
-							FoodMenuMgr.updateFoodCourseType(menuIndex);
+							FoodMenuMgr.updateFoodCourseType(menuItem, 
+									selectFoodCourseTypeUI("Select food course type."));
 							break;
 					case 5:
 				}
@@ -236,46 +216,124 @@ public class FoodMenuUI {
 	}
 	
 	/**
-	 * Update promotion package name, desc or price from restaurant food menu
-	 * based on menu index
-	 * @param menuIndex Menu item to be updated
+	 * Update promotion package name, desc or price from restaurant food menu.
+	 * @param menuItem Menu item to be updated
 	 */
-	private static void updatePromotionPackage(int menuIndex){
+	private static void updatePromotionPackage(MenuItem menuItem){
 		int choice;
 
-		try {
-			
-			do {
-				System.out.println("\nWhat would you like to update?");
-				System.out.println("(1) Promotion Package Name");
-				System.out.println("(2) Promotion Package Description");
-				System.out.println("(3) Promotion Package Price");
-				System.out.println("(4) Promotion Package Food");
-				System.out.println("(5) Back"); 
-				choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 1, 5);
-			
-				switch (choice) {
-					case 1:
-							FoodMenuMgr.updateMenuItemName(menuIndex);
-							break;
-					case 2:
-							FoodMenuMgr.updateMenuItemDesc(menuIndex);
-							break;
-					case 3: 
-							FoodMenuMgr.updateMenuItemPrice(menuIndex);
-							break;
-					case 4:
-							FoodMenuMgr.updatePromotionPackageFood(menuIndex);
-							break;
-					case 5:					
-				}
-			
-			} while (choice != 5);
+		do {
+			System.out.println("\nWhat would you like to update?");
+			System.out.println("(1) Promotion Package Name");
+			System.out.println("(2) Promotion Package Description");
+			System.out.println("(3) Promotion Package Price");
+			System.out.println("(4) Promotion Package Food");
+			System.out.println("(5) Back"); 
+			choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 1, 5);
 		
-		}catch(IndexOutOfBoundsException e){
-			System.out.println("Update menu item in food menu failed! (Invalid index provided");
-		}
+			switch (choice) {
+				case 1:
+						updateMenuItemName(menuItem);
+						break;
+				case 2:
+						updateMenuItemDesc(menuItem);
+						break;
+				case 3: 
+						updateMenuItemPrice(menuItem);
+						break;
+				case 4:
+						updatePromotionPackageFoodUI(menuItem);
+						break;
+				case 5:
+			}
+		
+		} while (choice != 5);
 
 	}
+	
+	/**
+	 * Edit food contained in promotion package
+	 * @param menuItem Promotion Package menu item to be edited
+	 */
+	public static void updatePromotionPackageFoodUI(MenuItem menuItem) {
+		
+		int choice;		
+		PromotionPackage pp = (PromotionPackage) menuItem;
+		
+		do{
+		
+			System.out.println("\nWould you like to add or delete food from Promotion Package?");
+			System.out.println("(1) Add food");
+			System.out.println("(2) Remove food");
+			System.out.println("(3) Back"); 
+			choice = ScannerExt.nextInt("\n    Enter the number of your choice: ", 1, 3);
+	
+			switch (choice){
+				case 1:
+						System.out.println();
+						pp.addFood(FoodMenuMgr.getRestaurantFoodMenu());
+						break;
+				case 2:
+						System.out.println();
+						pp.removeFood();
+						break;
+				case 3:
+			}
+		} while (choice !=  3);
+
+	}
+	
+	/**
+	 * Prompt user for menu item name to be updated
+	 * @param menuItem Menu Item to be updated
+	 */
+	public static void updateMenuItemName(MenuItem menuItem){
+		
+		System.out.print("Enter Updated Menu Name : "); String menuName = sc.nextLine();
+		FoodMenuMgr.updateMenuItemName(menuItem, menuName);
+		
+	}
+	
+	/**
+	 * Prompt user for menu item description to be updated
+	 * @param menuItem Menu Item to be updated
+	 */
+	public static void updateMenuItemDesc(MenuItem menuItem){
+
+		System.out.print("Enter Updated Menu Description : "); String menuDesc = sc.nextLine();
+		FoodMenuMgr.updateMenuItemDesc(menuItem, menuDesc);
+		
+	}
+	
+	/**
+	 * Prompt user for menu item price to be updated
+	 * @param menuItem Menu Item to be updated
+	 */
+	public static void updateMenuItemPrice(MenuItem menuItem){
+
+		double menuPrice = ScannerExt.nextDouble("\nEnter Updated Menu Price : ");
+		FoodMenuMgr.updateMenuItemPrice(menuItem, menuPrice);
+		
+	}
+	
+	/**
+	 * Prompt user for a food course type
+	 * @param promptMsg Message to ask user before prompting a selection
+	 */
+	public static CourseType selectFoodCourseTypeUI(String promptMsg){
+		
+		CourseType foodCourseType;
+		
+		System.out.println(promptMsg);
+		int index = 0;
+		for (CourseType courseType : CourseType.values())
+			System.out.println("(" + index++ + ")" + " " + courseType);
+		int choice = ScannerExt.nextInt("    Enter the number of your choice: ", 0, Food.CourseType.values().length-1);
+    	foodCourseType = Food.CourseType.values()[choice];
+		
+    	return foodCourseType;
+    	
+	}
+	
 }
 

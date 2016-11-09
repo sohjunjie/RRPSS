@@ -150,25 +150,25 @@ public class ReservationMgr {
 	public static int getDateTimeSession(Calendar date){
 		
 	    Calendar AMStartCal = (Calendar) date.clone();
-	    AMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMStartTime);
+	    AMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMSTARTTIME);
 	    AMStartCal.set(Calendar.MINUTE, 0);
 	    AMStartCal.set(Calendar.SECOND, 0);
 	    AMStartCal.set(Calendar.MILLISECOND, 0);
 	    
 	    Calendar AMEndCal = (Calendar) date.clone();
-	    AMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMEndTime);
+	    AMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.AMENDTIME);
 	    AMEndCal.set(Calendar.MINUTE, 0);
 	    AMEndCal.set(Calendar.SECOND, 0);
 	    AMEndCal.set(Calendar.MILLISECOND, 0);
 	    
 	    Calendar PMStartCal = (Calendar) date.clone();
-	    PMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMStartTime);
+	    PMStartCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMSTARTTIME);
 	    PMStartCal.set(Calendar.MINUTE, 0);
 	    PMStartCal.set(Calendar.SECOND, 0);
 	    PMStartCal.set(Calendar.MILLISECOND, 0);
 	    
 	    Calendar PMEndCal = (Calendar) date.clone();
-	    PMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMEndTime);
+	    PMEndCal.set(Calendar.HOUR_OF_DAY, Restaurant.PMENDTIME);
 	    PMEndCal.set(Calendar.MINUTE, 0);
 	    PMEndCal.set(Calendar.SECOND, 0);
 	    PMEndCal.set(Calendar.MILLISECOND, 0);
