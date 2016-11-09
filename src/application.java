@@ -31,8 +31,9 @@ public class application {
 			thisStaff = menuGetStaffIdentity(Restaurant.staffs);
 		showRestaurantOptions();
 
-		Restaurant.saveRestaurant();
 		System.out.println("Saving system state...");
+		Restaurant.saveRestaurant();
+		
 		System.out.println("Exiting system...");
 		System.exit(0);
 
