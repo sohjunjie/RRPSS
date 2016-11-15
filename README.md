@@ -1,7 +1,12 @@
-# RRPSS (CZ2002 GROUP PROJECT)
+# RRPSS (CZ2002 2016/2017 SEM 1 GROUP PROJECT)
 
 Restaurant Reservation and Point of Sale System (RRPSS)
 
+RRPSS is a console based application computerizing the processes of making reservation, 
+recording of orders and displaying of sale records. It will be solely used by the 
+restaurant staff.
+
+The restaurant is assumed to operates in 2 sessions (AM : 11am - 3pm, PM : 6pm - 10pm).
 
 
 ## Checking out project into Eclipse IDE
