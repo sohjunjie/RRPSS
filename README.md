@@ -6,7 +6,7 @@ RRPSS is a console based application computerizing the processes of making reser
 recording of orders and displaying of sale records. It will be solely used by the 
 restaurant staff.
 
-The restaurant is assumed to operates in 2 sessions (AM : 11am - 3pm, PM : 6pm - 10pm).
+The restaurant is assumed to operate in 2 sessions (AM : 11am - 3pm, PM : 6pm - 10pm).
 
 
 ## Checking out project into Eclipse IDE
