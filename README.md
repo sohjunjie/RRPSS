@@ -23,7 +23,7 @@ Follow the following instructions to clone the project files into your Eclipse I
 
 ## Pulling changes to the project
 
-####**Switch to master branch**
+#### **Switch to master branch**
 
    The master branch is the most definitive branch containing the latest working 
    copy of the project in github. Pull the latest changes by right clicking the project
@@ -36,7 +36,7 @@ Follow the following instructions to clone the project files into your Eclipse I
 
 ## Making changes to the project
 
-####**Create a new branch**
+#### **Create a new branch**
 
    All local development and changes should be done in appropriately named branches
    (e.g. create a new branch before doing any new major changes)
@@ -44,7 +44,7 @@ Follow the following instructions to clone the project files into your Eclipse I
   `Team > Switch To > New Branch`
   
 
-####**Pushing your changes to github**
+#### **Pushing your changes to github**
 
    Add all the files that you want all changes to be reflected by
    
@@ -60,7 +60,7 @@ Follow the following instructions to clone the project files into your Eclipse I
 
 
 
-####**Do not merge your changes directly into your local master branch and push to Git**
+#### **Do not merge your changes directly into your local master branch and push to Git**
 
    If you are done developing the component you are working on, push your
    branch to GitHub.
